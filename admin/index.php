@@ -407,7 +407,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 <div class="cards-list">
   
 <div class="card-stock">
-  <a href="inventory.php"><div class="card_image"> <img src="../images/inventory.png" /> </div></a>
+  <a href="inventory.php"><div class="card_image"> <img src="../images/inventory1.png" /> </div></a>
   <div class="card_title title-white">
 	  <p></p>
     <p>Inventory</p>
@@ -416,7 +416,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
   <div class="card-stock2">
   <div class="card_image">
-    <a href=""><img src="../images/revenue.png" /></a>
+    <a href=""><img src="../images/revenue1.png" /></a>
     </div>
   <div class="card_title title-white">
 	  <p>RM<?=$total_revenue['total_amount']?></p>
@@ -426,7 +426,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 <div class="card-stock3">
   <div class="card_image">
-    <a href="manage-online-order.php"><img src="../images/orders_completed.png" /></a>
+    <a href="manage-online-order.php"><img src="../images/complete_order1.jpg" /></a>
   </div>
   <div class="card_title title-white">
 	  <p><?php echo $total_orders_delivered; ?></p>
@@ -436,7 +436,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
   
   <div class="card-stock4">
   <div class="card_image">
-    <a href="manage-food.php"><img src="../images/folder2.png" /></a>
+    <a href="manage-food.php"><img src="../images/menu1.png" /></a>
     </div>
   <div class="card_title title-white">
 	  <p><?php echo $row_item; ?></p>
