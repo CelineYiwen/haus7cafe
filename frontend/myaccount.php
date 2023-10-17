@@ -141,6 +141,8 @@ if (isset($_SESSION['user'])) {
         </div>
         <!-- Navbar & Hero End -->
 
+        
+        <!-- user profile account -->
         <div class="container bootstrap snippets bootdey">
             <div class="row">
                 <div class="profile-nav col-md-3">
@@ -150,7 +152,6 @@ if (isset($_SESSION['user'])) {
                                 <img src="../images/avatar.png" alt="">
                             </a>
                             <h1><?php echo $name; ?></h1>
-
                         </div>
 
                         <ul class="nav nav-pills nav-stacked">
