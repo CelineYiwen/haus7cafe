@@ -314,6 +314,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<div class="form-input">
 				</div>
 			</form>
+
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
 					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
@@ -426,7 +430,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 <div class="card-stock3">
   <div class="card_image">
-    <a href="manage-online-order.php"><img src="../images/complete_order1.jpg" /></a>
+    <a href="manage-online-order.php"><img src="../images/complete_order1.png" /></a>
   </div>
   <div class="card_title title-white">
 	  <p><?php echo $total_orders_delivered; ?></p>

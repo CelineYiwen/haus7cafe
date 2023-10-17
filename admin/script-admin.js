@@ -64,17 +64,14 @@ window.addEventListener('resize', function () {
 })
 
 
-
+/* Dark Mode & Light Mode Switch */
 const switchMode = document.getElementById('switch-mode');
 
-switchMode.addEventListener('change', function ()
- {
-	if(this.checked)
-	 {
+switchMode.addEventListener('change', function () {
+	if (this.checked) {
 		document.body.classList.add('dark');
 	}
-	 else
-	  {
+	else {
 		document.body.classList.remove('dark');
 	}
 })

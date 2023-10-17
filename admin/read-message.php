@@ -341,6 +341,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<div class="form-input">
 				</div>
 			</form>
+
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			
 			<a href="messages.php"><div class="fetch_message"></a>
 				<a href="messages.php"><div class="action_message notfi_message">
 					<i class='bx bxs-envelope' ></i>
