@@ -303,7 +303,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
                 <tr>
                     <td>Price</td>
                     <td>
-                        <input type="number" name="price" id="ip2">
+                        <input type="text" name="price" id="ip2">
                     </td>
                 </tr>
 

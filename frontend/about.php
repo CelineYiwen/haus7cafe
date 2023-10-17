@@ -123,7 +123,7 @@
                                 <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="../images/about-1.jpg">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="../images/about-2.jpg" style="margin-top: 25%;">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="../images/about-2.jpg">
                             </div>
                             <div class="col-6 text-end">
                                 <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="../images/about-3.jpg">
@@ -197,7 +197,7 @@
                             <p>Monday : Closed</p>
                             <p>Tuesday to Friday : 9:00 am - 5:30 pm</p>
                             <p>Saturday & Sunday : 8:00 am - 5:30 pm</p>
-                            <p>&#42;Kitchen Last Call : 4:30 pm</p>
+                            <p>&#42; Kitchen Last Call : 4:30 pm &#42;</p>
                         </div>
                         <div class="col-lg-3 col-md-6">
                             <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>

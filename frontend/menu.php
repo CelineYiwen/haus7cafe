@@ -197,7 +197,7 @@
                         <p>Monday : Closed</p>
                         <p>Tuesday to Friday : 9:00 am - 5:30 pm</p>
                         <p>Saturday & Sunday : 8:00 am - 5:30 pm</p>
-                        <p>&#42;Kitchen Last Call : 4:30 pm</p>
+                        <p>&#42; Kitchen Last Call : 4:30 pm &#42;</p>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>

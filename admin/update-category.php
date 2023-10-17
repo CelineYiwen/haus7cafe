@@ -342,7 +342,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
                 <tr>
                     <td>New Image: </td>
                     <td>
-                        <input type="file" name="image" required>
+                        <input type="file" name="image">
                     </td>
                 </tr>
 
