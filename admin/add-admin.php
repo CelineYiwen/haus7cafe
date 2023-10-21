@@ -135,9 +135,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<form action="#">
 			</form>
 
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
-
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
 					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
@@ -273,7 +270,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 if (isset($_POST['submit'])) {
 	$full_name = $_POST['full_name'];
 	$username = $_POST['username'];
-	$password = md5($_POST['password']); //md5 encryption
+	$password = md5($_POST['password']); //md5 encryption (password hash)
 
 	$check_duplicate = "SELECT username FROM tbl_admin
 						WHERE username = '$username'";
