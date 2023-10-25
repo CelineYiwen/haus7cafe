@@ -71,6 +71,7 @@
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                                 <div class="dropdown-menu m-0">
                                     <a href="myaccount.php" class="dropdown-item">My Account</a>
+                                    <a href="feedback.php" class="dropdown-item">Submit Feedback</a>
                                     <a href="logout.php" class="dropdown-item">Logout</a>
                                 </div>
                             </div>
@@ -232,15 +233,7 @@
                         <p>Monday : Closed</p>
                         <p>Tuesday to Friday : 9:00 am - 5:30 pm</p>
                         <p>Saturday & Sunday : 8:00 am - 5:30 pm</p>
-                        <p>&#42; Kitchen Last Call : 4:30 pm &#42;</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
-                        <p>Monthly Star : Vote for a featured dish of the month and subscribers can enjoy a special discount on that selected dish.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email">
-                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                        </div>
+                        <p>&#42;Kitchen Last Call : 4:30 pm</p>
                     </div>
                 </div>
             </div>

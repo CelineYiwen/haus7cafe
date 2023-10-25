@@ -473,9 +473,8 @@ table thead th {
   margin-top: 30px;
 }
 
-/* customer account profile picture background design */
 .profile-nav .user-heading {
-  background: darkgrey;
+  background: #fbc02d;
   color: #fff;
   border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
@@ -483,11 +482,10 @@ table thead th {
   text-align: center;
 }
 
-/* customer account profile picture round circle design */
 .profile-nav .user-heading.round a {
   border-radius: 50%;
   -webkit-border-radius: 50%;
-  border: 10px solid white;
+  border: 10px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
 }
 
@@ -498,10 +496,9 @@ table thead th {
   -webkit-border-radius: 50%;
 }
 
-/* customer profile account name font colour */
 .profile-nav .user-heading h1 {
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 22px;
+  font-weight: 300;
   margin-bottom: 5px;
 }
 
@@ -584,9 +581,8 @@ table thead th {
   font-weight: 300;
 }
 
-/* user info (Biodata) font colour */
 .bio-graph-info {
-  color: #60401f;
+  color: #89817e;
 }
 
 .bio-graph-info h1 {
@@ -602,11 +598,9 @@ table thead th {
   padding: 0 15px;
 }
 
-/* customer account title font colour */
 .bio-row p span {
   width: 100px;
   display: inline-block;
-  color: #000000;
 }
 
 .bio-chart,

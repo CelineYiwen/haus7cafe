@@ -3,7 +3,7 @@
 //Including the constant file
 
 include('../frontend/config/constants.php');
-//include('login-check.php');
+include('login-check.php');
 
 
 

@@ -2,25 +2,8 @@
 	  include('login-check.php');
 
 ?>
+
 <?php 
-
-//Stats
-
-$sales_by_hour =  "SELECT date(order_date) as hname,
-					sum(total_amount) as total_sales
-					FROM order_manager
-					GROUP BY date(order_date)";
-					 
-
-$res_sales_by_hour = mysqli_query($conn, $sales_by_hour);
-
-$most_sold_items = "SELECT sum(Quantity) as total_qty,
-							Item_Name as item_name
-							FROM online_orders_new
-							GROUP BY Item_Name
-							";
-$res_most_sold_items = mysqli_query($conn, $most_sold_items);
-
 //Orders
 
 $ei_order_notif = "SELECT order_status from tbl_eipay
@@ -43,19 +26,6 @@ $stock_notif = "SELECT stock FROM tbl_food
 
 $res_stock_notif = mysqli_query($conn, $stock_notif);
 $row_stock_notif = mysqli_num_rows($res_stock_notif);
-
-// Revenue Generated
-$revenue = "SELECT SUM(total_amount) AS total_amount FROM order_manager
-			WHERE order_status='Delivered' ";
-$res_revenue = mysqli_query($conn, $revenue);
-$total_revenue = mysqli_fetch_array($res_revenue);
-
-//Total Orders Delivered
-
-$orders_delivered = "SELECT order_status FROM order_manager
-					 WHERE order_status='Delivered'";
-$res_orders_delivered = mysqli_query($conn, $orders_delivered);
-$total_orders_delivered = mysqli_num_rows($res_orders_delivered);
 
 //Message Notification
 $message_notif = "SELECT message_status FROM message
@@ -81,12 +51,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
-<body>
 
+<body>
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="index.php" class="brand">
+		<a href="#" class="brand">
 			<img src="../images/logo.png" width="80px" alt="">
 		</a>
 		<ul class="side-menu top">
@@ -165,16 +135,17 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-
+		
 		<ul class="side-menu">
-			<li>
-				<a href="tableorder-menu.php">
+			<li class="active">
+				<a href="#">
 					<i class='bx bx-qr-scan'></i>
 					<span class="text">Take Table Order</span>
 				</a>
 			</li>
 		</ul>
-		
+
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
@@ -186,7 +157,46 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	</section>
 	<!-- SIDEBAR -->
 
-	
+	 <!-- Dynamic Dashborad --> 
+
+	 <?php
+            //Categories
+
+            $sql = "SELECT * FROM tbl_category";
+
+            $res = mysqli_query($conn, $sql);
+
+            $row_cat = mysqli_num_rows($res);
+            
+            //Items
+
+            $sql2 = "SELECT * FROM tbl_food";
+
+            $res2 = mysqli_query($conn, $sql2);
+
+            $row_item = mysqli_num_rows($res2);
+
+            //Orders
+
+            $sql3 = "SELECT * FROM order_manager";
+
+            $res3 = mysqli_query($conn, $sql3);
+
+            $row_order = mysqli_num_rows($res3);
+
+			//Eat In Orders
+
+
+	  		$sql4 = "SELECT * FROM tbl_eipay";
+
+            $res4 = mysqli_query($conn, $sql4);
+
+            $row_ei_order = mysqli_num_rows($res4);
+
+        ?>
+
+
+	<!-- Dynamic DashBoard --> 
 
 
 	<!-- CONTENT -->
@@ -221,9 +231,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				}
 				?>
 			</div> 
-                    <div class="fetch_message">
+			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
 					<?php 
 
 					if($row_message_notif>0)
@@ -246,8 +256,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			</div>
 			
 			<div class="notification" onclick= "menuToggle();">
-				<div class="action notif" onclick= "menuToggle();">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
+				<div class="action notif " onclick= "menuToggle();">
+				<i class='bx bxs-bell ' onclick= "menuToggle();"></i>
 				<div class="notif_menu">
 				<ul><?php 
 							
@@ -307,99 +317,170 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 		</nav>
 		<!-- NAVBAR -->
 
-		<!-- MAIN -->
-		<main>
-		
-
-			<div class="table-data-message">
-				<div class="order">
-					<div class="">
-						
-						
-					</div>
-					<table>
-					
-						<?php
-                    
-                    $sql = "SELECT * FROM message ORDER BY date DESC";
-					$res = mysqli_query($conn, $sql);
-
-                    if($res == TRUE)
-					{
-					 $count = mysqli_num_rows($res); 
-
-                        if($count>0)
-						{
-                           while($rows = mysqli_fetch_assoc($res))
-						   {
-							$id = $rows['id'];
-                            $name = $rows['name'];
-                            $phone = $rows['phone'];
-                            $subject = $rows['subject'];
-                            $message = $rows['message'];
-                            $date = $rows['date'];
-                            $message_status = $rows['message_status'];
-                            ?> 
-						<tbody>
-                            <?php
-
-                            if($message_status == 'read')
-                            { ?>
-                                <tr>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$name"; ?></a></td>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$subject"; ?></a></td>
-                                <td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$date"; ?></a></td>
-								<td>
-                        			<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button" >Delete</a>
-									
-                    			</td>
-							</tr>
-                            	<?php 
-                            }
-                            else
-                            {
-                                 ?>
-                               <tr>
-                                   <div class="unread_message">
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$name</span>"; ?></a></td>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$subject</span>"; ?></a></td>
-                                <td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$date</span>"; ?></a></td>
-								<td>
-                        			<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button" >Delete</a>
-                            </div>
-                    			</td>
-							</tr>
-                            <?php
-                            }
-                        
-
-						
-
-						   }
-						}
-					}
-
-					?>
-						
-						</tbody>
-					</table>
+        <!-- Menu Start -->
+       
+<!-- MAIN -->
+<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Take Table Order</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="index.php">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="tableorder-menu.php">Take Table Order</a>
+						</li>
+					</ul>
 				</div>
+</div>
+
+			</br>
+				<div class="left">
+				<label for="color">Select Table:</label>
+					<select name="tablenumber" id="tablenumber">
+						<option value="">--- Choose a table number ---</option>
+						<option value="Table 1">Table 1</option>
+						<option value="Table 2">Table 2</option>
+						<option value="Table 3">Table 3</option>
+						<option value="Table 4">Table 4</option>
+						<option value="Table 5">Table 5</option>
+						<option value="Table 6">Table 6</option>
+						<option value="Table 7">Table 7</option>
+						<option value="Table 8">Table 8</option>
+						<option value="Table 9">Table 9</option>
+						<option value="Table 10">Table 10</option>
+						<option value="Table 11">Table 11</option>
+						<option value="Table 12">Table 12</option>
+</select>
+			</div>
+
+<br>
+				
+			<div class="table-data">
+			<div class="order">
+			<div class="head">
+</div>
+
+				 <table class="">
+                    <tr>
+                        <th>S.N.</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+
+				<?php 
+				//Getting Eat in order data from datbase
+				$sql = "SELECT * FROM tbl_food WHERE active='Yes'";
+
+//Execute Query
+$res = mysqli_query($conn, $sql);
+//Count the Rows
+$count = mysqli_num_rows($res);
+$sn = 1; //Create a Serial Number and set its initail value as 1
+                        if($count>0)
+                        {
+                            //Order Available
+                            while($row=mysqli_fetch_assoc($res))
+                            {
+                                //Get all the order details
+                                $id = $row['id'];
+                                $title = $row['title'];
+                                $description = $row['description'];
+                                $price = $row['price'];
+                                ?>
+
+                                    <tr>
+                                        <td><?php echo $sn++; ?>. </td>
+                                        <td><?php echo $title; ?></td>
+                                        <td><?php echo $description; ?></td>
+                                        <td><?php echo $price; ?></td>
+                                        <td>
+                                            <input type="submit" name="submit" value="Send to Kitchen" class="button-8" role="button">  
+                                        </td>
+                                    </tr>
+
+                                <?php
+
+                            }
+                        }
+                        else
+                        {
+                            //Order not Available
+                            echo "<tr><td colspan='7' class='error'>Orders not Available</td></tr>";
+                        }
+?>
+    </table>
 				
 			</div>
-		
+				</div>
+			</div>
 
-	
+					</div>
+					</div>
+					</div>
 		</main>
-		
-		
-	
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
-		
+        </section>
+        <!--Menu Ends -->
 
-	<script src="script-admin.js"></script>
-
-	
+		<script src="script-admin.js"></script>
 </body>
 </html>
+
+
+<?php 
+
+
+
+if(isset($_POST['submit']))
+	{
+
+		if (empty($_POST["tablenumber"])) {
+			$errors[] = "Please select table number";
+			die;
+		 } else {
+			$monitors_old = validateInput($_POST["tablenumber"]);
+		 }
+
+    $full_name = $_POST['full_name'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']); //md5 encryption
+
+	$check_duplicate = "SELECT username FROM tbl_admin
+						WHERE username = '$username'";
+	$res_check_duplicate = mysqli_query($conn, $check_duplicate);
+
+	$rows_check_duplicate = mysqli_num_rows($res_check_duplicate);
+	if($rows_check_duplicate>0)
+	{
+		echo "<script>
+                alert('Username already exists! Try a different username.'); 
+                window.location.href='add-admin.php';
+                </script>";
+	}
+	else
+	{
+		$sql = "INSERT INTO tbl_admin SET
+        full_name='$full_name',
+        username='$username',
+        password='$password'
+    	";
+	}
+
+    $res = mysqli_query($conn, $sql) or die(mysqli_error());
+
+    if($res == true)
+	{
+
+        $_SESSION['add'] = "<div class='success'>Admin Added Successfully</div>";
+    }
+    else
+	{
+        $_SESSION['add'] = "<div class='error'>Failed to Add Admin</div>";
+    }
+
+}
+
+?>

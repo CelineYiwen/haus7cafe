@@ -58,7 +58,7 @@ include('config/constants.php');
        //Preventing From SQL Injection
 
        $username = mysqli_real_escape_string($conn, $_POST['username']);
-       $password = mysqli_real_escape_string($conn, md5($_POST['password'])); // password hash
+       $password = mysqli_real_escape_string($conn, md5($_POST['password']));
 
         $sql = "SELECT * FROM tbl_users WHERE username='$username' AND password='$password'";
         $res = mysqli_query($conn, $sql);

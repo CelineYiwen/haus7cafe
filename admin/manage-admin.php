@@ -1,5 +1,5 @@
 <?php include('../frontend/config/constants.php');
-	  //include('login-check.php');
+	  include('login-check.php');
 
 ?>
 <?php
@@ -159,6 +159,16 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
+
+		<ul class="side-menu">
+			<li>
+				<a href="tableorder-menu.php">
+					<i class='bx bx-qr-scan'></i>
+					<span class="text">Take Table Order</span>
+				</a>
+			</li>
+		</ul>
+		
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
@@ -182,7 +192,28 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<div class="form-input">
 				</div>
 			</form>
+			<div class="bx.bx-menu">
+			<?php
+				if (isset($_SESSION['user-admin'])) {
+					$username = $_SESSION['user-admin'];
 
+				?>
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
+					</div>
+				<?php
+				} else {
+				?>
+					 echo "<script>
+						alert('Please login'); 
+						window.location.href='login.php';
+						</script>";
+  	
+				<?php
+
+				}
+				?>
+			</div> 
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
 					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>

@@ -61,7 +61,7 @@
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="categories.php" class="nav-item nav-link">Categories</a>
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
-                        <a href="contact.php" class="nav-item nav-link active">Contact</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact</a>
                     </div>
 
                     <?php
@@ -100,12 +100,12 @@
 
             <div class="container-xxl py-5 bg-dark hero-header mb-1">
                 <div class="container text-center my-3 pt-1 pb-1">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Contact Us</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Feedback</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
                             <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Feedback</li>
                         </ol>
                     </nav>
                 </div>
@@ -114,74 +114,144 @@
         <!-- Navbar & Hero End -->
 
 
-        <!-- Contact Start -->
+        <!-- Feedback form Start -->
         <div class="container-xxl py-5">
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Contact Us</h5>
-                    <h1 class="mb-5">Contact For Any Query</h1>
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Feedback Survey</h5>
+                    <h1 class="mb-5">We welcome your comments and suggestions.</h1>
                 </div>
                 <div class="row g-4">
-                    <div class="col-12">
-                        <div class="row gy-4">
-                            <div class="col-md-4">
-                                <h5 class="section-title ff-secondary fw-normal text-start text-primary">Booking Reservation</h5>
-                                <p><i class="fa fa-phone-square text-primary me-2"></i>017 - 428 833</p>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="section-title ff-secondary fw-normal text-start text-primary">Phone Contact</h5>
-                                <p><i class="fa fa-phone-square text-primary me-2"></i>017 - 428 833</p>
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class="section-title ff-secondary fw-normal text-start text-primary">Email</h5>
-                                <p><i class="fa fa-envelope-square text-primary me-2"></i><a href="mailto: haus7.cafe@gmail.com">haus7.cafe@gmail.com</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
 
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.02340618993233!2d101.62644332678249!3d2.9933837262007685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb53d2cbe1e1b%3A0xa4b0c784a57bfb22!2sHaus%207%20Cafe!5e0!3m2!1sen!2smy!4v1697372859409!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="col-md-6 wow fadeInDown" data-wow-delay="0.2s">
+                        <form action="message.php" method="POST">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="contact" name="contact" placeholder="Phone Number" required>
+                                        <label for="contact">Phone Number</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                                        <label for="subject">Subject Title</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="If you have additional feedback, please write it here." id="other_feedback" name="other_feedback" style="height: 150px" required></textarea>
+                                        <label for="other_feedback">Other Feedback (If Any)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
                     </div>
+
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form action="message.php" method="POST">
                                 <div class="row g-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
-                                            <label for="name">Your Name</label>
+                                            <select class="form-select" id="often_visit" name="often_visit" required>
+                                                <option value="" disabled selected>Select how often you visit</option>
+                                                <option value="Daily">Daily</option>
+                                                <option value="Weekly">Weekly</option>
+                                                <option value="Monthly">Monthly</option>
+                                                <option value="Rarely">Rarely</option>
+                                                <option value="FirstTime">First time</option>
+                                            </select>
+                                            <label for="often_visit">How often do you visit our restaurant?</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="number" class="form-control" id="email" name="phone" placeholder="Phone Number" required>
-                                            <label for="email">Phone Number</label>
+                                            <select class="form-select" id="quality" name="quality" required>
+                                                <option value="" disabled selected>Select your rating</option>
+                                                <option value="Excellent">Excellent</option>
+                                                <option value="VeryGood">Very Good</option>
+                                                <option value="Good">Good</option>
+                                                <option value="Fair">Fair</option>
+                                                <option value="Poor">Poor</option>
+                                            </select>
+                                            <label for="quality">How would you rate the quality of our food?</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-                                            <label for="subject">Subject</label>
+                                            <select class="form-select" id="cleanliness" name="cleanliness" required>
+                                                <option value="" disabled selected>Select your rating</option>
+                                                <option value="VeryClean">Very Clean</option>
+                                                <option value="Clean">Clean</option>
+                                                <option value="Neutral">Neutral</option>
+                                                <option value="NotSoClean">Not So Clean</option>
+                                                <option value="VeryDirty">Very Dirty</option>
+                                            </select>
+                                            <label for="cleanliness">How would you rate the cleanliness and hygiene of our restaurant?</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" name="message" style="height: 150px" required></textarea>
-                                            <label for="message">Message</label>
+                                            <select class="form-select" id="service_satisfaction" name="service_satisfaction" required>
+                                                <option value="" disabled selected>Select your satisfaction with service</option>
+                                                <option value="VerySatisfied">Very Satisfied</option>
+                                                <option value="Satisfied">Satisfied</option>
+                                                <option value="Neutral">Neutral</option>
+                                                <option value="Dissatisfied">Dissatisfied</option>
+                                                <option value="VeryDissatisfied">Very Dissatisfied</option>
+                                            </select>
+                                            <label for="service_satisfaction">How satisfied are you with the quality of service you received?</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit" name="submit_message">Send Message</button>
+                                        <div class="form-floating">
+                                            <select class="form-select" id="appreciate" name="appreciate" required>
+                                                <option value="" disabled selected>Select the features you appreciate</option>
+                                                <option value="FoodQuality">Food quality</option>
+                                                <option value="Service">Service</option>
+                                                <option value="Ambiance">Ambiance</option>
+                                                <option value="Price">Price</option>
+                                                <option value="Location">Location</option>
+                                            </select>
+                                            <label for="appreciate">Which features of our restaurant do you appreciate?</label>
+                                        </div>
                                     </div>
+
                                 </div>
                             </form>
                         </div>
                     </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit" name="submit_feedback">Submit Feedback</button>
+                    </div>
+
                 </div>
             </div>
         </div>
-        <!-- Contact End -->
+        <!-- Feedback form End -->
 
 
         <!-- Footer Start -->
@@ -219,7 +289,7 @@
                             &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                         </div>
                         <div class="col-md-6 text-center text-md-end">
-                            
+
                         </div>
                     </div>
                 </div>
