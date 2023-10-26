@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 10:24 AM
+-- Generation Time: Oct 26, 2023 at 03:54 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,7 +43,9 @@ CREATE TABLE `message` (
 
 INSERT INTO `message` (`id`, `name`, `phone`, `subject`, `message`, `message_status`, `date`) VALUES
 (18, 'Mohammad Wasikuzzaman', 1717731002, 'Hi There', 'Aasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'read', '2022-02-13 11:23:36'),
-(19, 'Maheosy Haque', 1867348264, 'Test Subject', 'Test Message', 'unread', '2022-02-14 12:24:15');
+(19, 'Maheosy Haque', 1867348264, 'Test Subject', 'Test Message', 'read', '2022-02-14 12:24:15'),
+(20, 'Jane', 2147483647, 'Test Features', 'Demo 123...', 'unread', '2023-10-18 01:21:14'),
+(21, 'Alice', 123456789, 'Feedback', 'Hello World!', 'read', '2023-10-18 02:19:30');
 
 -- --------------------------------------------------------
 
@@ -218,7 +220,12 @@ INSERT INTO `online_orders_new` (`order_id`, `Item_Name`, `Price`, `Quantity`) V
 (106, 'Cheese Burger', 100, 1),
 (107, 'Beef Burger', 150, 1),
 (108, 'Red Hot', 120, 1),
-(109, 'Beef Burger', 150, 1);
+(109, 'Beef Burger', 150, 1),
+(110, 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce.', 22, 1),
+(110, 'A shot or two of bold, tasty espresso with fresh, sweet steamed milk over it.', 12, 1),
+(111, 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshl', 22, 1),
+(111, 'Orange Cold Brew Coffee', 11, 1),
+(111, 'A crips waffle topped with slices of farm-fresh sweet banana, Premium Vanilla ice cream, whipping cr', 23, 1);
 
 -- --------------------------------------------------------
 
@@ -246,9 +253,9 @@ CREATE TABLE `order_manager` (
 --
 
 INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `cus_add1`, `cus_city`, `cus_phone`, `payment_status`, `order_date`, `total_amount`, `transaction_id`, `order_status`) VALUES
-(12, '', 'Nazrul Islam', 'nazrul.334@gmail.com', 'Badda, Dhaka', 'Dhaka', 16475347689, 'successful', '2022-02-16 08:17:29', 470, 'ONL-PAY-20XSKIEKLF', ''),
-(13, '', 'Maheosy Haque', 'maheosy.sristy@gmail.com', 'Banani, Dhaka', 'Dhaka', 34534534, 'successful', '2022-02-08 10:19:27', 170, 'ONL-PAY-QM7XFUQYHR', ''),
-(14, '', 'Mohammad Wasikuzzaman', 'maheosy.sristy@gmail.com', 'Banani, Dhaka', 'city name', 56756, 'successful', '2022-02-01 06:22:22', 270, 'ONL-PAY-COBQ6KWJSQ', ''),
+(12, '', 'Nazrul Islam', 'nazrul.334@gmail.com', 'Badda, Dhaka', 'Dhaka', 16475347689, 'successful', '2022-02-16 08:17:29', 470, 'ONL-PAY-20XSKIEKLF', 'Cancelled'),
+(13, '', 'Maheosy Haque', 'maheosy.sristy@gmail.com', 'Banani, Dhaka', 'Dhaka', 34534534, 'successful', '2022-02-08 10:19:27', 170, 'ONL-PAY-QM7XFUQYHR', 'Cancelled'),
+(14, '', 'Mohammad Wasikuzzaman', 'maheosy.sristy@gmail.com', 'Banani, Dhaka', 'city name', 56756, 'successful', '2022-02-01 06:22:22', 270, 'ONL-PAY-COBQ6KWJSQ', 'Cancelled'),
 (15, '', 'my full name', 'me@mydomain.com', '01', 'city name', 65, 'successful', '2022-02-01 07:42:35', 150, 'ONL-PAY-LJIBHV3TK8', ''),
 (16, '', 'my full name', 'me@mydomain.com', '01', 'city name', 67, 'successful', '0000-00-00 00:00:00', 100, 'ONL-PAY-TFWV0J5REO', ''),
 (17, '', 'my full name', 'me@mydomain.com', '01', 'city name', 76, 'successful', '0000-00-00 00:00:00', 130, 'ONL-PAY-GY1UBIG5RX', ''),
@@ -264,17 +271,17 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (27, '', 'my full name', 'me@mydomain.com', '01', 'city name', 65, 'pending', '0000-00-00 00:00:00', 270, 'ONL-PAY-S89OQX0OZD', ''),
 (28, '', 'my full name', 'me@mydomain.com', '01', 'city name', 66, 'pending', '0000-00-00 00:00:00', 290, 'ONL-PAY-3EZX9X9K5J', ''),
 (29, '', 'Asad Ali', 'asad45@gmail.com', 'House-34, Road 5, Sector7, Uttara', 'Dhaka', 1765349826, 'successful', '0000-00-00 00:00:00', 1310, 'ONL-PAY-6V6RYWX24Z', ''),
-(30, '', 'Tamin Ahmed', 'tamim354@gmail.com', 'Uttara, Dhaka', 'Dhaka', 1876563854, 'successful', '0000-00-00 00:00:00', 420, 'ONL-PAY-WVQRSZGWMW', ''),
-(31, '', 'my full name', 'me@mydomain.com', '01', 'city name', 8, 'successful', '0000-00-00 00:00:00', 940, 'ONL-PAY-LDFBBO3TJW', ''),
+(30, '', 'Tamin Ahmed', 'tamim354@gmail.com', 'Uttara, Dhaka', 'Dhaka', 1876563854, 'successful', '0000-00-00 00:00:00', 420, 'ONL-PAY-WVQRSZGWMW', 'Cancelled'),
+(31, '', 'my full name', 'me@mydomain.com', '01', 'city name', 8, 'successful', '0000-00-00 00:00:00', 940, 'ONL-PAY-LDFBBO3TJW', 'Cancelled'),
 (32, '', 'Wasikuzzaman', 'wasik0003@gmail.com', 'House -15, Road - 19, Nikunja', 'Dhaka', 1717731002, 'successful', '0000-00-00 00:00:00', 460, 'ONL-PAY-7UBFJLE87H', ''),
 (33, '', 'Eureka', 'euiiak@gmals.com', 'Sjsjsk', 'Djdjskş', 101, 'successful', '0000-00-00 00:00:00', 750, 'ONL-PAY-GWBLBMSVB8', ''),
 (34, '', 'Seems like This is working', 'Yeahh@sohappy.com', 'Finally after all the hardworks', 'I can sigh a breath of relief', 999999, 'successful', '0000-00-00 00:00:00', 880, 'ONL-PAY-VHMONRPXA1', ''),
 (35, '', 'Maheosy Haque', 'maheosy.sristy@gmail.com', 'Banani, Dhaka', 'Dhaka', 2121212, 'successful', '0000-00-00 00:00:00', 1080, 'ONL-PAY-C67X5PHHX4', ''),
-(36, '', 'Shoriful Islam', 'shorif65@gmail.com', 'House 45, Road 2, Nikunja ', 'Dhaka', 1876349236, 'successful', '0000-00-00 00:00:00', 300, 'ONL-PAY-OSKZYF7J42', ''),
+(36, '', 'Shoriful Islam', 'shorif65@gmail.com', 'House 45, Road 2, Nikunja ', 'Dhaka', 1876349236, 'successful', '0000-00-00 00:00:00', 300, 'ONL-PAY-OSKZYF7J42', 'Cancelled'),
 (37, '', 'Farook Ahmed', 'farook345@hotmail.com', 'House 4, Road 19, Sector 3, Uttara', 'Dhaka', 1934826457, 'successful', '0000-00-00 00:00:00', 250, 'ONL-PAY-X3U8QMX9UG', ''),
-(38, '', 'Nazmul Islam', 'naz90@yahoo.com', 'House 20, Road 4, Block D, Aftabnagar', 'Dhaka', 1729458729, 'pending', '0000-00-00 00:00:00', 490, 'ONL-PAY-7PVDA9NVIL', ''),
+(38, '', 'Nazmul Islam', 'naz90@yahoo.com', 'House 20, Road 4, Block D, Aftabnagar', 'Dhaka', 1729458729, 'Pending', '0000-00-00 00:00:00', 490, 'ONL-PAY-7PVDA9NVIL', 'Cancelled'),
 (39, '', 'my full name', 'me@mydomain.com', '01', 'city name', 11, 'successful', '0000-00-00 00:00:00', 240, 'ONL-PAY-GDGUVQOCL3', ''),
-(40, '', 'Monir Ali', 'monir56@gmail.com', 'Uttara, Dhaka', 'Dhaka', 17232567642, 'successful', '0000-00-00 00:00:00', 360, 'ONL-PAY-IRDBF59HGR', ''),
+(40, '', 'Monir Ali', 'monir56@gmail.com', 'Uttara, Dhaka', 'Dhaka', 17232567642, 'successful', '0000-00-00 00:00:00', 360, 'ONL-PAY-IRDBF59HGR', 'Cancelled'),
 (41, '', 'Jalal Molla', 'jalal34@gmail.com', 'Basabo, Dhaka', 'Dhaka', 17822347345, 'successful', '0000-00-00 00:00:00', 160, 'ONL-PAY-9U0IWYR96U', ''),
 (42, '', 'Jalal Molla', 'jalal34@gmail.com', 'Basabo, Dhaka', 'Dhaka', 17822347345, 'successful', '0000-00-00 00:00:00', 160, 'ONL-PAY-9U0IWYR96U', ''),
 (43, '', 'Jalal Molla', 'jalal34@gmail.com', 'Basabo, Dhaka', 'Dhaka', 17822347345, 'successful', '0000-00-00 00:00:00', 160, 'ONL-PAY-9U0IWYR96U', ''),
@@ -285,7 +292,7 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (48, '', 'Jalal Molla', 'jalal34@gmail.com', 'Basabo, Dhaka', 'Dhaka', 17822347345, 'successful', '0000-00-00 00:00:00', 160, 'ONL-PAY-9U0IWYR96U', ''),
 (49, '', 'Jalal Molla', 'jalal34@gmail.com', 'Basabo, Dhaka', 'Dhaka', 17822347345, 'successful', '0000-00-00 00:00:00', 160, 'ONL-PAY-9U0IWYR96U', ''),
 (50, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', ''),
-(51, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', ''),
+(51, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', 'Cancelled'),
 (52, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', ''),
 (53, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', ''),
 (54, '', 'Kobita Begum', 'kobita456@gmail.com', 'Dhanmondi,Dhaka', 'Dhaka', 1876452946, 'successful', '0000-00-00 00:00:00', 110, 'ONL-PAY-FSSWV66LPV', ''),
@@ -313,7 +320,7 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (76, '', 'Jamila Jameel', 'jamila34@gmail.com', 'Badda, Dhaka', 'Dhaka', 1876343495, 'successful', '0000-00-00 00:00:00', 120, 'ONL-PAY-C1HFESV819', 'Processing'),
 (77, '', 'Tom Hanks', 'tom45@gmail.com', 'Dhanmondi, Dhaka', 'Dhaka', 17656349832, 'successful', '0000-00-00 00:00:00', 390, 'ONL-PAY-G7PB7WULEF', 'Processing'),
 (78, '', 'Sumona Akter', 'sumona43@yahoo.com', 'Cantonment,Dhaka', 'Dhaka', 1763838232, 'successful', '0000-00-00 00:00:00', 540, 'ONL-PAY-H8GFL3LYB7', 'Delivered'),
-(79, '', 'Sumona Akter', 'sumona43@yahoo.com', 'Cantonment,Dhaka', 'Dhaka', 1763838232, 'successful', '0000-00-00 00:00:00', 540, 'ONL-PAY-H8GFL3LYB7', 'Pending'),
+(79, '', 'Sumona Akter', 'sumona43@yahoo.com', 'Cantonment,Dhaka', 'Dhaka', 1763838232, 'successful', '0000-00-00 00:00:00', 540, 'ONL-PAY-H8GFL3LYB7', 'Delivered'),
 (80, '', 'Sabir Ahmed', 'sabir34@gmail.com', 'Mirpur,Dhaka', 'Dhaka', 1876344832, 'successful', '0000-00-00 00:00:00', 200, 'ONL-PAY-3XF146V92Q', 'Cancelled'),
 (81, '', 'Sabir Ahmed', 'sabir34@gmail.com', 'Mirpur,Dhaka', 'Dhaka', 1876344832, 'successful', '0000-00-00 00:00:00', 200, 'ONL-PAY-3XF146V92Q', 'Processing'),
 (82, '', 'Jahangir Alom', 'jahnalom@yahoo.com', 'Uttara,Dhaka', 'Dhaka', 1986473747, 'successful', '0000-00-00 00:00:00', 320, 'ONL-PAY-6EF97NAH6Y', 'Cancelled'),
@@ -334,16 +341,18 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (97, 'wasik0003', 'Mohammad Wasikuzzaman', 'wasikz331@gmail.com', 'Bhaluka Municipality, Bhaluka, Mymensingh.', 'Mymensingh', 1717731002, 'successful', '2022-02-14 03:46:19', 120, 'ONL-PAY-SK7IM5U84G', 'Delivered'),
 (98, 'wasik0003', 'Wasikuzzaman', 'wasik0003@gmail.com', 'Bhaluka Municipality, Bhaluka, Mymensingh.', 'Mymensingh', 1717731002, 'successful', '2022-02-14 06:16:15', 300, 'ONL-PAY-8E5L7NIWAE', 'Processing'),
 (99, 'wasik0003', 'Wasikuzzaman', 'wasik0003@gmail.com', 'Bhaluka Municipality, Bhaluka, Mymensingh.', 'Mymensingh', 1717731002, 'successful', '2022-02-14 06:26:37', 450, 'ONL-PAY-VPE49B581W', 'Processing'),
-(100, 'mofiz11', 'Mofiz Mia', 'mofiz@gmail.com', 'Dhaka', 'Dhaka', 1717122112, 'pending', '2023-09-19 08:18:49', 250, 'ONL-PAY-02H137JNWT', 'Pending'),
-(101, 'Alvin', 'Alvin', 'Alvin@gmail.com', 'No.1 Lorong Meranti 3, Off Jalan Kenanga, 55200, Kuala Lumpur, WP Kuala Lumpur', 'Kuala Lumpur', 138100233, 'pending', '2023-10-16 01:20:12', 150, 'ONL-PAY-M20W3QIZJ8', 'Pending'),
+(100, 'mofiz11', 'Mofiz Mia', 'mofiz@gmail.com', 'Dhaka', 'Dhaka', 1717122112, 'Pending', '2023-09-19 08:18:49', 250, 'ONL-PAY-02H137JNWT', 'Cancelled'),
+(101, 'Alvin', 'Alvin', 'Alvin@gmail.com', 'No.1 Lorong Meranti 3, Off Jalan Kenanga, 55200, Kuala Lumpur, WP Kuala Lumpur', 'Kuala Lumpur', 138100233, 'Pending', '2023-10-16 01:20:12', 150, 'ONL-PAY-M20W3QIZJ8', 'Cancelled'),
 (102, 'Alvin', 'Alvin', 'Alvin@gmail.com', 'No.1 Lorong Meranti 3, Off Jalan Kenanga, 55200, Kuala Lumpur, WP Kuala Lumpur', 'Kuala Lumpur', 138100233, 'pending', '2023-10-16 03:30:16', 150, 'ONL-PAY-LK8DXA0D1U', 'Pending'),
 (103, 'Alvin', 'Alvin', 'Alvin@gmail.com', 'No.1 Lorong Meranti 3, Off Jalan Kenanga, 55200, Kuala Lumpur, WP Kuala Lumpur', 'Kuala Lumpur', 138100233, 'pending', '2023-10-16 03:34:55', 100, 'ONL-PAY-MDYY2P6V2O', 'Pending'),
 (104, 'Maddie', 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'pending', '2023-10-16 03:38:03', 110, 'ONL-PAY-FU028CJNM9', 'Pending'),
 (105, 'Maddie', 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'pending', '2023-10-16 03:39:30', 100, 'ONL-PAY-X8JH1XBGLE', 'Pending'),
-(106, 'Maddie', 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'pending', '2023-10-16 03:41:08', 100, 'ONL-PAY-J2V92Y2B56', 'Pending'),
-(107, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'pending', '2023-10-16 03:41:43', 150, 'ONL-PAY-ZQYEVOOM2S', 'Pending'),
+(106, 'Maddie', 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'successful', '2023-10-16 03:41:08', 100, 'ONL-PAY-J2V92Y2B56', 'Delivered'),
+(107, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'successful', '2023-10-16 03:41:43', 150, 'ONL-PAY-ZQYEVOOM2S', 'Delivered'),
 (108, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'successful', '2023-10-16 03:43:31', 120, 'ONL-PAY-WXJTH1BCMF', 'Delivered'),
-(109, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'successful', '2023-10-16 03:46:16', 150, 'ONL-PAY-KHV4WBCR07', 'Delivered');
+(109, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'successful', '2023-10-16 03:46:16', 150, 'ONL-PAY-KHV4WBCR07', 'Delivered'),
+(110, 'alice', 'Alice', 'alice@gmail.com', 'test fucntion', 'penang', 1232456789, 'successful', '2023-10-18 02:07:51', 35, 'ONL-PAY-FSZYKS5XHC', 'Delivered'),
+(111, 'alice', 'Alice', 'alice@gmail.com', 'test fucntion', 'penang', 1232456789, 'successful', '2023-10-25 03:23:47', 57, 'ONL-PAY-FU0Q5V97I5', 'Delivered');
 
 -- --------------------------------------------------------
 
@@ -385,11 +394,11 @@ CREATE TABLE `tbl_category` (
 --
 
 INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`) VALUES
-(41, 'Burger', 'Food_Category_81005.jpg', 'Yes', 'Yes'),
-(42, 'Pizza', 'Food_Category_13196.jpg', 'Yes', 'Yes'),
-(43, 'Hot Dogs', 'Food_Category_76472.jpg', 'Yes', 'Yes'),
-(44, 'Sides', 'Food_Category_39435.jpg', 'Yes', 'Yes'),
-(48, 'Bengali', 'Food_Category_94135.png', 'Yes', 'Yes');
+(58, 'Waffle', 'Food_Category_66808.jpg', 'Yes', 'Yes'),
+(59, 'Main Course', 'Food_Category_16051.jpg', 'Yes', 'Yes'),
+(60, 'Coffee', 'Food_Category_56745.jpg', 'Yes', 'Yes'),
+(61, 'Spaghetti', 'Food_Category_31185.jpg', 'Yes', 'Yes'),
+(62, 'Rice', 'Food_Category_34774.jpg', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -414,7 +423,7 @@ CREATE TABLE `tbl_eipay` (
 INSERT INTO `tbl_eipay` (`id`, `table_id`, `amount`, `tran_id`, `order_date`, `payment_status`, `order_status`) VALUES
 (415, 'Table 3', 763.00, 'EI-PAY-GKKQXXZ42C', '2022-02-09 10:36:18', 'Successful', 'Delivered'),
 (416, 'Table 2', 460.00, 'EI-PAY-5SA6TNEO29', '2022-02-09 12:14:30', 'Successful', 'Delivered'),
-(418, 'Table 4', 450.00, 'EI-PAY-65IYLWUW2S', '2022-02-09 14:11:26', 'Successful', 'Pending'),
+(418, 'Table 4', 450.00, 'EI-PAY-65IYLWUW2S', '2022-02-09 14:11:26', 'Successful', 'Delivered'),
 (420, 'Table 4', 678.00, 'EI-PAY-245XLV2144', '2022-02-09 16:41:41', 'Successful', 'Pending');
 
 -- --------------------------------------------------------
@@ -440,27 +449,19 @@ CREATE TABLE `tbl_food` (
 --
 
 INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `category_id`, `featured`, `active`, `stock`) VALUES
-(34, 'Chicken Burger', 'Chicken Burger', 120.00, 'Food-Name-7394.jpg', 41, 'No', 'Yes', 70),
-(35, 'Beef Burger', 'Beef Burger', 150.00, 'Food-Name-251.jpg', 41, 'No', 'Yes', 55),
-(36, 'Cheese Burger', 'Cheese Burger', 100.00, 'Food-Name-1511.jpg', 41, 'No', 'Yes', 81),
-(37, 'Hamburger', 'Hamburger', 160.00, 'Food-Name-8238.jpg', 41, 'Yes', 'Yes', 90),
-(38, 'Supreme Pizza', 'Supreme Pizza', 450.00, 'Food-Name-3657.jpg', 42, 'Yes', 'Yes', 69),
-(39, 'Deluxe Pizza ', 'Deluxe Pizza ', 490.00, 'Food-Name-4854.jpg', 42, 'No', 'Yes', 49),
-(40, 'Cheese Pizza', 'Cheese Pizza', 350.00, 'Food-Name-926.jpg', 42, 'No', 'Yes', 80),
-(41, 'Vegetarian Pizza', 'Vegetarian Pizza', 300.00, 'Food-Name-6428.jpg', 42, 'No', 'Yes', 86),
-(42, 'Chili Hot Dog', 'Chili Hot Dog', 80.00, 'Food-Name-1499.jpg', 43, 'No', 'Yes', 145),
-(43, 'Hot Onion Dog', 'Hot Onion Dog', 100.00, 'Food-Name-5049.jpg', 43, 'No', 'Yes', 158),
-(44, 'Cheese Dog', 'Cheese Dog', 110.00, 'Food-Name-3512.jpg', 43, 'Yes', 'Yes', 59),
-(45, 'Red Hot', 'Red Hot\r\n', 120.00, 'Food-Name-5500.jpg', 43, 'No', 'Yes', 138),
-(46, 'Popcorn Chicken', 'Popcorn Chicken', 250.00, 'Food-Name-9143.jpg', 44, 'No', 'Yes', 500),
-(47, 'Samoosa', 'Samoosa', 100.00, 'Food-Name-1669.jpg', 44, 'No', 'Yes', 300),
-(48, 'Shingara', 'Shingara', 100.00, 'Food-Name-937.jpg', 44, 'Yes', 'Yes', 596),
-(49, 'Spring Roll', 'Spring Roll', 130.00, 'Food-Name-5356.jpg', 44, 'Yes', 'Yes', 78),
-(50, 'Chicken Nuggets', 'Chicken Nuggets', 150.00, 'Food-Name-5725.jpg', 44, 'No', 'Yes', 595),
-(51, 'Chicken Kiev Balls', 'Chicken Kiev Balls', 200.00, 'Food-Name-5497.jpg', 44, 'Yes', 'Yes', 39),
-(52, 'French Fries', 'French Fries', 120.00, 'Food-Name-2893.jpg', 44, 'Yes', 'Yes', 594),
-(53, 'Onion Rings', 'Onion Rings', 100.00, 'Food-Name-8745.jpg', 44, 'Yes', 'Yes', 597),
-(57, 'test', 'test', 2.00, 'Food-Name-259.png', 41, 'Yes', 'Yes', 0);
+(71, 'Nasi Goreng Petai', 'Fried Rice with Haus made Shrimp Sambal, Petai, shrimps and Fried Egg. (Spicy/non-Spicy)', 15.80, 'Food-Name-8090.jpg', 62, 'No', 'Yes', 66),
+(72, 'Butter Milk Chicken', 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried egg (Spicy)', 20.80, 'Food-Name-383.jpg', 62, 'No', 'Yes', 51),
+(73, 'Percik Chicken', 'Percik Style Chicken serve with Jasmine White Rice and Mix Green Salad.  (Spicy)', 16.80, 'Food-Name-3545.jpg', 62, 'Yes', 'Yes', 100),
+(74, 'Spicy Portugese Chicken', 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce', 22.80, 'Food-Name-9506.jpg', 59, 'Yes', 'Yes', 97),
+(75, 'Latte', '', 12.00, 'Food-Name-2900.jpg', 60, 'Yes', 'Yes', 100),
+(76, 'Cappucino', '', 12.00, 'Food-Name-4575.jpg', 60, 'No', 'Yes', 43),
+(77, 'Aglio Olio', 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshly cooked spaghetti.\r\n(Smoked duck/Shrimps)', 22.80, 'Food-Name-3892.jpg', 61, 'Yes', 'Yes', 92),
+(78, 'Uncle Paul Fish & Fries', 'Crispy Soda Battered Fish Fillet (Perch) serve with Fries and Special Tartar Dipping Sauce.', 22.80, 'Food-Name-2611.jpg', 59, 'Yes', 'Yes', 30),
+(79, 'Simply Waffle', 'A crips waffle topped with strawberry slices, blueberries serve with Queen maple syrup (sugar free), unsalted butter and sprinkled with granola and icing sugar', 14.00, 'Food-Name-1152.jpg', 58, 'No', 'Yes', 34),
+(80, 'Banana Waffle', 'A crips waffle topped with slices of form-fresh sweet banana, Premium  Vanilla ice cream, whipping cream, drizzled with caramel sauce and sprinkled with cinnamon sugar', 23.00, 'Food-Name-8496.jpg', 58, 'No', 'Yes', 55),
+(81, 'Lotus Biscoff Waffle', 'A crips waffle topped with 5 pcs Nutella Chocolate Brownies, Premium Vanilla Ice Cream, Lotus Biscoff biscuits, Biscoff sauce and one shot of Alturra espresso (Suitable for sharing)', 30.00, 'Food-Name-1.jpg', 58, 'Yes', 'Yes', 90),
+(82, 'Signature Overload Waffles', 'Two crips waffles topped with Premium Vanilla ice cream, Premium Mini Almond ice cream , Gery chocolate wafer roll, strawberries and blueberries, serve with chocolate sauce, drizzled with chocolate sauce and sprinkled with icing sugar and almond (Suitable for sharing)', 36.00, 'Food-Name-5029.jpg', 58, 'Yes', 'Yes', 71),
+(83, 'Espresso', '', 7.00, 'Food-Name-7507.jpg', 58, 'No', 'Yes', 7);
 
 -- --------------------------------------------------------
 
@@ -548,7 +549,8 @@ CREATE TABLE `tbl_users` (
 INSERT INTO `tbl_users` (`id`, `name`, `email`, `add1`, `city`, `phone`, `username`, `password`) VALUES
 (1, 'Alvin', 'Alvin@gmail.com', 'No.1 Lorong Meranti 3, Off Jalan Kenanga, 55200, Kuala Lumpur, WP Kuala Lumpur', 'Kuala Lumpur', 138100233, 'Alvin', '81dc9bdb52d04dc20036dbd8313ed055'),
 (5, 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'Kelvin', '81dc9bdb52d04dc20036dbd8313ed055'),
-(6, 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'Maddie', '81dc9bdb52d04dc20036dbd8313ed055');
+(6, 'Maddie', 'Maddie@gmail.com', 'No.1, Jalan Megah 23, Batu 9 1/2 Taman Megah, Wilayah Persekutuan, 43200 Kuala Lumpur', 'Kuala Lumpur', 198273362, 'Maddie', '81dc9bdb52d04dc20036dbd8313ed055'),
+(7, 'Alice', 'alice@gmail.com', 'test fucntion', 'penang', 1232456789, 'alice', '81dc9bdb52d04dc20036dbd8313ed055');
 
 --
 -- Indexes for dumped tables
@@ -610,13 +612,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `order_manager`
 --
 ALTER TABLE `order_manager`
-  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -628,7 +630,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay`
@@ -640,7 +642,7 @@ ALTER TABLE `tbl_eipay`
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
@@ -652,7 +654,7 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

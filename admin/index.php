@@ -444,7 +444,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<p>Revenue Generated</p>
 					</div>
 				</div>
-
+			</div>
+			
+			<div class="cards-list">
 				<div class="card-stock3">
 					<div class="card_image">
 						<a href="manage-online-order.php"><img src="../images/complete_order1.png" /></a>
@@ -464,7 +466,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<p>Menu Items</p>
 					</div>
 				</div>
-
 			</div>
 
 
