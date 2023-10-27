@@ -138,11 +138,11 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
-
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.02340618993233!2d101.62644332678249!3d2.9933837262007685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb53d2cbe1e1b%3A0xa4b0c784a57bfb22!2sHaus%207%20Cafe!5e0!3m2!1sen!2smy!4v1697372859409!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.374701119934!2d101.62397907461441!3d2.993328154091497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb53d2cbe1e1b%3A0xa4b0c784a57bfb22!2sHaus%207%20Coffee!5e0!3m2!1sen!2smy!4v1698373347621!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
+                    
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form action="message.php" method="POST">
@@ -219,7 +219,7 @@
                             &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                         </div>
                         <div class="col-md-6 text-center text-md-end">
-                            
+
                         </div>
                     </div>
                 </div>

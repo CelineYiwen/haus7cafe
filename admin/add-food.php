@@ -46,7 +46,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link rel="stylesheet" href="style-admin.css">
     <link rel="icon" 
       type="image/png" 
-      href="../images/logo.png">
+      href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
@@ -56,7 +56,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+		<div class="centered-image">
+			<img src="../images/logo1.jpg" width="80px" alt="">
+		</div>
 		</a>
 		<ul class="side-menu top">
 			<li >

@@ -1,8 +1,8 @@
 <?php include('../frontend/config/constants.php');
-	  include('login-check.php');
+include('login-check.php');
 
 ?>
-<?php 
+<?php
 
 //Stats
 
@@ -10,7 +10,7 @@ $sales_by_hour =  "SELECT date(order_date) as hname,
 					sum(total_amount) as total_sales
 					FROM order_manager
 					GROUP BY date(order_date)";
-					 
+
 
 $res_sales_by_hour = mysqli_query($conn, $sales_by_hour);
 
@@ -67,6 +67,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,30 +76,31 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-	<link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
+
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo1.jpg" width="80px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
 			<li class="">
 				<a href="index.php">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
 				<a href="manage-admin.php">
-					<i class='bx bxs-group' ></i>
+					<i class='bx bxs-group'></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
@@ -106,18 +108,15 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders &nbsp;</span>
-						<?php 
-					if($row_online_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_online_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_online_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
 				</a>
@@ -125,25 +124,22 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text" >Eat In Orders &nbsp;&nbsp;&nbsp;
-						
+					<span class="text">Eat In Orders &nbsp;&nbsp;&nbsp;
+
 					</span>
-					
-					<?php 
-					if($row_ei_order_notif>0)
-					{
-						?>
+
+					<?php
+					if ($row_ei_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_ei_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
-					
+
 				</a>
 			</li>
 			<li>
@@ -174,11 +170,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -186,21 +182,21 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	</section>
 	<!-- SIDEBAR -->
 
-	
+
 
 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 				</div>
 			</form>
 			<div class="bx.bx-menu">
-			<?php
+				<?php
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
@@ -211,195 +207,172 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php
 				} else {
 				?>
-					 echo "<script>
-						alert('Please login'); 
-						window.location.href='login.php';
-						</script>";
-  	
+					echo "<script>
+						alert('Please login');
+						window.location.href = 'login.php';
+					</script>";
+
 				<?php
 
 				}
 				?>
-			</div> 
-                    <div class="fetch_message">
+			</div>
+			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
-					<?php 
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
+					<?php
 
-					if($row_message_notif>0)
-					{
-						?>
+					if ($row_message_notif > 0) {
+					?>
 						<span class="num"><?php echo $row_message_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""></span>
-						<?php
+					<?php
 
 					}
 					?>
-					
+
 				</div>
-					
+
 			</div>
-			
-			<div class="notification" onclick= "menuToggle();">
-				<div class="action notif" onclick= "menuToggle();">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
-				<div class="notif_menu">
-				<ul><?php 
-							
-							if($row_stock_notif>0 and $row_stock_notif !=1 )
-							{
-								?>
+
+			<div class="notification" onclick="menuToggle();">
+				<div class="action notif" onclick="menuToggle();">
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
+					<div class="notif_menu">
+						<ul><?php
+
+							if ($row_stock_notif > 0 and $row_stock_notif != 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
-								<?php
-							}
-							else if($row_stock_notif == 1)
-							{
-								?>
+							<?php
+							} else if ($row_stock_notif == 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
-								<?php
+							<?php
+							} else {
 							}
-							else
-							{
-								
-							}
-							if($row_ei_order_notif>0)
-							{
-								?>
+							if ($row_ei_order_notif > 0) {
+							?>
 								<li><a href="manage-online-order.php"><?php echo $row_online_order_notif ?>&nbsp;New Online Order</li></a>
-								<?php
+							<?php
 
 							}
-							if($row_online_order_notif>0)
-							{
-								?>
+							if ($row_online_order_notif > 0) {
+							?>
 								<li><a href="manage-ei-order.php"><?php echo $row_ei_order_notif ?>&nbsp;New Eat In Order</li></a>
-								<?php
+							<?php
 
 							}
 							?>
-						
-					</ul>
+
+						</ul>
+					</div>
+					<?php
+					if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
+						$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
+					?>
+
+						<span class="num"><?php echo $total_notif; ?></span>
+					<?php
+					} else {
+					?>
+						<span class=""></span>
+					<?php
+					}
+					?>
+					</a>
 				</div>
-				<?php 
-				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
-				{
-					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
-					?>
-					
-					<span class="num"><?php echo $total_notif; ?></span>
-					<?php
-				}
-				else
-				{
-					?>
-					<span class=""></span>
-					<?php
-				}
-				?>
-			</a>
-			</div>
 			</div>
 		</nav>
 		<!-- NAVBAR -->
 
 		<!-- MAIN -->
 		<main>
-		
+
 
 			<div class="table-data-message">
 				<div class="order">
 					<div class="">
-						
-						
+
+
 					</div>
 					<table>
-					
+
 						<?php
-                    
-                    $sql = "SELECT * FROM message ORDER BY date DESC";
-					$res = mysqli_query($conn, $sql);
 
-                    if($res == TRUE)
-					{
-					 $count = mysqli_num_rows($res); 
+						$sql = "SELECT * FROM message ORDER BY date DESC";
+						$res = mysqli_query($conn, $sql);
 
-                        if($count>0)
-						{
-                           while($rows = mysqli_fetch_assoc($res))
-						   {
-							$id = $rows['id'];
-                            $name = $rows['name'];
-                            $phone = $rows['phone'];
-                            $subject = $rows['subject'];
-                            $message = $rows['message'];
-                            $date = $rows['date'];
-                            $message_status = $rows['message_status'];
-                            ?> 
-						<tbody>
-                            <?php
+						if ($res == TRUE) {
+							$count = mysqli_num_rows($res);
 
-                            if($message_status == 'read')
-                            { ?>
-                                <tr>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$name"; ?></a></td>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$subject"; ?></a></td>
-                                <td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "$date"; ?></a></td>
-								<td>
-                        			<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button" >Delete</a>
-									
-                    			</td>
-							</tr>
-                            	<?php 
-                            }
-                            else
-                            {
-                                 ?>
-                               <tr>
-                                   <div class="unread_message">
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$name</span>"; ?></a></td>
-								<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$subject</span>"; ?></a></td>
-                                <td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>" > <?php echo "<span class='unread'>$date</span>"; ?></a></td>
-								<td>
-                        			<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button" >Delete</a>
-                            </div>
-                    			</td>
-							</tr>
-                            <?php
-                            }
-                        
+							if ($count > 0) {
+								while ($rows = mysqli_fetch_assoc($res)) {
+									$id = $rows['id'];
+									$name = $rows['name'];
+									$phone = $rows['phone'];
+									$subject = $rows['subject'];
+									$message = $rows['message'];
+									$date = $rows['date'];
+									$message_status = $rows['message_status'];
+						?>
+									<tbody>
+										<?php
 
-						
+										if ($message_status == 'read') { ?>
+											<tr>
+												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$name"; ?></a></td>
+												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$subject"; ?></a></td>
+												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$date"; ?></a></td>
+												<td>
+													<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button">Delete</a>
 
-						   }
-						}
-					}
+												</td>
+											</tr>
+										<?php
+										} else {
+										?>
+											<tr>
+												<div class="unread_message">
+													<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "<span class='unread'>$name</span>"; ?></a></td>
+													<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "<span class='unread'>$subject</span>"; ?></a></td>
+													<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "<span class='unread'>$date</span>"; ?></a></td>
+													<td>
+														<a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button">Delete</a>
+												</div>
+												</td>
+											</tr>
+							<?php
+										}
+									}
+								}
+							}
 
-					?>
-						
-						</tbody>
+							?>
+
+									</tbody>
 					</table>
 				</div>
-				
-			</div>
-		
 
-	
+			</div>
+
+
+
 		</main>
-		
-		
-	
+
+
+
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-		
+
 
 	<script src="script-admin.js"></script>
 
-	
+
 </body>
+
 </html>

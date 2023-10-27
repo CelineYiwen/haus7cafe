@@ -1,7 +1,7 @@
 <?php include('../frontend/config/constants.php');
-	  include('login-check.php');
-	  error_reporting(0);
-      @ini_set('display_errors', 0);
+include('login-check.php');
+error_reporting(0);
+@ini_set('display_errors', 0);
 
 ?>
 <?php
@@ -36,6 +36,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,30 +45,31 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-	<link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
+
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo.png" width="80px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
-			<li >
+			<li>
 				<a href="index.php">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li >
+			<li>
 				<a href="manage-admin.php">
-					<i class='bx bxs-group' ></i>
+					<i class='bx bxs-group'></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
@@ -75,18 +77,15 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>
-						<?php 
-					if($row_online_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_online_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_online_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
 				</a>
@@ -94,24 +93,21 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text" >Eat In Orders&nbsp;&nbsp;&nbsp;
-						
+					<span class="text">Eat In Orders&nbsp;&nbsp;&nbsp;
+
 					</span>
-					<?php 
-					if($row_ei_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_ei_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_ei_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
-					
+
 				</a>
 			</li>
 			<li class="active">
@@ -142,11 +138,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -160,14 +156,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 				</div>
 			</form>
 			<div class="bx.bx-menu">
-			<?php
+				<?php
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
@@ -178,141 +174,120 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php
 				} else {
 				?>
-					 echo "<script>
-						alert('Please login'); 
-						window.location.href='login.php';
-						</script>";
-  	
+					echo "<script>
+						alert('Please login');
+						window.location.href = 'login.php';
+					</script>";
+
 				<?php
 
 				}
 				?>
-			</div> 
+			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
-					<?php 
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
+					<?php
 
-					if($row_message_notif>0)
-					{
-						?>
+					if ($row_message_notif > 0) {
+					?>
 						<span class="num"><?php echo $row_message_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""></span>
-						<?php
+					<?php
 
 					}
 					?>
-					
+
 				</div>
-					
+
 			</div>
-		<div class="notification" >
+			<div class="notification">
 				<div class="action notif">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
-				<div class="notif_menu">
-				<ul><?php 
-							
-							if($row_stock_notif>0 and $row_stock_notif !=1 )
-							{
-								?>
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
+					<div class="notif_menu">
+						<ul><?php
+
+							if ($row_stock_notif > 0 and $row_stock_notif != 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
-								<?php
-							}
-							else if($row_stock_notif == 1)
-							{
-								?>
+							<?php
+							} else if ($row_stock_notif == 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
-								<?php
+							<?php
+							} else {
 							}
-							else
-							{
-								
-							}
-							if($row_ei_order_notif>0)
-							{
-								?>
+							if ($row_ei_order_notif > 0) {
+							?>
 								<li><a href="manage-online-order.php"><?php echo $row_online_order_notif ?>&nbsp;New Online Order</li></a>
-								<?php
+							<?php
 
 							}
-							if($row_online_order_notif>0)
-							{
-								?>
+							if ($row_online_order_notif > 0) {
+							?>
 								<li><a href="manage-ei-order.php"><?php echo $row_ei_order_notif ?>&nbsp;New Eat In Order</li></a>
-								<?php
+							<?php
 
 							}
 							?>
-						
-					</ul>
+
+						</ul>
+					</div>
+					<?php
+					if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
+						$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
+					?>
+
+						<span class="num"><?php echo $total_notif; ?></span>
+					<?php
+					} else {
+					?>
+						<span class=""></span>
+					<?php
+					}
+					?>
+					</a>
 				</div>
-				<?php 
-				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
-				{
-					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
-					?>
-					
-					<span class="num"><?php echo $total_notif; ?></span>
-					<?php
-				}
-				else
-				{
-					?>
-					<span class=""></span>
-					<?php
-				}
-				?>
-			</a>
 			</div>
-			</div>
-			
+
 		</nav>
 		<!-- NAVBAR -->
 		<?php
 
-		 if(isset($_SESSION['add']))
-        {
-            echo $_SESSION['add'];
-            unset($_SESSION['add']);
-        }
-        if(isset($_SESSION['remove']))
-        {
-            echo $_SESSION['remove'];
-            unset($_SESSION['remove']);
-        }
-        if(isset($_SESSION['delete']))
-        {
-            echo $_SESSION['delete'];
-            unset($_SESSION['delete']);
-        }
-        if(isset($_SESSION['no-category-found']))
-        {
-            echo $_SESSION['no-category-found'];
-            unset($_SESSION['no-category-found']);
-        }
-        if(isset($_SESSION['update']))
-        {
-            echo $_SESSION['update'];
-            unset($_SESSION['update']);
-        }
-        if(isset($_SESSION['upload']))
-        {
-            echo $_SESSION['upload'];
-            unset($_SESSION['upload']);
-        }
-        if(isset($_SESSION['failed-remove']))
-        {
-            echo $_SESSION['failed-remove'];
-            unset($_SESSION['failed-remove']);
-        }
-        
-        
-        ?>
+		if (isset($_SESSION['add'])) {
+			echo $_SESSION['add'];
+			unset($_SESSION['add']);
+		}
+		if (isset($_SESSION['remove'])) {
+			echo $_SESSION['remove'];
+			unset($_SESSION['remove']);
+		}
+		if (isset($_SESSION['delete'])) {
+			echo $_SESSION['delete'];
+			unset($_SESSION['delete']);
+		}
+		if (isset($_SESSION['no-category-found'])) {
+			echo $_SESSION['no-category-found'];
+			unset($_SESSION['no-category-found']);
+		}
+		if (isset($_SESSION['update'])) {
+			echo $_SESSION['update'];
+			unset($_SESSION['update']);
+		}
+		if (isset($_SESSION['upload'])) {
+			echo $_SESSION['upload'];
+			unset($_SESSION['upload']);
+		}
+		if (isset($_SESSION['failed-remove'])) {
+			echo $_SESSION['failed-remove'];
+			unset($_SESSION['failed-remove']);
+		}
+
+
+		?>
 
 		<!-- MAIN -->
 		<main>
@@ -323,153 +298,149 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<li>
 							<a href="index.php">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
 							<a class="active" href="manage-admin.php">Category</a>
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 
-       
 
-		<br/>
 
-            <!-- Button Add Admin-->
-            <a href="<?php echo SITEURL; ?>add-category.php" class="button-8" role="button">Add Category</a>
+			<br />
 
-            <br /> <br/>
-				<div class="table-data">
-			<div class="order">
-			<div class="head">
-	</div>
-            <table class="">
-                <tr>
-                    <th>S.N.</th>
-                    <th>Title</th>
-                    <th>Image</th>
-                    <th>Featured</th>
-                    <th>Active</th>
-                    <th>Actions</th>
-                </tr>
+			<!-- Button Add Admin-->
+			<a href="<?php echo SITEURL; ?>add-category.php" class="button-8" role="button">Add Category</a>
 
-                <?php 
-                //Fetching and Displaying data from database
+			<br /> <br />
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+					</div>
+					<table class="">
+						<tr>
+							<th>S.N.</th>
+							<th>Title</th>
+							<th>Image</th>
+							<th>Featured</th>
+							<th>Active</th>
+							<th>Actions</th>
+						</tr>
 
-                $sql = "SELECT * FROM tbl_category";
+						<?php
+						//Fetching and Displaying data from database
 
-                //Executing the Query
-                $res = mysqli_query($conn, $sql);
+						$sql = "SELECT * FROM tbl_category";
 
-                //Counting number of rows
+						//Executing the Query
+						$res = mysqli_query($conn, $sql);
 
-                $count = mysqli_num_rows($res);
+						//Counting number of rows
 
-                //Fixing Serial Number issue
-                $sn=1; //Create variable and assign as 1
+						$count = mysqli_num_rows($res);
 
-                //Check whether there is data in database or not
-                if($count > 0)
-                {
-                    //Data available in database
-                    //Get data and display
-                    while($row=mysqli_fetch_assoc($res))
-                    {
-                        $id = $row['id'];
-                        $title = $row['title'];
-                        $image_name = $row['image_name'];
-                        $featured = $row['featured'];
-                        $active = $row['active'];
+						//Fixing Serial Number issue
+						$sn = 1; //Create variable and assign as 1
 
-                        ?> <!-- Breaking the PHP to write HTML -->
+						//Check whether there is data in database or not
+						if ($count > 0) {
+							//Data available in database
+							//Get data and display
+							while ($row = mysqli_fetch_assoc($res)) {
+								$id = $row['id'];
+								$title = $row['title'];
+								$image_name = $row['image_name'];
+								$featured = $row['featured'];
+								$active = $row['active'];
 
-                    <tr>
-                    <td><?php echo $sn++; ?></td>
-                    <td><?php echo $title; ?></td>
-                    <td>
-                        <?php 
-                        //Check whether image name is available or not
-                        if($image_name!="")
-                        {
-                            //Display the image
+						?> <!-- Breaking the PHP to write HTML -->
 
-                            ?> <!-- Breaking the PHP to write HTML -->
+								<tr>
+									<td><?php echo $sn++; ?></td>
+									<td><?php echo $title; ?></td>
+									<td>
+										<?php
+										//Check whether image name is available or not
+										if ($image_name != "") {
+											//Display the image
 
-                            <img src="<?php echo SITEURL; ?>../images/category/<?php echo $image_name; ?>" width="100px" >
+										?> <!-- Breaking the PHP to write HTML -->
 
-                            <?php
+											<img src="<?php echo SITEURL; ?>../images/category/<?php echo $image_name; ?>" width="100px">
 
-                        }
-                        else
-                        {
-                            //Display the message
-                            echo "<div class='error'>No Image Available</div>";
-                        }
-                        ?>
-                    </td>
-                    <td><?php echo $featured; ?></td>
-                    <td><?php echo $active; ?></td>
-                    <td>
-                        <a href="<?php echo SITEURL; ?>update-category.php?id=<?php echo $id; ?>" class="button-5" role="button">Update</a>
-                        <a href="<?php echo SITEURL; ?>delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="button-7" role="button">Delete</a>
-                    </td>
-                </tr>
+										<?php
+
+										} else {
+											//Display the message
+											echo "<div class='error'>No Image Available</div>";
+										}
+										?>
+									</td>
+									<td><?php echo $featured; ?></td>
+									<td><?php echo $active; ?></td>
+									<td>
+										<a href="<?php echo SITEURL; ?>update-category.php?id=<?php echo $id; ?>" class="button-5" role="button">Update</a>
+										<a href="<?php echo SITEURL; ?>delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="button-7" role="button">Delete</a>
+									</td>
+								</tr>
 
 
 
-                        <?php
-                    }
-                }
-                else
-                {
-                    //No Data in database
-                    //Displaying the message inside table
+							<?php
+							}
+						} else {
+							//No Data in database
+							//Displaying the message inside table
 
-                    ?> <!-- Breaking the PHP to write HTML-->
+							?> <!-- Breaking the PHP to write HTML-->
 
-                    <tr>
-                        <td colspan="6"><div class="error">No Category Added</div></td>
-                    </tr>
+							<tr>
+								<td colspan="6">
+									<div class="error">No Category Added</div>
+								</td>
+							</tr>
 
-                    <?php
+						<?php
 
 
-                }
+						}
 
-                
-                
-                
-                
-                ?>
 
-               
 
-        
 
-            </table>
-</div>
-</div>
-	</div>
+
+						?>
+
+
+
+
+
+					</table>
 				</div>
-				
+			</div>
+			</div>
+			</div>
+
 			</div>
 
 
-<!-- Main Content Ends -->
+			<!-- Main Content Ends -->
 
 
 
-			
 
 
-	
+
+
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 
 	<script src="script-admin.js"></script>
 </body>
+
 </html>

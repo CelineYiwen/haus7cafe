@@ -84,7 +84,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-	<link rel="icon" type="image/png" href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<!-- Chart --->
 
@@ -180,7 +180,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo1.jpg" width="100px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -445,7 +447,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="cards-list">
 				<div class="card-stock3">
 					<div class="card_image">

@@ -1,5 +1,5 @@
 <?php include('../frontend/config/constants.php');
-	  include('login-check.php');
+include('login-check.php');
 
 ?>
 <?php
@@ -33,6 +33,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,30 +42,31 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-    <link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
+
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo1.jpg" width="80px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
-			<li >
+			<li>
 				<a href="index.php">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li >
+			<li>
 				<a href="manage-admin.php">
-					<i class='bx bxs-group' ></i>
+					<i class='bx bxs-group'></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
@@ -72,43 +74,37 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>
-						<?php 
-					if($row_online_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_online_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_online_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
 				</a>
 			</li>
-		<li>
+			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text" >Eat In Orders&nbsp;&nbsp;&nbsp;
-						
+					<span class="text">Eat In Orders&nbsp;&nbsp;&nbsp;
+
 					</span>
-					<?php 
-					if($row_ei_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_ei_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_ei_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
-					
+
 				</a>
 			</li>
 			<li class="active">
@@ -123,7 +119,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Food Menu</span>
 				</a>
 			</li>
-            <li class="">
+			<li class="">
 				<a href="inventory.php">
 					<i class='bx bxs-box'></i>
 					<span class="text">Inventory</span>
@@ -139,11 +135,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -157,14 +153,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 				</div>
 			</form>
 			<div class="bx.bx-menu">
-			<?php
+				<?php
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
@@ -175,99 +171,85 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php
 				} else {
 				?>
-					 echo "<script>
-						alert('Please login'); 
-						window.location.href='login.php';
-						</script>";
-  	
+					echo "<script>
+						alert('Please login');
+						window.location.href = 'login.php';
+					</script>";
+
 				<?php
 
 				}
 				?>
-			</div> 
+			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
-					<?php 
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
+					<?php
 
-					if($row_message_notif>0)
-					{
-						?>
+					if ($row_message_notif > 0) {
+					?>
 						<span class="num"><?php echo $row_message_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""></span>
-						<?php
+					<?php
 
 					}
 					?>
-					
+
 				</div>
-					
+
 			</div>
-			<div class="notification" >
+			<div class="notification">
 				<div class="action notif">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
-				<div class="notif_menu">
-				<ul><?php 
-							
-							if($row_stock_notif>0 and $row_stock_notif !=1 )
-							{
-								?>
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
+					<div class="notif_menu">
+						<ul><?php
+
+							if ($row_stock_notif > 0 and $row_stock_notif != 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
-								<?php
-							}
-							else if($row_stock_notif == 1)
-							{
-								?>
+							<?php
+							} else if ($row_stock_notif == 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
-								<?php
+							<?php
+							} else {
 							}
-							else
-							{
-								
-							}
-							if($row_ei_order_notif>0)
-							{
-								?>
+							if ($row_ei_order_notif > 0) {
+							?>
 								<li><a href="manage-online-order.php"><?php echo $row_online_order_notif ?>&nbsp;New Online Order</li></a>
-								<?php
+							<?php
 
 							}
-							if($row_online_order_notif>0)
-							{
-								?>
+							if ($row_online_order_notif > 0) {
+							?>
 								<li><a href="manage-ei-order.php"><?php echo $row_ei_order_notif ?>&nbsp;New Eat In Order</li></a>
-								<?php
+							<?php
 
 							}
 							?>
-						
-					</ul>
+
+						</ul>
+					</div>
+					<?php
+					if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
+						$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
+					?>
+
+						<span class="num"><?php echo $total_notif; ?></span>
+					<?php
+					} else {
+					?>
+						<span class=""></span>
+					<?php
+					}
+					?>
+					</a>
 				</div>
-				<?php 
-				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
-				{
-					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
-					?>
-					
-					<span class="num"><?php echo $total_notif; ?></span>
-					<?php
-				}
-				else
-				{
-					?>
-					<span class=""></span>
-					<?php
-				}
-				?>
-			</a>
 			</div>
-			</div>
-			
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -280,7 +262,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<li>
 							<a href="index.php">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
 							<a class="" href="manage-category.php">Manage Category</a>
 						</li>
@@ -289,210 +271,196 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
-	
-        <br/> 
 
-        <!-- Update Category Form Start-->
+			<br />
 
-<?php 
-        
-            //Check whether the id is set or not
-            if(isset($_GET['id']))
-            {
-                //Get the ID and all other details
-                //echo "Getting the Data";
-                $id = $_GET['id'];
-                //Create SQL Query to get all other details
-                $sql = "SELECT * FROM tbl_category WHERE id=$id";
+			<!-- Update Category Form Start-->
 
-                //Execute the Query
-                $res = mysqli_query($conn, $sql);
+			<?php
 
-                //Count the Rows to check whether the id is valid or not
-                $count = mysqli_num_rows($res);
+			//Check whether the id is set or not
+			if (isset($_GET['id'])) {
+				//Get the ID and all other details
+				//echo "Getting the Data";
+				$id = $_GET['id'];
+				//Create SQL Query to get all other details
+				$sql = "SELECT * FROM tbl_category WHERE id=$id";
 
-                if($count==1)
-                {
-                    //Get all the data
-                    $row = mysqli_fetch_assoc($res);
-                    $title = $row['title'];
-                    $current_image = $row['image_name'];
-                    $featured = $row['featured'];
-                    $active = $row['active'];
-                }
-                else
-                {
-                    //redirect to manage category with session message
-                    $_SESSION['no-category-found'] = "<div class='error'>Category not Found.</div>";
-                    header('location:'.SITEURL.'manage-category.php');
-                }
+				//Execute the Query
+				$res = mysqli_query($conn, $sql);
 
-            }
-            else
-            {
-                //redirect to Manage CAtegory
-                header('location:'.SITEURL.'manage-category.php');
-            }
-        
-        ?>
-        <div class="table-data">
-			<div class="order">
-			<div class="head">	
+				//Count the Rows to check whether the id is valid or not
+				$count = mysqli_num_rows($res);
 
-        <form action="" method="POST" enctype="multipart/form-data">
+				if ($count == 1) {
+					//Get all the data
+					$row = mysqli_fetch_assoc($res);
+					$title = $row['title'];
+					$current_image = $row['image_name'];
+					$featured = $row['featured'];
+					$active = $row['active'];
+				} else {
+					//redirect to manage category with session message
+					$_SESSION['no-category-found'] = "<div class='error'>Category not Found.</div>";
+					header('location:' . SITEURL . 'manage-category.php');
+				}
+			} else {
+				//redirect to Manage CAtegory
+				header('location:' . SITEURL . 'manage-category.php');
+			}
 
-            <table class="">
-                <tr>
-                    <td>Title: </td>
-                    <td>
-                        <input type="text" name="title" value="<?php echo $title; ?>" id="ip2" required>
-                    </td>
-                </tr>
+			?>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
 
-                <tr>
-                    <td>Current Image: </td>
-                    <td>
-                        <?php 
-                            if($current_image != "")
-                            {
-                                //Display the Image
-                                ?>
-                                <img src="<?php echo SITEURL; ?>../images/category/<?php echo $current_image; ?>" width="150px">
-                                <?php
-                            }
-                            else
-                            {
-                                //Display Message
-                                echo "<div class='error'>Image Not Added.</div>";
-                            }
-                        ?>
-                    </td>
-                </tr>
+						<form action="" method="POST" enctype="multipart/form-data">
 
-                <tr>
-                    <td>New Image: </td>
-                    <td>
-                        <input type="file" name="image">
-                    </td>
-                </tr>
+							<table class="">
+								<tr>
+									<td>Title: </td>
+									<td>
+										<input type="text" name="title" value="<?php echo $title; ?>" id="ip2" required>
+									</td>
+								</tr>
 
-                <tr>
-                    <td>Featured: </td>
-                    <td>
-                        <input <?php if($featured=="Yes"){echo "checked";} ?> type="radio" name="featured" value="Yes" required> Yes 
+								<tr>
+									<td>Current Image: </td>
+									<td>
+										<?php
+										if ($current_image != "") {
+											//Display the Image
+										?>
+											<img src="<?php echo SITEURL; ?>../images/category/<?php echo $current_image; ?>" width="150px">
+										<?php
+										} else {
+											//Display Message
+											echo "<div class='error'>Image Not Added.</div>";
+										}
+										?>
+									</td>
+								</tr>
 
-                        <input <?php if($featured=="No"){echo "checked";} ?> type="radio" name="featured" value="No" required> No 
-                    </td>
-                </tr>
+								<tr>
+									<td>New Image: </td>
+									<td>
+										<input type="file" name="image">
+									</td>
+								</tr>
 
-                <tr>
-                    <td>Active: </td>
-                    <td>
-                        <input <?php if($active=="Yes"){echo "checked";} ?> type="radio" name="active" value="Yes" required> Yes 
+								<tr>
+									<td>Featured: </td>
+									<td>
+										<input <?php if ($featured == "Yes") {
+													echo "checked";
+												} ?> type="radio" name="featured" value="Yes" required> Yes
 
-                        <input <?php if($active=="No"){echo "checked";} ?> type="radio" name="active" value="No" required> No 
-                    </td>
-                </tr>
+										<input <?php if ($featured == "No") {
+													echo "checked";
+												} ?> type="radio" name="featured" value="No" required> No
+									</td>
+								</tr>
 
-                <tr>
-                    <td>
-                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <input type="submit" name="submit" value="Update Category" class="button-8" role="button">
-                    </td>
-                </tr>
+								<tr>
+									<td>Active: </td>
+									<td>
+										<input <?php if ($active == "Yes") {
+													echo "checked";
+												} ?> type="radio" name="active" value="Yes" required> Yes
 
-            </table>
+										<input <?php if ($active == "No") {
+													echo "checked";
+												} ?> type="radio" name="active" value="No" required> No
+									</td>
+								</tr>
 
-        </form>
+								<tr>
+									<td>
+										<input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
+										<input type="hidden" name="id" value="<?php echo $id; ?>">
+										<input type="submit" name="submit" value="Update Category" class="button-8" role="button">
+									</td>
+								</tr>
 
-        <?php 
-        
-            if(isset($_POST['submit']))
-            {
-                //echo "Clicked";
-                //1. Get all the values from our form
-                $id = $_POST['id'];
-                $title = $_POST['title'];
-                $current_image = $_POST['current_image'];
-                $featured = $_POST['featured'];
-                $active = $_POST['active'];
+							</table>
 
-                //2. Updating New Image if selected
-                //Check whether the image is selected or not
-                if(isset($_FILES['image']['name']))
-                {
-                    //Get the Image Details
-                    $image_name = $_FILES['image']['name'];
+						</form>
 
-                    //Check whether the image is available or not
-                    if($image_name != "")
-                    {
-                        //Image Available
+						<?php
 
-                        //A. UPload the New Image
+						if (isset($_POST['submit'])) {
+							//echo "Clicked";
+							//1. Get all the values from our form
+							$id = $_POST['id'];
+							$title = $_POST['title'];
+							$current_image = $_POST['current_image'];
+							$featured = $_POST['featured'];
+							$active = $_POST['active'];
 
-                        //Auto Rename our Image
-                        //Get the Extension of our image (jpg, png, gif, etc) e.g. "specialfood1.jpg"
-                        $ext = end(explode('.', $image_name));
+							//2. Updating New Image if selected
+							//Check whether the image is selected or not
+							if (isset($_FILES['image']['name'])) {
+								//Get the Image Details
+								$image_name = $_FILES['image']['name'];
 
-                        //Rename the Image
-                        $image_name = "Food_Category_".rand(000, 999).'.'.$ext; // e.g. Food_Category_834.jpg
-                        
+								//Check whether the image is available or not
+								if ($image_name != "") {
+									//Image Available
 
-                        $source_path = $_FILES['image']['tmp_name'];
+									//A. UPload the New Image
 
-                        $destination_path = "../images/category/".$image_name;
+									//Auto Rename our Image
+									//Get the Extension of our image (jpg, png, gif, etc) e.g. "specialfood1.jpg"
+									$ext = end(explode('.', $image_name));
 
-                        //Finally Upload the Image
-                        $upload = move_uploaded_file($source_path, $destination_path);
+									//Rename the Image
+									$image_name = "Food_Category_" . rand(000, 999) . '.' . $ext; // e.g. Food_Category_834.jpg
 
-                        //Check whether the image is uploaded or not
-                        //And if the image is not uploaded then we will stop the process and redirect with error message
-                        if($upload==false)
-                        {
-                            //SEt message
-                            $_SESSION['upload'] = "<div class='error'>Failed to Upload Image. </div>";
-                            //Redirect to Add CAtegory Page
-                            header('location:'.SITEURL.'manage-category.php');
-                            //STop the Process
-                            die();
-                        }
 
-                        //B. Remove the Current Image if available
-                        if($current_image!="")
-                        {
-                            $remove_path = "../images/category/".$current_image;
+									$source_path = $_FILES['image']['tmp_name'];
 
-                            $remove = unlink($remove_path);
+									$destination_path = "../images/category/" . $image_name;
 
-                            //CHeck whether the image is removed or not
-                            //If failed to remove then display message and stop the processs
-                            if($remove==false)
-                            {
-                                //Failed to remove image
-                                $_SESSION['failed-remove'] = "<div class='error'>Failed to remove current Image.</div>";
-                                header('location:'.SITEURL.'manage-category.php');
-                                die();//Stop the Process
-                            }
-                        }
-                        
+									//Finally Upload the Image
+									$upload = move_uploaded_file($source_path, $destination_path);
 
-                    }
-                    else
-                    {
-                        $image_name = $current_image;
-                    }
-                }
-                else
-                {
-                    $image_name = $current_image;
-                }
+									//Check whether the image is uploaded or not
+									//And if the image is not uploaded then we will stop the process and redirect with error message
+									if ($upload == false) {
+										//SEt message
+										$_SESSION['upload'] = "<div class='error'>Failed to Upload Image. </div>";
+										//Redirect to Add CAtegory Page
+										header('location:' . SITEURL . 'manage-category.php');
+										//STop the Process
+										die();
+									}
 
-                //3. Update the Database
-                $sql2 = "UPDATE tbl_category SET 
+									//B. Remove the Current Image if available
+									if ($current_image != "") {
+										$remove_path = "../images/category/" . $current_image;
+
+										$remove = unlink($remove_path);
+
+										//CHeck whether the image is removed or not
+										//If failed to remove then display message and stop the processs
+										if ($remove == false) {
+											//Failed to remove image
+											$_SESSION['failed-remove'] = "<div class='error'>Failed to remove current Image.</div>";
+											header('location:' . SITEURL . 'manage-category.php');
+											die(); //Stop the Process
+										}
+									}
+								} else {
+									$image_name = $current_image;
+								}
+							} else {
+								$image_name = $current_image;
+							}
+
+							//3. Update the Database
+							$sql2 = "UPDATE tbl_category SET 
                     title = '$title',
                     image_name = '$image_name',
                     featured = '$featured',
@@ -500,32 +468,28 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
                     WHERE id=$id
                 ";
 
-                //Execute the Query
-                $res2 = mysqli_query($conn, $sql2);
+							//Execute the Query
+							$res2 = mysqli_query($conn, $sql2);
 
-                //4. REdirect to Manage Category with MEssage
-                //CHeck whether executed or not
-                if($res2==true)
-                {
-                    //Category Updated
-                    $_SESSION['update'] = "<div class='success'>Category Updated Successfully.</div>";
-                    header('location:'.SITEURL.'manage-category.php');
-                }
-                else
-                {
-                    //failed to update category
-                    $_SESSION['update'] = "<div class='error'>Failed to Update Category.</div>";
-                    header('location:'.SITEURL.'manage-category.php');
-                }
+							//4. REdirect to Manage Category with MEssage
+							//CHeck whether executed or not
+							if ($res2 == true) {
+								//Category Updated
+								$_SESSION['update'] = "<div class='success'>Category Updated Successfully.</div>";
+								header('location:' . SITEURL . 'manage-category.php');
+							} else {
+								//failed to update category
+								$_SESSION['update'] = "<div class='error'>Failed to Update Category.</div>";
+								header('location:' . SITEURL . 'manage-category.php');
+							}
+						}
 
-            }
-        
-        ?>
-       
+						?>
 
-        <!-- Update Category Form End -->
 
-        
+						<!-- Update Category Form End -->
+
+
 
 
 
@@ -533,8 +497,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 
 	<script src="script-admin.js"></script>
 </body>
+
 </html>

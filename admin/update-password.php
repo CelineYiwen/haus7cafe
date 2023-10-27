@@ -1,5 +1,5 @@
 <?php include('../frontend/config/constants.php');
-	  include('login-check.php');
+include('login-check.php');
 
 ?>
 <?php
@@ -33,6 +33,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,30 +42,31 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-	<link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
+
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo1.jpg" width="80px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
-			<li >
+			<li>
 				<a href="index.php">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li class="active">
 				<a href="manage-admin.php">
-					<i class='bx bxs-group' ></i>
+					<i class='bx bxs-group'></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
@@ -72,43 +74,37 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>
-						<?php 
-					if($row_online_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_online_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_online_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
 				</a>
 			</li>
-		<li>
+			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text" >Eat In Orders&nbsp;&nbsp;&nbsp;
-						
+					<span class="text">Eat In Orders&nbsp;&nbsp;&nbsp;
+
 					</span>
-					<?php 
-					if($row_ei_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_ei_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_ei_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
-					
+
 				</a>
 			</li>
 			<li>
@@ -139,11 +135,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -157,14 +153,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 				</div>
 			</form>
 			<div class="bx.bx-menu">
-			<?php
+				<?php
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
@@ -175,92 +171,79 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php
 				} else {
 				?>
-					 echo "<script>
-						alert('Please login'); 
-						window.location.href='login.php';
-						</script>";
-  	
+					echo "<script>
+						alert('Please login');
+						window.location.href = 'login.php';
+					</script>";
+
 				<?php
 
 				}
 				?>
-			</div> 
+			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
-					<?php 
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
+					<?php
 
-					if($row_message_notif>0)
-					{
-						?>
+					if ($row_message_notif > 0) {
+					?>
 						<span class="num"><?php echo $row_message_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""></span>
-						<?php
+					<?php
 
 					}
 					?>
-					
+
 				</div>
-					
+
 			</div>
-		<div class="notification" >
+			<div class="notification">
 				<div class="action notif">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
-				<div class="notif_menu">
-					<ul><?php 
-							if($row_ei_order_notif>0)
-							{
-								?>
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
+					<div class="notif_menu">
+						<ul><?php
+							if ($row_ei_order_notif > 0) {
+							?>
 								<li><a href="manage-ei-order.php"><?php echo $row_ei_order_notif ?>&nbsp;new EI order</li></a>
-								<?php
+							<?php
 
 							}
-							if($row_stock_notif>0 and $row_stock_notif !=1 )
-							{
-								?>
-								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
-								<?php
-							}
-							else if($row_stock_notif == 1)
-							{
-								?>
-								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
-								<?php
-							}
-							else
-							{
-								
-							}
-							
+							if ($row_stock_notif > 0 and $row_stock_notif != 1) {
 							?>
-						
-					</ul>
+								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
+							<?php
+							} else if ($row_stock_notif == 1) {
+							?>
+								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
+							<?php
+							} else {
+							}
+
+							?>
+
+						</ul>
+					</div>
+					<?php
+					if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
+						$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
+					?>
+
+						<span class="num"><?php echo $total_notif; ?></span>
+					<?php
+					} else {
+					?>
+						<span class=""></span>
+					<?php
+					}
+					?>
+					</a>
 				</div>
-				<?php 
-				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
-				{
-					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
-					?>
-					
-					<span class="num"><?php echo $total_notif; ?></span>
-					<?php
-				}
-				else
-				{
-					?>
-					<span class=""></span>
-					<?php
-				}
-				?>
-			</a>
 			</div>
-			</div>
-			
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -273,175 +256,171 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<li>
 							<a href="index.php">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
 							<a class="active" href="manage-admin.php">Manage Admin</a>
 						</li>
-                        <li>
+						<li>
 							<a class="active" href="manage-admin.php">Change Password</a>
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
-             <?php 
-            if(isset($_GET['id']))
-            {
-            $id = $_GET['id'];
-            }
-        
-            ?>
-            <div class="table-data">
-			<div class="order">
-			<div class="head">
+			<?php
+			if (isset($_GET['id'])) {
+				$id = $_GET['id'];
+			}
 
-            <form action="" method="POST">
-            <table class="tbl-30">
-                <tr>
-                    <td>Current Password</td>
-                    <td>
-                        <input type="password" name="current_password" id="ip2">
-                    </td>
-                </tr>
+			?>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
 
-                <tr>
-                    <td>New Password</td>
-                    <td>
-                        <input type="password" name="new_password" id="ip2">
-                    </td>
+						<form action="" method="POST">
+							<table class="tbl-30">
+								<tr>
+									<td>Current Password</td>
+									<td>
+										<input type="password" name="current_password" id="ip2">
+									</td>
+								</tr>
 
-                </tr>
+								<tr>
+									<td>New Password</td>
+									<td>
+										<input type="password" name="new_password" id="ip2">
+									</td>
 
-                <tr>
-                    <td>Confirm Password</td>
-                    <td>
-                        <input type="password" name="confirm_password" id="ip2">
-                    </td>
+								</tr>
 
-                </tr>
+								<tr>
+									<td>Confirm Password</td>
+									<td>
+										<input type="password" name="confirm_password" id="ip2">
+									</td>
 
-                <tr>
-                    <td colspan="2">
-                        <input type="hidden" name="id" value="<?php echo $id ?>">
-                        <input type="submit" name="submit" value="Change Password" class="button-8" role="button">
-                    </td>
-                </tr>
+								</tr>
 
-            </table>
+								<tr>
+									<td colspan="2">
+										<input type="hidden" name="id" value="<?php echo $id ?>">
+										<input type="submit" name="submit" value="Change Password" class="button-8" role="button">
+									</td>
+								</tr>
 
-        </form>
+							</table>
 
-        </div>
-        </div>
-        </div>
+						</form>
 
-        <?php 
-//Check whether the submit button is clicked or not
-if(isset($_POST['submit'])){
-   // echo "Clicked";
-   
-   //1. Get the data from form
+					</div>
+				</div>
+			</div>
 
-   $id = $_POST['id'];
-   $current_password = md5($_POST['current_password']);
-   $new_password = md5($_POST['new_password']);
-   $confirm_password = md5($_POST['confirm_password']);
+			<?php
+			//Check whether the submit button is clicked or not
+			if (isset($_POST['submit'])) {
+				// echo "Clicked";
 
-   //2. Check whether the user with current ID and Password exists or not
+				//1. Get the data from form
 
-        $sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='$current_password'";
+				$id = $_POST['id'];
+				$current_password = md5($_POST['current_password']);
+				$new_password = md5($_POST['new_password']);
+				$confirm_password = md5($_POST['confirm_password']);
 
-        //Execute the Query
+				//2. Check whether the user with current ID and Password exists or not
 
-        $res = mysqli_query($conn, $sql);
+				$sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='$current_password'";
 
-        if($res == true){
-            //Check whether data is available or not
-            $count = mysqli_num_rows($res);
+				//Execute the Query
 
-            if($count==1){
-                //User exists and password can be changed
-                //echo "User Found";
-                //Check whether the new password and confirm password match or not
-                if($new_password==$confirm_password){
-                    //Update the password
-                    //echo "Password Match";
-                    $sql2 = "UPDATE tbl_admin SET
+				$res = mysqli_query($conn, $sql);
+
+				if ($res == true) {
+					//Check whether data is available or not
+					$count = mysqli_num_rows($res);
+
+					if ($count == 1) {
+						//User exists and password can be changed
+						//echo "User Found";
+						//Check whether the new password and confirm password match or not
+						if ($new_password == $confirm_password) {
+							//Update the password
+							//echo "Password Match";
+							$sql2 = "UPDATE tbl_admin SET
                         password = '$new_password'
                         WHERE id=$id
                     
                     
                     ";
-                    //Execute the Query
-                    $res2 = mysqli_query($conn, $sql2);
+							//Execute the Query
+							$res2 = mysqli_query($conn, $sql2);
 
-                    //Check whether the Query executed or not
+							//Check whether the Query executed or not
 
-                    if($res2==true){
-                         $_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
+							if ($res2 == true) {
+								$_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
 
-                //Redirecting the user
+								//Redirecting the user
 
-                header('location:'.SITEURL.'manage-admin.php');
-                    }
-                    else{
-                        //Display error message
-                         $_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
+								header('location:' . SITEURL . 'manage-admin.php');
+							} else {
+								//Display error message
+								$_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
 
-                //Redirecting the user
+								//Redirecting the user
 
-                header('location:'.SITEURL.'manage-admin.php');
-                    }
-                }
-                else{
-                    $_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
+								header('location:' . SITEURL . 'manage-admin.php');
+							}
+						} else {
+							$_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
 
-                //Redirecting the user
+							//Redirecting the user
 
-                header('location:'.SITEURL.'manage-admin.php');
+							header('location:' . SITEURL . 'manage-admin.php');
+						}
+					} else {
+						//User does not exist. Set message and redirect
+						$_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
 
-                }
-            }
-            else{
-                //User does not exist. Set message and redirect
-                $_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
+						//Redirecting the user
 
-                //Redirecting the user
-
-                header('location:'.SITEURL.'manage-admin.php');
-            }
-        }
+						header('location:' . SITEURL . 'manage-admin.php');
+					}
+				}
 
 
-   //3. Check whether the New password and confirm password match or not
+				//3. Check whether the New password and confirm password match or not
 
-   //4. Change password if all of the above are true
+				//4. Change password if all of the above are true
 
 
-}
+			}
 
-?>
+			?>
 
 
 
 
 
 
-        </div>
-			
-        
+			</div>
 
 
-			
 
 
-	
+
+
+
+
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 
 	<script src="script-admin.js"></script>
 </body>
+
 </html>
