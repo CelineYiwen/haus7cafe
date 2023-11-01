@@ -120,6 +120,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Inventory</span>
 				</a>
 			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="side-menu">
@@ -288,6 +294,13 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 							</table>
 
+							<label>* Password security requirements: <br>
+								Please include at least one number, <br>
+								one alphabet character, and one special character. <br>
+								Password must be at least 8 characters long.
+							</label>
+
+
 						</form>
 					</div>
 				</div>
@@ -303,36 +316,34 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 if (isset($_POST['submit'])) {
 	$full_name = $_POST['full_name'];
 	$username = $_POST['username'];
-	$password = md5($_POST['password']); //md5 encryption
+	$password = $_POST['password'];
 
-	$check_duplicate = "SELECT username FROM tbl_admin
-						WHERE username = '$username'";
-	$res_check_duplicate = mysqli_query($conn, $check_duplicate);
+	// Check if the password meets security requirements
+	if (preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/", $password)) {
+		$check_duplicate = "SELECT username FROM tbl_admin WHERE username = '$username'";
+		$res_check_duplicate = mysqli_query($conn, $check_duplicate);
+		$rows_check_duplicate = mysqli_num_rows($res_check_duplicate);
 
-	$rows_check_duplicate = mysqli_num_rows($res_check_duplicate);
-	if ($rows_check_duplicate > 0) {
-		echo "<script>
-                alert('Username already exists! Try a different username.'); 
-                window.location.href='add-admin.php';
-                </script>";
+		if ($rows_check_duplicate > 0) {
+			echo "<script>alert('Username already exists! Try a different username.'); window.location.href='add-admin.php';</script>";
+		} else {
+			$hashedPassword = md5($password); // MD5 encryption
+
+			$sql = "INSERT INTO tbl_admin (full_name, username, password) VALUES ('$full_name', '$username', '$hashedPassword')";
+			$res = mysqli_query($conn, $sql) or die(mysqli_error());
+
+			if ($res == true) {
+				$_SESSION['add'] = "<div class='success'>Admin Added Successfully</div>";
+				header("location:" . SITEURL . 'manage-admin.php');
+			} else {
+				$_SESSION['add'] = "<div class='error'>Failed to Add Admin</div>";
+				header("location:" . SITEURL . 'add-admin.php');
+			}
+		}
 	} else {
-		$sql = "INSERT INTO tbl_admin SET
-        full_name='$full_name',
-        username='$username',
-        password='$password'
-    	";
-	}
-
-	$res = mysqli_query($conn, $sql) or die(mysqli_error());
-
-	if ($res == true) {
-
-		$_SESSION['add'] = "<div class='success'>Admin Added Successfully</div>";
-		header("location:" . SITEURL . 'manage-admin.php');
-	} else {
-		$_SESSION['add'] = "<div class='error'>Failed to Add Admin</div>";
-		header("location:" . SITEURL . 'add-admin.php');
+		echo "<script>alert('Password does not meet security requirements. Please include at least one number, one alphabet character, and one special character. Password must be at least 8 characters long.'); window.location.href='add-admin.php';</script>";
 	}
 }
+
 
 ?>

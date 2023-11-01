@@ -57,7 +57,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="sidebar">
 		<a href="index.php" class="brand">
 			<div class="centered-image">
-				<img src="../images/logo.png" width="80px" alt="">
+				<img src="../images/logo1.jpg" width="80px" alt="">
 			</div>
 		</a>
 		<ul class="side-menu top">
@@ -126,6 +126,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="inventory.php">
 					<i class='bx bxs-box'></i>
 					<span class="text">Inventory</span>
+				</a>
+			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
 				</a>
 			</li>
 		</ul>

@@ -125,6 +125,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Inventory</span>
 				</a>
 			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="side-menu">
@@ -311,6 +317,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 							</table>
 
+							<label>* Password security requirements: <br>
+								Please include at least one number, <br>
+								one alphabet character, and one special character. <br>
+								Password must be at least 8 characters long.
+							</label>
+
 						</form>
 
 					</div>
@@ -320,83 +332,51 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<?php
 			//Check whether the submit button is clicked or not
 			if (isset($_POST['submit'])) {
-				// echo "Clicked";
-
-				//1. Get the data from form
-
 				$id = $_POST['id'];
-				$current_password = md5($_POST['current_password']);
-				$new_password = md5($_POST['new_password']);
-				$confirm_password = md5($_POST['confirm_password']);
+				$current_password = $_POST['current_password'];
+				$new_password = $_POST['new_password'];
+				$confirm_password = $_POST['confirm_password'];
 
-				//2. Check whether the user with current ID and Password exists or not
+				// Check if the new password meets security requirements
+				if (preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/", $new_password)) {
+					$sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='" . md5($current_password) . "'";
+					$res = mysqli_query($conn, $sql);
 
-				$sql = "SELECT * FROM tbl_admin WHERE id=$id AND password='$current_password'";
+					if ($res == true) {
+						$count = mysqli_num_rows($res);
 
-				//Execute the Query
+						if ($count == 1) {
+							if ($new_password == $confirm_password) {
+								$hashedNewPassword = md5($new_password);
 
-				$res = mysqli_query($conn, $sql);
+								$sql2 = "UPDATE tbl_admin SET password = '$hashedNewPassword' WHERE id=$id";
+								$res2 = mysqli_query($conn, $sql2);
 
-				if ($res == true) {
-					//Check whether data is available or not
-					$count = mysqli_num_rows($res);
-
-					if ($count == 1) {
-						//User exists and password can be changed
-						//echo "User Found";
-						//Check whether the new password and confirm password match or not
-						if ($new_password == $confirm_password) {
-							//Update the password
-							//echo "Password Match";
-							$sql2 = "UPDATE tbl_admin SET
-                        password = '$new_password'
-                        WHERE id=$id
-                    
-                    
-                    ";
-							//Execute the Query
-							$res2 = mysqli_query($conn, $sql2);
-
-							//Check whether the Query executed or not
-
-							if ($res2 == true) {
-								$_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
-
-								//Redirecting the user
-
-								header('location:' . SITEURL . 'manage-admin.php');
+								if ($res2 == true) {
+									$_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
+									header('location:' . SITEURL . 'manage-admin.php');
+								} else {
+									$_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
+									header('location:' . SITEURL . 'manage-admin.php');
+								}
 							} else {
-								//Display error message
-								$_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
-
-								//Redirecting the user
-
+								$_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
 								header('location:' . SITEURL . 'manage-admin.php');
 							}
 						} else {
-							$_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
-
-							//Redirecting the user
-
+							$_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
 							header('location:' . SITEURL . 'manage-admin.php');
 						}
 					} else {
-						//User does not exist. Set message and redirect
-						$_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
-
-						//Redirecting the user
-
+						$_SESSION['change-pwd'] = "<div class='error'>Failed to verify the current password. Try Again Please.</div>";
 						header('location:' . SITEURL . 'manage-admin.php');
 					}
+				} else {
+					$_SESSION['pwd-not-match'] = "<div class='error'>New password does not meet security requirements. Please include at least one number, one alphabet character, and one special character. Password must be at least 8 characters long.</div>";
+					header('location:' . SITEURL . 'manage-admin.php');
 				}
-
-
-				//3. Check whether the New password and confirm password match or not
-
-				//4. Change password if all of the above are true
-
-
 			}
+
 
 			?>
 

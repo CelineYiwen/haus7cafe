@@ -1,9 +1,7 @@
-<?php include('../frontend/config/constants.php'); 
-include('login-check.php'); ?>
-<?php
- 
+<?php include('../frontend/config/constants.php');
+	  include('login-check.php');
 
-                   ?>
+?>
 <?php
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
@@ -64,13 +62,13 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li >
+			<li class="active">
 				<a href="manage-admin.php">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>
@@ -114,7 +112,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 			<li>
-				<a href="manage-category.php">
+				<a href="manager-category.php">
 					<i class='bx bxs-category'></i>
 					<span class="text">Category</span>
 				</a>
@@ -138,7 +136,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="tableorder-menu.php">
@@ -147,7 +145,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-
+		
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
@@ -259,7 +257,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php 
 				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
 				{
-				$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
+					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
 					?>
 					
 					<span class="num"><?php echo $total_notif; ?></span>
@@ -283,171 +281,142 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Online Orders</h1>
+					<h1>Update Coupon Claim</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="index.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="manage-online-order.php">Online Orders</a>
+							<a class="active" href="manage-admin.php">Update Coupon Claim</a>
 						</li>
 					</ul>
 				</div>
 				
 			</div>
-			<br/>
 
+			<?php 
+        //1. Get the ID of Selected Admin
+        $id=$_GET['id'];
+
+        //2. Create SQL Query to get the details 
+        $sql="SELECT * FROM tbl_feedback WHERE id=$id";
+
+        //3. Execute the Query
+
+        $res=mysqli_query($conn, $sql);
+
+        //Check whether the query is executed or not
+
+        if($res == true){
+            //Check whether the data is available or not
+            $count = mysqli_num_rows($res);
+            //Check whether we have coupon data or not
+            if($count==1){
+                //Get the Details
+                $row=mysqli_fetch_assoc($res);
+                
+                $username = $row['username'];
+				$coupon_code = $row['coupon_code'];
+				$claim_indicator = $row['claim_indicator'];
+            }
+            else{
+                header('location:'.SITEURL.'feedback.php');
+            }
+        }
+
+        
+        
+        ?>
 		<div class="table-data">
 			<div class="order">
 			<div class="head">
 
-			<table class="">
-                    <thead>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Phone</th>
-                            <th>Payment Status</th>
-							<th>Order Status</th>
-                            <th>Total</th>
-                            <th>Order</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
+        <form action="" method="POST">
+        <table class="rtable">
+            <tr>
+                <td>Username</td>
+                <td>
+                    <input type="text" name="username" value="<?php echo $username; ?>" id="ip2">
+                </td>
+            </tr>
+			<tr>
+                <td>Coupon Code</td>
+                <td>
+                    <input type="text" name="coupon_code" value="<?php echo $coupon_code; ?>" id="ip2">
+                </td>
+            </tr>
+			<tr>
+                <td>Coupon Status</td>
+                <td>
+                     <select name="claim_indicator">
+                        <option <?php if($claim_indicator=="Active"){ echo "selected";} ?> value="Active">Active</option>
+                        <option <?php if($claim_indicator=="Claimed"){ echo "selected";} ?> value="Claimed">Claimed</option>
+                        <option <?php if($claim_indicator=="Cancelled"){ echo "selected";} ?> value="Cancelled">Cancelled</option>
+                    </select>
+                </td>
+            </tr>
 
-                    <?php
+            <tr>
+                <td colspan="2">
+					<input type="hidden" name="coupon_code" value="<?php echo $coupon_code; ?>">
+                    <input type="submit" name="submit" value="Update" class="button-8" role="button">
+                </td>
+            </tr>
 
-
-
-
-                    $query="SELECT * FROM `order_manager` ORDER BY order_id DESC";
-                    $user_result=mysqli_query($conn,$query);
-
-
-                    while($user_fetch=mysqli_fetch_assoc($user_result))
-                    {
-						$order_id = $user_fetch['order_id'];
-						$cus_name = $user_fetch['cus_name'];
-						$cus_email = $user_fetch['cus_email'];
-						$cus_add1 = $user_fetch['cus_add1'];
-						$cus_phone = $user_fetch['cus_phone'];
-						$payment_status = $user_fetch['payment_status'];
-						$order_status = $user_fetch['order_status'];
-						$total_amount = $user_fetch['total_amount'];
-						?>
-                        
-                        <tr>
-                            <td><?php echo $order_id; ?></td>
-                            <td><?php echo $cus_name; ?></td>
-                            <td><?php echo $cus_email; ?></td>
-                            <td><?php echo $cus_add1; ?></td>
-                            <td><?php echo $cus_phone ?></td>
-							
-
-                            <td>
-							<?php 
-							if($payment_status=="successful")
-							{
-								echo "<span class='status process'>$payment_status</span>";
-							}
-							else if($payment_status=="Processing")
-							{
-								echo "<span class='status pending'>$payment_status</span>";
-							}
-							
-							?>
-							</td>
-							<td>
-								<?php 
-										if($order_status=="Pending")
-											{
-											echo "<span class='status process'>$order_status</span>";
-											}
-											else if($order_status=="Processing")
-											{
-											echo "<span class='status pending'>$order_status</span>";
-											}
-											else if($order_status=="Delivered")
-											{
-											echo "<span class='status completed'>$order_status</span>";
-											}
-											else if($order_status=="Cancelled")
-											{
-											echo "<span class='status cancelled'>$order_status</span>";
-											}
-							
-											?>
-											<br><br>
-
-							<span>
-							<a href="<?php echo SITEURL; ?>update-online-order.php?id=<?php echo $order_id; ?>" class="button-8" role="button">Update</a>
-										</span>
-							</td>
-
-
-                            <td><?php echo $total_amount; ?></td>
-							<?php
-                            echo"
-                            <td>
-                                <table class='tbl-full'>
-                                <thead>
-                                    <tr>
-                                        <th>Item Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                      
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                ";
-
-                                $order_query="SELECT * FROM `online_orders_new` WHERE `order_id`='$user_fetch[order_id]' ORDER BY order_id DESC ";
-                                $order_result = mysqli_query($conn,$order_query);
-                                
-                                while($order_fetch=mysqli_fetch_assoc($order_result))
-                                {
-                                    echo"
-                                        <tr>
-                                            <td>$order_fetch[Item_Name]</td>
-                                            <td>$order_fetch[Price]</td>
-                                            <td>$order_fetch[Quantity]</td>
-                                         
-                                        </tr>
-                                    
-                                    
-                                    
-                                    ";
-                                }
-
-                                echo"
-                                </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                        
-                        ";
-                    }
-
-                ?>
-
-                    </tbody>
-                </table>                       
-				</div>
-				</div>
-				
-			</div>
+        </table>
 
 
 
-			
+        </form>
+	</div>
+    </div>
+</div>
+	</div>
+
+<?php 
+//Check whether the Submit button is clicked or not
+
+if(isset($_POST['submit'])){
+    //echo "Button Clicked";
+    //Get all the values from form to update
+
+	$coupon_code = $_POST['coupon_code'];
+    $claim_indicator = $_POST['claim_indicator'];
+
+     // Creating SQL Query to update coupon
+		$sql = "UPDATE tbl_feedback SET
+		claim_indicator = '$claim_indicator'
+		WHERE coupon_code = '$coupon_code'";
 
 
-	
+     //Executing the Query
+
+     $res = mysqli_query($conn, $sql);
+
+     //Check whether the query is succesfully executed or not
+
+     if($res == true){
+         //Query executed and admin updated
+         $_SESSION['update'] = "<div class='success'>Coupon Updated Successfully</div>";
+
+         //Redirecting to Admin Panel
+
+         header('location:'.SITEURL.'feedback.php');
+     }
+
+     else{
+         //Failed to update admin
+        $_SESSION['update'] = "<div class='error'>Failed to Update Coupon</div>";
+
+         //Redirecting to Admin Panel
+
+         header('location:'.SITEURL.'feedback.php');
+         
+     }
+
+}
+?>
 		</main>
 		<!-- MAIN -->
 	</section>

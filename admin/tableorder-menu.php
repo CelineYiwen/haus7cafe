@@ -1,11 +1,10 @@
 <?php include('../frontend/config/constants.php');
-include('login-check.php');
+include('login-check.php'); ?>
+<?php
+
 
 ?>
-
 <?php
-//Orders
-
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
 
@@ -20,7 +19,6 @@ $res_online_order_notif = mysqli_query($conn, $online_order_notif);
 
 $row_online_order_notif = mysqli_num_rows($res_online_order_notif);
 
-// Stock Notification
 $stock_notif = "SELECT stock FROM tbl_food
 				WHERE stock<50";
 
@@ -33,7 +31,25 @@ $message_notif = "SELECT message_status FROM message
 $res_message_notif = mysqli_query($conn, $message_notif);
 $row_message_notif = mysqli_num_rows($res_message_notif);
 
+
 ?>
+
+
+<?php
+function getGUIDnoHash()
+{
+	mt_srand((float)microtime() * 10000);
+	$charid = md5(uniqid(rand(), true));
+	$c = unpack("C*", $charid);
+	$c = implode("", $c);
+
+	return substr($c, 0, 20);
+}
+
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,15 +69,16 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 <body>
 
+
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
+		<a href="index.php" class="brand">
 			<div class="centered-image">
 				<img src="../images/logo1.jpg" width="80px" alt="">
 			</div>
 		</a>
 		<ul class="side-menu top">
-			<li class="">
+			<li>
 				<a href="index.php">
 					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
@@ -73,10 +90,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
-					<span class="text">Online Orders &nbsp;</span>
+					<span class="text">Online Orders&nbsp;</span>
 					<?php
 					if ($row_online_order_notif > 0) {
 					?>
@@ -93,10 +110,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text">Eat In Orders &nbsp;&nbsp;&nbsp;
+					<span class="text">Eat In Orders&nbsp;&nbsp;&nbsp;
 
 					</span>
-
 					<?php
 					if ($row_ei_order_notif > 0) {
 					?>
@@ -129,17 +145,22 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Inventory</span>
 				</a>
 			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="side-menu">
-			<li class="active">
-				<a href="#">
+			<li>
+				<a href="tableorder-menu.php">
 					<i class='bx bx-qr-scan'></i>
 					<span class="text">Take Table Order</span>
 				</a>
 			</li>
 		</ul>
-
 
 		<ul class="side-menu">
 			<li>
@@ -152,46 +173,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	</section>
 	<!-- SIDEBAR -->
 
-	<!-- Dynamic Dashborad -->
-
-	<?php
-	//Categories
-
-	$sql = "SELECT * FROM tbl_category";
-
-	$res = mysqli_query($conn, $sql);
-
-	$row_cat = mysqli_num_rows($res);
-
-	//Items
-
-	$sql2 = "SELECT * FROM tbl_food";
-
-	$res2 = mysqli_query($conn, $sql2);
-
-	$row_item = mysqli_num_rows($res2);
-
-	//Orders
-
-	$sql3 = "SELECT * FROM order_manager";
-
-	$res3 = mysqli_query($conn, $sql3);
-
-	$row_order = mysqli_num_rows($res3);
-
-	//Eat In Orders
-
-
-	$sql4 = "SELECT * FROM tbl_eipay";
-
-	$res4 = mysqli_query($conn, $sql4);
-
-	$row_ei_order = mysqli_num_rows($res4);
-
-	?>
-
-
-	<!-- Dynamic DashBoard -->
 
 
 	<!-- CONTENT -->
@@ -246,10 +227,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</div>
 
 			</div>
-
-			<div class="notification" onclick="menuToggle();">
-				<div class="action notif " onclick="menuToggle();">
-					<i class='bx bxs-bell ' onclick="menuToggle();"></i>
+			<div class="notification">
+				<div class="action notif">
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
 					<div class="notif_menu">
 						<ul><?php
 
@@ -295,12 +275,15 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					</a>
 				</div>
 			</div>
+
 		</nav>
 		<!-- NAVBAR -->
 
-		<!-- Menu Start -->
 
-		<!-- MAIN -->
+
+
+
+		<!-- Your HTML content, including sidebar, navigation, and order form -->
 		<main>
 			<div class="head-title">
 				<div class="left">
@@ -311,146 +294,155 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						</li>
 						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
-							<a class="active" href="tableorder-menu.php">Take Table Order</a>
+							<a class="active" href="manage-online-order.php">Take Table Order</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 
-			</br>
-			<div class="left">
-				<label for="color">Select Table:</label>
-				<select name="tablenumber" id="tablenumber">
-					<option value="">--- Choose a table number ---</option>
-					<option value="Table 1">Table 1</option>
-					<option value="Table 2">Table 2</option>
-					<option value="Table 3">Table 3</option>
-					<option value="Table 4">Table 4</option>
-					<option value="Table 5">Table 5</option>
-					<option value="Table 6">Table 6</option>
-					<option value="Table 7">Table 7</option>
-					<option value="Table 8">Table 8</option>
-					<option value="Table 9">Table 9</option>
-					<option value="Table 10">Table 10</option>
-					<option value="Table 11">Table 11</option>
-					<option value="Table 12">Table 12</option>
-				</select>
-			</div>
-
 			<br>
-
 			<div class="table-data">
 				<div class="order">
-					<div class="head">
-					</div>
+					<div class="head"></div>
+					<form action="" method="POST">
+						<div class="left">
+							<label for="tablenumber">Select Table:</label>
+							<select name="tablenumber" id="tablenumber">
+								<option value="">--- Choose a table number ---</option>
+								<option value="Table 1">Table 1</option>
+								<option value="Table 2">Table 2</option>
+								<option value="Table 3">Table 3</option>
+								<option value="Table 4">Table 4</option>
+								<option value="Table 5">Table 5</option>
+								<option value="Table 6">Table 6</option>
+								<option value="Table 7">Table 7</option>
+								<option value="Table 8">Table 8</option>
+								<option value="Table 9">Table 9</option>
+								<option value="Table 10">Table 10</option>
+								<!-- Add options for other tables -->
+							</select>
+						</div>
 
-					<table class="">
-						<tr>
-							<th>S.N.</th>
-							<th>Title</th>
-							<th>Description</th>
-							<th>Price</th>
-						</tr>
-
-						<?php
-						//Getting Eat in order data from datbase
-						$sql = "SELECT * FROM tbl_food WHERE active='Yes'";
-
-						//Execute Query
-						$res = mysqli_query($conn, $sql);
-						//Count the Rows
-						$count = mysqli_num_rows($res);
-						$sn = 1; //Create a Serial Number and set its initail value as 1
-						if ($count > 0) {
-							//Order Available
+						<div class="left">
+							<label style="display: none;">GUID Value:</label>
+							<span style="display: none;"><?php echo getGUIDnoHash(); ?></span>
+						</div>
+						<br>
+						<br>
+						<table class="">
+							<tr>
+								<th>S.N.</th>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Price</th>
+								<th>Action</th>
+							</tr>
+							<?php
+							// Fetch menu items from the database
+							$sql = "SELECT * FROM tbl_food WHERE active='Yes'";
+							$res = mysqli_query($conn, $sql);
+							$sn = 1; // Serial number counter
 							while ($row = mysqli_fetch_assoc($res)) {
-								//Get all the order details
-								$id = $row['id'];
-								$title = $row['title'];
-								$description = $row['description'];
-								$price = $row['price'];
-						?>
-
+							?>
 								<tr>
-									<td><?php echo $sn++; ?>. </td>
-									<td><?php echo $title; ?></td>
-									<td><?php echo $description; ?></td>
-									<td><?php echo $price; ?></td>
+									<td><?php echo $sn++; ?>.</td>
+									<td><?php echo $row['title']; ?></td>
+									<td><?php echo $row['description']; ?></td>
+									<td><?php echo $row['price']; ?></td>
 									<td>
-										<input type="submit" name="submit" value="Send to Kitchen" class="button-8" role="button">
+										<input type="checkbox" name="selected_items[]" value="<?php echo htmlspecialchars(json_encode($row)); ?>">
 									</td>
 								</tr>
-
-						<?php
-
+							<?php
 							}
-						} else {
-							//Order not Available
-							echo "<tr><td colspan='7' class='error'>Orders not Available</td></tr>";
-						}
-						?>
-					</table>
-
+							?>
+						</table>
+						<input type="submit" name="submit" value="Send to Kitchen" class="button-8" role="button">
+					</form>
 				</div>
 			</div>
-			</div>
-
-			</div>
-			</div>
-			</div>
 		</main>
-	</section>
-	<!--Menu Ends -->
 
-	<script src="script-admin.js"></script>
+		<?php
+
+		// Initialize variables for error handling
+		$db_error = '';
+		$order_success = false;
+
+		if (isset($_POST['submit'])) {
+
+			if (empty($_POST["tablenumber"])) {
+				$db_error = "Please select table number.";
+				echo "<script>
+                    alert('Please select table number.'); 
+                    </script>";
+			} else {
+				$table_id = $_POST['tablenumber'];
+				$date = date("Y-m-d H:i:s");
+				// Generate a unique identifier for trans_id
+				$tran_id = getGUIDnoHash();
+
+				$item_price = 0;
+				$total_amount = 0;
+
+				// Define an array to store selected items
+				$selected_items = [];
+
+				// Check if any items are selected
+				if (!empty($_POST['selected_items'])) {
+					$selected_items = $_POST['selected_items'];
+				} else {
+					$db_error = "Please select at least one item.";
+					echo "<script>
+                    alert('Please select at least one item.'); 
+                    </script>";
+				}
+
+				// Loop through selected items and insert them into the database
+				foreach ($selected_items as $item) {
+					// Extract item details
+					$item_data = json_decode($item, true);
+
+					// Debugging: Output item_data
+					var_dump($item_data);
+
+					// Check if $item_data is not null
+					if ($item_data) {
+
+						$item_title = $item_data['title'];
+						$item_price = $item_data['price'];
+
+						$total_amount = $total_amount + $item_price;
+
+
+
+
+						// Insert item details into tbl_eipay_details
+						$Insertdetailquery = "INSERT INTO tbl_eipay_details (item_name, price, quantity, tran_id)
+				VALUES ('$item_title', '$item_price', 1, '$tran_id')";
+
+						$res_insert_detailquery = mysqli_query($conn, $Insertdetailquery);
+					} else {
+						echo "<script>alert('Item data is null.');</script>";
+					}
+				}
+
+				// Insert the item into the tbl_eipay table
+				$Insertquery = "INSERT INTO tbl_eipay (table_id, amount, order_date, payment_status, order_status, tran_id)
+			VALUES ('$table_id', '$total_amount', '$date', 'Pending', 'Pending', '$tran_id')";
+
+				$res_insert_query = mysqli_query($conn, $Insertquery);
+
+				if ($res_insert_query) {
+					echo "<script>alert('Order sent to kitchen.');</script>";
+				} else {
+					echo "<script>alert('Order failed to send to the kitchen.');</script>";
+					echo "SQL Error: " . mysqli_error($conn); // Check for SQL errors
+				}
+			}
+		}
+		?>
+
 </body>
 
 </html>
-
-
-<?php
-
-
-
-if (isset($_POST['submit'])) {
-
-	if (empty($_POST["tablenumber"])) {
-		$errors[] = "Please select table number";
-		die;
-	} else {
-		$monitors_old = validateInput($_POST["tablenumber"]);
-	}
-
-	$full_name = $_POST['full_name'];
-	$username = $_POST['username'];
-	$password = md5($_POST['password']); //md5 encryption
-
-	$check_duplicate = "SELECT username FROM tbl_admin
-						WHERE username = '$username'";
-	$res_check_duplicate = mysqli_query($conn, $check_duplicate);
-
-	$rows_check_duplicate = mysqli_num_rows($res_check_duplicate);
-	if ($rows_check_duplicate > 0) {
-		echo "<script>
-                alert('Username already exists! Try a different username.'); 
-                window.location.href='add-admin.php';
-                </script>";
-	} else {
-		$sql = "INSERT INTO tbl_admin SET
-        full_name='$full_name',
-        username='$username',
-        password='$password'
-    	";
-	}
-
-	$res = mysqli_query($conn, $sql) or die(mysqli_error());
-
-	if ($res == true) {
-
-		$_SESSION['add'] = "<div class='success'>Admin Added Successfully</div>";
-	} else {
-		$_SESSION['add'] = "<div class='error'>Failed to Add Admin</div>";
-	}
-}
-
-?>

@@ -123,6 +123,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Inventory</span>
 				</a>
 			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="side-menu">
@@ -330,7 +336,15 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 								<tr>
 									<td>Payment Status</td>
 									<td>
-										<input type="text" name="payment_status" value="<?php echo $payment_status; ?>" id="ip2">
+										<select name="payment_status">
+											<option <?php if ($payment_status == "Pending") {
+														echo "selected";
+													} ?> value="Pending">Pending</option>
+											<option <?php if ($payment_status == "successful") {
+														echo "selected";
+													} ?> value="successful">successful</option>
+										</select>
+
 									</td>
 								</tr>
 								<tr>

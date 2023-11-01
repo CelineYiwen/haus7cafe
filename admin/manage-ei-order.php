@@ -127,6 +127,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Inventory</span>
 				</a>
 			</li>
+			<li class="">
+				<a href="feedback.php">
+					<i class='bx bxs-box'></i>
+					<span class="text">Coupon & Feedback</span>
+				</a>
+			</li>
 		</ul>
 
 		<ul class="side-menu">
@@ -293,52 +299,48 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<div class="head">
 </div>
 
-				 <table class="">
-                    <tr>
-                        <th>S.N.</th>
+
+
+			<table class="">
+                    <thead>
+                        <tr>
+						<th>Transaction ID</th>
                         <th>Table ID</th>
-                        <th>Amount</th>
-                        <th>Transaction ID</th>
                         <th>Order Date</th>
                         <th>Payment Status</th>
 						<th>Order Status</th>
                         <th>Actions</th>
-                    </tr>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
 
-				<?php 
-				//Getting Eat in order data from datbase
-$sql = "SELECT * FROM tbl_eipay ORDER BY id DESC";
+                    <?php
 
-//Execute Query
-$res = mysqli_query($conn, $sql);
-//Count the Rows
-$count = mysqli_num_rows($res);
-$sn = 1; //Create a Serial Number and set its initail value as 1
-                        if($count>0)
-                        {
-                            //Order Available
-                            while($row=mysqli_fetch_assoc($res))
-                            {
-                                //Get all the order details
-                                $id = $row['id'];
-                                $table_id = $row['table_id'];
-                                $amount = $row['amount'];
-                                $tran_id = $row['tran_id'];
-                                $order_date = $row['order_date'];
-                                $payment_status = $row['payment_status'];
-								$order_status = $row['order_status'];
-                                ?>
+	                $query="SELECT * FROM `tbl_eipay` ORDER BY id DESC";
+                    $user_result=mysqli_query($conn,$query);
 
-                                    <tr>
-                                        <td><?php echo $sn++; ?>. </td>
+
+                    while($user_fetch=mysqli_fetch_assoc($user_result))
+                    {
+						$tran_id = $user_fetch['tran_id'];
+						$id = $user_fetch['id'];
+                                $table_id = $user_fetch['table_id'];
+                                $order_date = $user_fetch['order_date'];
+                                $payment_status = $user_fetch['payment_status'];
+								$order_status = $user_fetch['order_status'];
+								$total_amount = $user_fetch['amount'];
+						?>
+                        
+                        <tr>
+						<td><?php echo $tran_id++; ?> </td>
                                         <td><?php echo $table_id; ?></td>
-                                        <td><?php echo $amount; ?></td>
-                                        <td><?php echo $tran_id; ?></td>
                                         <td><?php echo $order_date; ?></td>
                                         <td><span class="status process"><?php echo $payment_status; ?></span></td>
-										<td>
+							
 
-										<?php 
+                            <td>
+							<?php 
 										if($order_status=="Pending")
 											{
 											echo "<span class='status process'>$order_status</span>";
@@ -357,48 +359,70 @@ $sn = 1; //Create a Serial Number and set its initail value as 1
 											}
 							
 											?>
+							</td>
+							<td>
+											<br><br>
 
-											
-									
-										</td>
-                                        <td>
-                                            <a href="<?php echo SITEURL; ?>update-ei-order.php?id=<?php echo $id; ?>" class="button-5" role="button">Update</a>
-                                            <a href="<?php echo SITEURL; ?>delete-ei-order.php?id=<?php echo $id; ?>" class="button-7" role="button">Delete</a>
-											
-                                        </td>
+							<span>
+							<a href="<?php echo SITEURL; ?>update-ei-order.php?id=<?php echo $id; ?>" class="button-8" role="button">Update</a>
+								</span>
+							</td>
+
+
+                            <td><?php echo $total_amount; ?></td>
+							<?php
+                            echo"
+                            <td>
+                                <table class='tbl-full'>
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                      
+
                                     </tr>
+                                </thead>
+                                <tbody>
+                                ";
 
-                                <?php
+                                $order_query="SELECT * FROM `tbl_eipay_details` WHERE `tran_id`='$user_fetch[tran_id]' ORDER BY tran_id DESC ";
+                                $order_result = mysqli_query($conn,$order_query);
+                                
+                                while($order_fetch=mysqli_fetch_assoc($order_result))
+                                {
+                                    echo"
+                                        <tr>
+                                            <td>$order_fetch[item_name]</td>
+                                            <td>$order_fetch[price]</td>
+                                            <td>$order_fetch[quantity]</td>
+                                         
+                                        </tr>
+                                    
+                                    
+                                    
+                                    ";
+                                }
 
-                            }
-                        }
-                        else
-                        {
-                            //Order not Available
-                            echo "<tr><td colspan='7' class='error'>Orders not Available</td></tr>";
-                        }
+                                echo"
+                                </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        
+                        ";
+                    }
 
+                ?>
 
-
-
-
-?>
-
-
-
-
-    </table>
-				
-			</div>
-		
-               
+                    </tbody>
+                </table>                       
+				</div>
 				</div>
 				
 			</div>
 
-					</div>
-					</div>
-					</div>
+
 
 			
 

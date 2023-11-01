@@ -157,6 +157,12 @@ if (isset($_GET['id'])) {
                     <span class="text">Inventory</span>
                 </a>
             </li>
+            <li class="">
+                <a href="feedback.php">
+                    <i class='bx bxs-box'></i>
+                    <span class="text">Coupon & Feedback</span>
+                </a>
+            </li>
         </ul>
 
         <ul class="side-menu">
