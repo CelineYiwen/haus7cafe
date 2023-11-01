@@ -181,7 +181,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<div class="centered-image">
-				<img src="../images/logo1.jpg" width="100px" alt="">
+				<img src="../images/logo1.jpg" width="130px" alt="">
 			</div>
 		</a>
 		<ul class="side-menu top">
