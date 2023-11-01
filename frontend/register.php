@@ -37,7 +37,7 @@ include('config/constants.php');
       <label>City</label>
       <input type="text" name="city" required>
       <label>Phone</label>
-      <input type="number" name="phone" required>
+      <input type="number" name="phone" placeholder="Ex. 60123456789" required>
       <label>Username</label>
       <input type="text" name="username" required>
       <label>Password</label>
