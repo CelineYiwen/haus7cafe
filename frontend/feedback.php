@@ -1,5 +1,18 @@
 <?php include('config/constants.php'); ?>
 
+<?php 
+function getGUIDWithPrefix() {
+    mt_srand((double)microtime() * 10000);
+    $charid = md5(uniqid(rand(), true));
+    $c = unpack("C*", $charid);
+    $c = implode("", $c);
+
+    $guid = substr($c, 0, 20);
+
+    return "Free" . $guid;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +58,7 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar & Hero Start -->
+        <!-- Navbar -->
         <div class="container-xxl position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
                 <a href="<?php echo SITEURL; ?>" class="navbar-brand p-0">
@@ -111,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <!-- Navbar & Hero End -->
+        <!-- Navbar -->
 
 
         <!-- Feedback form Start -->
@@ -122,53 +135,10 @@
                     <h1 class="mb-5">We welcome your comments and suggestions.</h1>
                 </div>
                 <div class="row g-4">
-
-                    <div class="col-md-6 wow fadeInDown" data-wow-delay="0.2s">
-                        <form action="message.php" method="POST">
-                            <div class="row g-3">
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="contact" name="contact" placeholder="Phone Number" required>
-                                        <label for="contact">Phone Number</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
-                                        <label for="email">Email</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-                                        <label for="subject">Subject Title</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="If you have additional feedback, please write it here." id="other_feedback" name="other_feedback" style="height: 150px" required></textarea>
-                                        <label for="other_feedback">Other Feedback (If Any)</label>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
-                            <form action="message.php" method="POST">
-                                <div class="row g-3">
+                            <form action="" method="POST">
+                                <div class="row g-5">
                                     <div class="col-md-12">
                                         <div class="form-floating">
                                             <select class="form-select" id="often_visit" name="often_visit" required>
@@ -239,19 +209,72 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="If you have additional feedback, please write it here." id="other_feedback" name="other_feedback" style="height: 150px" required></textarea>
+                                        <label for="other_feedback">Other Feedback (If Any)</label>
+                                    </div>
                                 </div>
+
+                                </div>
+
+                                <div class="col-12">
+                        <button class="btn btn-primary w-100 py-3" type="submit" name="submit">Submit Feedback</button>
+                    </div>
                             </form>
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <button class="btn btn-primary w-100 py-3" type="submit" name="submit_feedback">Submit Feedback</button>
-                    </div>
+                    
 
                 </div>
             </div>
         </div>
         <!-- Feedback form End -->
+
+        <?php
+
+                if(isset($_POST['submit']))
+                {
+                    $username = $_SESSION['user'];
+                    $often_visit = $_POST['often_visit'];
+                    $quality = $_POST['quality'];
+                    $cleanliness = $_POST['cleanliness'];
+                    $service_satisfaction = $_POST['service_satisfaction'];
+                    $appreciate = $_POST['appreciate'];
+                    $other_feedback = $_POST['other_feedback'];
+                    $coupon_code = getGUIDWithPrefix();
+                    $date = date("Y-m-d h:i:sa");
+                    $claim_indicator = 'Active';
+                    
+
+                    $send_feedback = "INSERT INTO `tbl_feedback`(`username`, `often_visit`, `quality`, `cleanliness`, `service_satisfaction`, `appreciate`, `other_feedback`, `coupon_code`, `date`, `claim_indicator`) VALUES ('$username','$often_visit','$quality','$cleanliness','$service_satisfaction','$appreciate','$other_feedback','$coupon_code','$date','$claim_indicator')";
+                    $res_send_feedback = mysqli_query($conn, $send_feedback);
+
+                    if($res_send_feedback == true)
+                    {
+                        echo "<script>
+                            alert('Thank you for your valuable feedback. We appreciate your input, and we are happy to offer you a small free gift as a token of our gratitude. Please claim your free gift at our counter with this code: " . getGUIDWithPrefix() . ". Thanks again for choosing us.'); 
+                            window.location.href='feedback.php';
+                            </script>";
+
+                    }
+                    else
+                    {
+                        echo "<script>
+                            alert('Failed to send feedback'); 
+                            window.location.href='feedback.php';
+                            </script>";
+                    }
+
+                }
+        ?>
+
+
+
+
+
+
 
 
         <!-- Footer Start -->

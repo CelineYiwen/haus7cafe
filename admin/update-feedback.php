@@ -1,5 +1,5 @@
 <?php include('../frontend/config/constants.php');
-	  include('login-check.php');
+include('login-check.php');
 
 ?>
 <?php
@@ -33,6 +33,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,30 +42,31 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="style-admin.css">
-	<link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
+	<link rel="icon" type="image/png" href="../images/logo1.jpg">
 
 	<title>Haus 7 Cafe Admin</title>
 </head>
+
 <body>
 
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="index.php" class="brand">
-			<img src="../images/logo.png" width="80px" alt="">
+			<div class="centered-image">
+				<img src="../images/logo1.jpg" width="80px" alt="">
+			</div>
 		</a>
 		<ul class="side-menu top">
-			<li >
+			<li>
 				<a href="index.php">
-					<i class='bx bxs-dashboard' ></i>
+					<i class='bx bxs-dashboard'></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li class="active">
 				<a href="manage-admin.php">
-					<i class='bx bxs-group' ></i>
+					<i class='bx bxs-group'></i>
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
@@ -72,18 +74,15 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>
-						<?php 
-					if($row_online_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_online_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_online_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
 				</a>
@@ -91,24 +90,21 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
-					<span class="text" >Eat In Orders&nbsp;&nbsp;&nbsp;
-						
+					<span class="text">Eat In Orders&nbsp;&nbsp;&nbsp;
+
 					</span>
-					<?php 
-					if($row_ei_order_notif>0)
-					{
-						?>
+					<?php
+					if ($row_ei_order_notif > 0) {
+					?>
 						<span class="num-ei"><?php echo $row_ei_order_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""> </span>
-						<?php
+					<?php
 					}
 					?>
-					
+
 				</a>
 			</li>
 			<li>
@@ -145,11 +141,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</a>
 			</li>
 		</ul>
-		
+
 		<ul class="side-menu">
 			<li>
 				<a href="logout.php" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
@@ -163,14 +159,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
+			<i class='bx bx-menu'></i>
 			<a href="#" class="nav-link"></a>
 			<form action="#">
 				<div class="form-input">
 				</div>
 			</form>
 			<div class="bx.bx-menu">
-			<?php
+				<?php
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
@@ -181,99 +177,85 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<?php
 				} else {
 				?>
-					 echo "<script>
-						alert('Please login'); 
-						window.location.href='login.php';
-						</script>";
-  	
+					echo "<script>
+						alert('Please login');
+						window.location.href = 'login.php';
+					</script>";
+
 				<?php
 
 				}
 				?>
-			</div> 
+			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
-					<a href="messages.php"><i class='bx bxs-envelope' ></i></a>
-					<?php 
+					<a href="messages.php"><i class='bx bxs-envelope'></i></a>
+					<?php
 
-					if($row_message_notif>0)
-					{
-						?>
+					if ($row_message_notif > 0) {
+					?>
 						<span class="num"><?php echo $row_message_notif; ?></span>
-						<?php
-					}
-					else
-					{
-						?>
+					<?php
+					} else {
+					?>
 						<span class=""></span>
-						<?php
+					<?php
 
 					}
 					?>
-					
+
 				</div>
-					
+
 			</div>
-			<div class="notification" >
+			<div class="notification">
 				<div class="action notif">
-				<i class='bx bxs-bell' onclick= "menuToggle();"></i>
-				<div class="notif_menu">
-				<ul><?php 
-							
-							if($row_stock_notif>0 and $row_stock_notif !=1 )
-							{
-								?>
+					<i class='bx bxs-bell' onclick="menuToggle();"></i>
+					<div class="notif_menu">
+						<ul><?php
+
+							if ($row_stock_notif > 0 and $row_stock_notif != 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Items are running out of stock</li></a>
-								<?php
-							}
-							else if($row_stock_notif == 1)
-							{
-								?>
+							<?php
+							} else if ($row_stock_notif == 1) {
+							?>
 								<li><a href="inventory.php"><?php echo $row_stock_notif ?>&nbsp;Item is running out of stock</li></a>
-								<?php
+							<?php
+							} else {
 							}
-							else
-							{
-								
-							}
-							if($row_ei_order_notif>0)
-							{
-								?>
+							if ($row_ei_order_notif > 0) {
+							?>
 								<li><a href="manage-online-order.php"><?php echo $row_online_order_notif ?>&nbsp;New Online Order</li></a>
-								<?php
+							<?php
 
 							}
-							if($row_online_order_notif>0)
-							{
-								?>
+							if ($row_online_order_notif > 0) {
+							?>
 								<li><a href="manage-ei-order.php"><?php echo $row_ei_order_notif ?>&nbsp;New Eat In Order</li></a>
-								<?php
+							<?php
 
 							}
 							?>
-						
-					</ul>
+
+						</ul>
+					</div>
+					<?php
+					if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
+						$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
+					?>
+
+						<span class="num"><?php echo $total_notif; ?></span>
+					<?php
+					} else {
+					?>
+						<span class=""></span>
+					<?php
+					}
+					?>
+					</a>
 				</div>
-				<?php 
-				if($row_stock_notif>0 || $row_online_order_notif>0 || $row_ei_order_notif>0)
-				{
-					$total_notif = $row_online_order_notif+$row_ei_order_notif+$row_stock_notif;
-					?>
-					
-					<span class="num"><?php echo $total_notif; ?></span>
-					<?php
-				}
-				else
-				{
-					?>
-					<span class=""></span>
-					<?php
-				}
-				?>
-			</a>
 			</div>
-			</div>
-			
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -286,143 +268,145 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<li>
 							<a href="index.php">Dashboard</a>
 						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right'></i></li>
 						<li>
 							<a class="active" href="manage-admin.php">Update Coupon Claim</a>
 						</li>
 					</ul>
 				</div>
-				
+
 			</div>
 
-			<?php 
-        //1. Get the ID of Selected Admin
-        $id=$_GET['id'];
+			<?php
+			//1. Get the ID of Selected Admin
+			$id = $_GET['id'];
 
-        //2. Create SQL Query to get the details 
-        $sql="SELECT * FROM tbl_feedback WHERE id=$id";
+			//2. Create SQL Query to get the details 
+			$sql = "SELECT * FROM tbl_feedback WHERE id=$id";
 
-        //3. Execute the Query
+			//3. Execute the Query
 
-        $res=mysqli_query($conn, $sql);
+			$res = mysqli_query($conn, $sql);
 
-        //Check whether the query is executed or not
+			//Check whether the query is executed or not
 
-        if($res == true){
-            //Check whether the data is available or not
-            $count = mysqli_num_rows($res);
-            //Check whether we have coupon data or not
-            if($count==1){
-                //Get the Details
-                $row=mysqli_fetch_assoc($res);
-                
-                $username = $row['username'];
-				$coupon_code = $row['coupon_code'];
-				$claim_indicator = $row['claim_indicator'];
-            }
-            else{
-                header('location:'.SITEURL.'feedback.php');
-            }
-        }
+			if ($res == true) {
+				//Check whether the data is available or not
+				$count = mysqli_num_rows($res);
+				//Check whether we have coupon data or not
+				if ($count == 1) {
+					//Get the Details
+					$row = mysqli_fetch_assoc($res);
 
-        
-        
-        ?>
-		<div class="table-data">
-			<div class="order">
-			<div class="head">
-
-        <form action="" method="POST">
-        <table class="rtable">
-            <tr>
-                <td>Username</td>
-                <td>
-                    <input type="text" name="username" value="<?php echo $username; ?>" id="ip2">
-                </td>
-            </tr>
-			<tr>
-                <td>Coupon Code</td>
-                <td>
-                    <input type="text" name="coupon_code" value="<?php echo $coupon_code; ?>" id="ip2">
-                </td>
-            </tr>
-			<tr>
-                <td>Coupon Status</td>
-                <td>
-                     <select name="claim_indicator">
-                        <option <?php if($claim_indicator=="Active"){ echo "selected";} ?> value="Active">Active</option>
-                        <option <?php if($claim_indicator=="Claimed"){ echo "selected";} ?> value="Claimed">Claimed</option>
-                        <option <?php if($claim_indicator=="Cancelled"){ echo "selected";} ?> value="Cancelled">Cancelled</option>
-                    </select>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2">
-					<input type="hidden" name="coupon_code" value="<?php echo $coupon_code; ?>">
-                    <input type="submit" name="submit" value="Update" class="button-8" role="button">
-                </td>
-            </tr>
-
-        </table>
+					$username = $row['username'];
+					$coupon_code = $row['coupon_code'];
+					$claim_indicator = $row['claim_indicator'];
+				} else {
+					header('location:' . SITEURL . 'feedback.php');
+				}
+			}
 
 
 
-        </form>
-	</div>
-    </div>
-</div>
-	</div>
+			?>
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
 
-<?php 
-//Check whether the Submit button is clicked or not
+						<form action="" method="POST">
+							<table class="rtable">
+								<tr>
+									<td>Username</td>
+									<td>
+										<input type="text" name="username" value="<?php echo $username; ?>" id="ip2">
+									</td>
+								</tr>
+								<tr>
+									<td>Coupon Code</td>
+									<td>
+										<input type="text" name="coupon_code" value="<?php echo $coupon_code; ?>" id="ip2">
+									</td>
+								</tr>
+								<tr>
+									<td>Coupon Status</td>
+									<td>
+										<select name="claim_indicator">
+											<option <?php if ($claim_indicator == "Active") {
+														echo "selected";
+													} ?> value="Active">Active</option>
+											<option <?php if ($claim_indicator == "Claimed") {
+														echo "selected";
+													} ?> value="Claimed">Claimed</option>
+											<option <?php if ($claim_indicator == "Cancelled") {
+														echo "selected";
+													} ?> value="Cancelled">Cancelled</option>
+										</select>
+									</td>
+								</tr>
 
-if(isset($_POST['submit'])){
-    //echo "Button Clicked";
-    //Get all the values from form to update
+								<tr>
+									<td colspan="2">
+										<input type="hidden" name="coupon_code" value="<?php echo $coupon_code; ?>">
+										<input type="submit" name="submit" value="Update" class="button-8" role="button">
+									</td>
+								</tr>
 
-	$coupon_code = $_POST['coupon_code'];
-    $claim_indicator = $_POST['claim_indicator'];
+							</table>
 
-     // Creating SQL Query to update coupon
-		$sql = "UPDATE tbl_feedback SET
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+			</div>
+
+			<?php
+			//Check whether the Submit button is clicked or not
+
+			if (isset($_POST['submit'])) {
+				//echo "Button Clicked";
+				//Get all the values from form to update
+
+				$coupon_code = $_POST['coupon_code'];
+				$claim_indicator = $_POST['claim_indicator'];
+
+				// Creating SQL Query to update coupon
+				$sql = "UPDATE tbl_feedback SET
 		claim_indicator = '$claim_indicator'
 		WHERE coupon_code = '$coupon_code'";
 
 
-     //Executing the Query
+				//Executing the Query
 
-     $res = mysqli_query($conn, $sql);
+				$res = mysqli_query($conn, $sql);
 
-     //Check whether the query is succesfully executed or not
+				//Check whether the query is succesfully executed or not
 
-     if($res == true){
-         //Query executed and admin updated
-         $_SESSION['update'] = "<div class='success'>Coupon Updated Successfully</div>";
+				if ($res == true) {
+					//Query executed and admin updated
+					$_SESSION['update'] = "<div class='success'>Coupon Updated Successfully</div>";
 
-         //Redirecting to Admin Panel
+					//Redirecting to Admin Panel
 
-         header('location:'.SITEURL.'feedback.php');
-     }
+					header('location:' . SITEURL . 'feedback.php');
+				} else {
+					//Failed to update admin
+					$_SESSION['update'] = "<div class='error'>Failed to Update Coupon</div>";
 
-     else{
-         //Failed to update admin
-        $_SESSION['update'] = "<div class='error'>Failed to Update Coupon</div>";
+					//Redirecting to Admin Panel
 
-         //Redirecting to Admin Panel
-
-         header('location:'.SITEURL.'feedback.php');
-         
-     }
-
-}
-?>
+					header('location:' . SITEURL . 'feedback.php');
+				}
+			}
+			?>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+
 
 	<script src="script-admin.js"></script>
 </body>
+
 </html>
