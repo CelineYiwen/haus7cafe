@@ -29,9 +29,9 @@ include('config/constants.php');
 
     <form action="" class="inputs" method="POST" name="form1">
       <label>Username</label>
-      <input type="text" placeholder="" name="username" required>
+      <input type="text" name="username" required>
       <label>Password</label>
-      <input type="password" name="password">
+      <input type="password" name="password" required>
 
       <br>
       <a href="forgot_password.php">Forgot Password?</a>

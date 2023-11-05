@@ -95,6 +95,29 @@ if (isset($_SESSION['user'])) {
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
                         <a href="contact.php " class="nav-item nav-link">Contact</a>
                     </div>
+
+                    <?php
+                    if (isset($_SESSION['user'])) {
+                        $username = $_SESSION['user'];
+
+                    ?>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
+                            <div class="dropdown-menu m-0">
+                                <a href="myaccount.php" class="dropdown-item">My Account</a>
+                                <a href="feedback.php" class="dropdown-item">Submit Feedback</a>
+                                <a href="logout.php" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    <?php
+                    } else {
+                    ?>
+                        <a href="login.php" class="nav-item nav-link">Login</a>
+                    <?php
+
+                    }
+                    ?>
+
                     <?php
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
@@ -106,14 +129,14 @@ if (isset($_SESSION['user'])) {
                 </div>
             </nav>
 
-            <div class="container-xxl py-5 bg-dark hero-header mb-5">
-                <div class="container text-center my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">My Account</h1>
+            <div class="container-xxl py-5 bg-dark hero-header mb-1">
+                <div class="container text-center my-2 pt-4 pb-1">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Edit Profile</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">My Account</a></li>
-                            <li class="breadcrumb-item text-white active" aria-current="page">My Account</li>
+                            <li class="breadcrumb-item"><a href="myaccount.php">My Account</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Edit Profile</li>
                         </ol>
                     </nav>
                 </div>
@@ -140,7 +163,16 @@ if (isset($_SESSION['user'])) {
                                     <tr>
                                         <td>New Password</td>
                                         <td>
-                                            <input type="password" name="new_password" id="ip2">
+                                            <input type="password" name="new_password" id="ip2"> <br>
+
+                                            <label style="color: red;">* Password must contain the following:<br />
+                                                One lowercase letter,<br />
+                                                One capital (uppercase) letter,<br />
+                                                A number,<br />
+                                                A special symbol,<br />
+                                                Minimum 8 characters long.<br />
+                                            </label>
+
                                         </td>
 
                                     </tr>
@@ -160,6 +192,8 @@ if (isset($_SESSION['user'])) {
                                         </td>
                                     </tr>
 
+
+
                                 </table>
 
                             </form>
@@ -169,57 +203,50 @@ if (isset($_SESSION['user'])) {
                 </div>
 
                 <?php
-                //Check whether the submit button is clicked or not
+                // Check whether the submit button is clicked or not
                 if (isset($_POST['submit'])) {
-                    // echo "Clicked";
-
-                    //1. Get the data from form
-
+                    // Get the data from the form
                     $username = $_POST['username'];
                     $current_password = md5($_POST['current_password']);
                     $new_password = md5($_POST['new_password']);
                     $confirm_password = md5($_POST['confirm_password']);
 
-                    $update_password = "SELECT * FROM tbl_users WHERE username='$username' AND password='$current_password'";
+                    // Check if the new password meets security requirements
+                    if (preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/", $new_password)) {
+                        $update_password = "SELECT * FROM tbl_users WHERE username='$username' AND password='$current_password'";
+                        $res_update_password = mysqli_query($conn, $update_password);
 
+                        if ($res_update_password == true) {
+                            $count = mysqli_num_rows($res_update_password);
 
+                            if ($count == 1) {
+                                if ($new_password == $confirm_password) {
+                                    $sql2_update_password = "UPDATE tbl_users SET password = '$new_password' WHERE username='$username'";
+                                    $res2_update_password = mysqli_query($conn, $sql2_update_password);
 
-                    $res_update_password = mysqli_query($conn, $update_password);
-
-                    if ($res_update_password == true) {
-                        $count = mysqli_num_rows($res_update_password);
-
-                        if ($count == 1) {
-
-                            if ($new_password == $confirm_password) {
-
-                                $sql2_update_password = "UPDATE tbl_users SET
-                        password = '$new_password'
-                        WHERE username='$username'
-                    ";
-
-                                $res2_update_password = mysqli_query($conn, $sql2_update_password);
-                                if ($res2_update_password == true) {
-                                    $_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
-                                    header('location:' . SITEURL . 'myaccount.php');
+                                    if ($res2_update_password == true) {
+                                        $_SESSION['change-pwd'] = "<div class='success'>Password Changed Successfully.</div>";
+                                        header('location:' . SITEURL . 'myaccount.php');
+                                    } else {
+                                        $_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
+                                        header('location:' . SITEURL . 'myaccount.php');
+                                    }
                                 } else {
-                                    $_SESSION['pwd-not-match'] = "<div class='error'>Failed to Change Password. Try Again Please.</div>";
-
+                                    $_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
                                     header('location:' . SITEURL . 'myaccount.php');
                                 }
                             } else {
-                                $_SESSION['pwd-not-match'] = "<div class='error'>Passwords Did Not Match. Try Again Please.</div>";
-
-                                header('location:' . SITEURL . 'myaccount.php');
+                                $_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
+                                header('location:' . SITEURL . 'admin/myaccount.php');
                             }
-                        } else {
-                            $_SESSION['user-not-found'] = "<div class='error'>User Not Found</div>";
-                            header('location:' . SITEURL . 'admin/myaccount.php');
                         }
+                    } else {
+                        $_SESSION['pwd-not-match'] = "<div class='error'>Your password does not meet the security requirements. Please revise it to meet the password criteria.</div>";
+                        header('location:' . SITEURL . 'myaccount.php');
                     }
                 }
-
                 ?>
+
 
 
 
@@ -272,7 +299,7 @@ if (isset($_SESSION['user'])) {
                                     &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                                 </div>
                                 <div class="col-md-6 text-center text-md-end">
-                                    
+
                                 </div>
                             </div>
                         </div>

@@ -313,13 +313,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										<input type="submit" name="submit" value="Change Password" class="button-8" role="button">
 									</td>
 								</tr>
-
 							</table>
 
-							<label>* Password security requirements: <br>
-								Please include at least one number, <br>
-								one alphabet character, and one special character. <br>
-								Password must be at least 8 characters long.
+							<label style="color: red;">* Password must contain the following:<br />
+								One lowercase letter,<br />
+								One capital (uppercase) letter,<br />
+								A number,<br />
+								A special symbol,<br />
+								Minimum 8 characters long.<br />
 							</label>
 
 						</form>
@@ -371,7 +372,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						header('location:' . SITEURL . 'manage-admin.php');
 					}
 				} else {
-					$_SESSION['pwd-not-match'] = "<div class='error'>New password does not meet security requirements. Please include at least one number, one alphabet character, and one special character. Password must be at least 8 characters long.</div>";
+					$_SESSION['pwd-not-match'] = "<div class='error'>Your password does not meet the security requirements. Please revise it to meet the password criteria.</div>";
 					header('location:' . SITEURL . 'manage-admin.php');
 				}
 			}

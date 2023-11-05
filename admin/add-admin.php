@@ -89,7 +89,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 					<span class="text">Take Table Order</span>
 				</a>
 			</li>
-			
+
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
@@ -293,12 +293,13 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 							</table>
 
-							<label>* Password security requirements: <br>
-								Please include at least one number, <br>
-								one alphabet character, and one special character. <br>
-								Password must be at least 8 characters long.
+							<label style="color: red;">* Password must contain the following:<br />
+								One lowercase letter,<br />
+								One capital (uppercase) letter,<br />
+								A number,<br />
+								A special symbol,<br />
+								Minimum 8 characters long.<br />
 							</label>
-
 
 						</form>
 					</div>
@@ -340,7 +341,7 @@ if (isset($_POST['submit'])) {
 			}
 		}
 	} else {
-		echo "<script>alert('Password does not meet security requirements. Please include at least one number, one alphabet character, and one special character. Password must be at least 8 characters long.'); window.location.href='add-admin.php';</script>";
+		echo "<script>alert('Your password does not meet the security requirements. Please revise it to meet the password criteria.'); window.location.href='add-admin.php';</script>";
 	}
 }
 

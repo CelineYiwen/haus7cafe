@@ -21,7 +21,6 @@ include('config/constants.php');
 
 <body>
 
-
   <!-- Sign Up Form -->
   <div class="container">
 
@@ -35,13 +34,14 @@ include('config/constants.php');
       <label>Address</label>
       <input type="text" name="add1" required>
       <label>City</label>
-      <input type="text" name="city" required>
+      <input type="text" name="city" placeholder="Ex. George Town / Klang" required>
       <label>Phone</label>
       <input type="number" name="phone" placeholder="Ex. 60123456789" required>
       <label>Username</label>
       <input type="text" name="username" required>
       <label>Password</label>
       <input type="password" name="password" required>
+
 
       <br>
       Already Have Account?
