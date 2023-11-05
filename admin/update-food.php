@@ -119,6 +119,14 @@ if (isset($_GET['id'])) {
                     ?>
                 </a>
             </li>
+
+            <li>
+                <a href="tableorder-menu.php">
+                    <i class='bx bx-qr-scan'></i>
+                    <span class="text">Take Table Order</span>
+                </a>
+            </li>
+
             <li>
                 <a href="manage-ei-order.php">
                     <i class='bx bx-qr-scan'></i>
@@ -161,15 +169,6 @@ if (isset($_GET['id'])) {
                 <a href="feedback.php">
                     <i class='bx bxs-box'></i>
                     <span class="text">Coupon & Feedback</span>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="side-menu">
-            <li>
-                <a href="tableorder-menu.php">
-                    <i class='bx bx-qr-scan'></i>
-                    <span class="text">Take Table Order</span>
                 </a>
             </li>
         </ul>

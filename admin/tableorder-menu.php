@@ -1,10 +1,8 @@
-<?php include('../frontend/config/constants.php');
-include('login-check.php'); ?>
 <?php
 
+include('../frontend/config/constants.php');
+include('login-check.php');
 
-?>
-<?php
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
 
@@ -32,10 +30,6 @@ $res_message_notif = mysqli_query($conn, $message_notif);
 $row_message_notif = mysqli_num_rows($res_message_notif);
 
 
-?>
-
-
-<?php
 function getGUIDnoHash()
 {
 	mt_srand((float)microtime() * 10000);
@@ -45,8 +39,6 @@ function getGUIDnoHash()
 
 	return substr($c, 0, 20);
 }
-
-
 
 ?>
 
@@ -107,6 +99,14 @@ function getGUIDnoHash()
 					?>
 				</a>
 			</li>
+
+			<li class="active">
+				<a href="tableorder-menu.php">
+					<i class='bx bx-qr-scan'></i>
+					<span class="text">Take Table Order</span>
+				</a>
+			</li>
+
 			<li>
 				<a href="manage-ei-order.php">
 					<i class='bx bx-qr-scan'></i>
@@ -149,15 +149,6 @@ function getGUIDnoHash()
 				<a href="feedback.php">
 					<i class='bx bxs-box'></i>
 					<span class="text">Coupon & Feedback</span>
-				</a>
-			</li>
-		</ul>
-
-		<ul class="side-menu">
-			<li>
-				<a href="tableorder-menu.php">
-					<i class='bx bx-qr-scan'></i>
-					<span class="text">Take Table Order</span>
 				</a>
 			</li>
 		</ul>

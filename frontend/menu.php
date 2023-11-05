@@ -142,7 +142,7 @@
                                     <form action="manage-cart.php" method="POST">
                                         <h5 class="card-title"><?php echo $title; ?></h5>
                                         <h8 class="card-title"><?php echo $description; ?></h8>
-                                        <p class="card-text">RM<?php echo $price; ?></p>
+                                        <p class="card-text" style="color: blue; font-weight: bold;">RM<?php echo $price; ?></p>
                                         <button type="submit" name="Add_To_Cart" class="btn btn-primary btn-sm">Add To Cart</button>
                                         <input type="hidden" name="Item_Name" value="<?php echo $title; ?>">
                                         <input type="hidden" name="Item_Description" value="<?php echo $description; ?>">

@@ -1,16 +1,19 @@
-<?php include('config/constants.php'); ?>
+<?php
 
-<?php 
-function getGUIDWithPrefix() {
-    mt_srand((double)microtime() * 10000);
+include('config/constants.php');
+
+function getGUIDWithPrefix()
+{
+    mt_srand((float)microtime() * 10000);
     $charid = md5(uniqid(rand(), true));
     $c = unpack("C*", $charid);
     $c = implode("", $c);
 
-    $guid = substr($c, 0, 20);
+    $guid = substr($charid, 0, 8);      // Adjust the length here (8 characters)
 
-    return "Free" . $guid;
+    return "Free " . $guid;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -210,22 +213,24 @@ function getGUIDWithPrefix() {
                                     </div>
 
                                     <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="If you have additional feedback, please write it here." id="other_feedback" name="other_feedback" style="height: 150px" required></textarea>
-                                        <label for="other_feedback">Other Feedback (If Any)</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="If you have additional feedback, please write it here." id="other_feedback" name="other_feedback" style="height: 150px" required></textarea>
+                                            <label for="other_feedback">Other Feedback (If Any)</label>
+                                        </div>
                                     </div>
-                                </div>
 
                                 </div>
+
+                                <br /><br />
 
                                 <div class="col-12">
-                        <button class="btn btn-primary w-100 py-3" type="submit" name="submit">Submit Feedback</button>
-                    </div>
+                                    <button class="btn btn-primary w-100 py-3" type="submit" name="submit">Submit Feedback</button>
+                                </div>
                             </form>
                         </div>
                     </div>
 
-                    
+
 
                 </div>
             </div>
@@ -234,40 +239,35 @@ function getGUIDWithPrefix() {
 
         <?php
 
-                if(isset($_POST['submit']))
-                {
-                    $username = $_SESSION['user'];
-                    $often_visit = $_POST['often_visit'];
-                    $quality = $_POST['quality'];
-                    $cleanliness = $_POST['cleanliness'];
-                    $service_satisfaction = $_POST['service_satisfaction'];
-                    $appreciate = $_POST['appreciate'];
-                    $other_feedback = $_POST['other_feedback'];
-                    $coupon_code = getGUIDWithPrefix();
-                    $date = date("Y-m-d h:i:sa");
-                    $claim_indicator = 'Active';
-                    
+        if (isset($_POST['submit'])) {
+            $username = $_SESSION['user'];
+            $often_visit = $_POST['often_visit'];
+            $quality = $_POST['quality'];
+            $cleanliness = $_POST['cleanliness'];
+            $service_satisfaction = $_POST['service_satisfaction'];
+            $appreciate = $_POST['appreciate'];
+            $other_feedback = $_POST['other_feedback'];
+            $coupon_code = getGUIDWithPrefix();
+            $date = date("Y-m-d h:i:sa");
+            $claim_indicator = 'Active';
 
-                    $send_feedback = "INSERT INTO `tbl_feedback`(`username`, `often_visit`, `quality`, `cleanliness`, `service_satisfaction`, `appreciate`, `other_feedback`, `coupon_code`, `date`, `claim_indicator`) VALUES ('$username','$often_visit','$quality','$cleanliness','$service_satisfaction','$appreciate','$other_feedback','$coupon_code','$date','$claim_indicator')";
-                    $res_send_feedback = mysqli_query($conn, $send_feedback);
 
-                    if($res_send_feedback == true)
-                    {
-                        echo "<script>
+            $send_feedback = "INSERT INTO `tbl_feedback`(`username`, `often_visit`, `quality`, `cleanliness`, `service_satisfaction`, `appreciate`, `other_feedback`, `coupon_code`, `date`, `claim_indicator`) VALUES ('$username','$often_visit','$quality','$cleanliness','$service_satisfaction','$appreciate','$other_feedback','$coupon_code','$date','$claim_indicator')";
+            $res_send_feedback = mysqli_query($conn, $send_feedback);
+
+            if ($res_send_feedback == true) {
+                // Output the generated GUID
+                echo "<script>
                             alert('Thank you for your valuable feedback. We appreciate your input, and we are happy to offer you a small free gift as a token of our gratitude. Please claim your free gift at our counter with this code: " . getGUIDWithPrefix() . ". Thanks again for choosing us.'); 
                             window.location.href='feedback.php';
                             </script>";
-
-                    }
-                    else
-                    {
-                        echo "<script>
+            } else {
+                echo "<script>
                             alert('Failed to send feedback'); 
                             window.location.href='feedback.php';
                             </script>";
-                    }
-
-                }
+            }
+        }
         ?>
 
 
