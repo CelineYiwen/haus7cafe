@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
     <section id="sidebar">
         <a href="index.php" class="brand">
             <div class="centered-image">
-                <img src="../images/logo1.jpg" width="80px" alt="">
+                <img src="../images/logo1.jpg" width="130px" alt="">
             </div>
         </a>
         <ul class="side-menu top">

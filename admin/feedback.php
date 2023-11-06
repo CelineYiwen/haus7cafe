@@ -88,7 +88,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<section id="sidebar">
 		<a href="index.php" class="brand">
 			<div class="centered-image">
-				<img src="../images/logo1.jpg" width="80px" alt="">
+				<img src="../images/logo1.jpg" width="130px" alt="">
 			</div>
 		</a>
 		<ul class="side-menu top">
@@ -330,7 +330,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 								<th>Often Visit</th>
 								<th>Quality</th>
 								<th>Cleanliness</th>
-								<th>Service Satification</th>
+								<th>Service Satisfaction</th>
 								<th>Appreciate</th>
 								<th>Other Feedback</th>
 								<th>Date</th>
@@ -372,7 +372,20 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 											<td><?php echo $appreciate; ?></td>
 											<td><?php echo $other_feedback; ?></td>
 											<td><?php echo $date; ?></td>
-											<td><?php echo $claim_indicator; ?></td>
+
+											<td>
+												<?php
+												if ($claim_indicator == "Claimed") {
+													echo "<span class='status completed'>$claim_indicator</span>";
+												} else if ($claim_indicator == "Cancelled") {
+													echo "<span class='status cancelled'>$claim_indicator</span>";
+												} else if ($claim_indicator == "Active") {
+													echo "<span class='status process'>$claim_indicator</span>";
+												}
+												?>
+											</td>
+
+
 											<td>
 												<a href="<?php echo SITEURL; ?>update-feedback.php?id=<?php echo $id; ?>" class="button-6" role="button">Update</a>
 											</td>

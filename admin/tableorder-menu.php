@@ -66,7 +66,7 @@ function getGUIDnoHash()
 	<section id="sidebar">
 		<a href="index.php" class="brand">
 			<div class="centered-image">
-				<img src="../images/logo1.jpg" width="80px" alt="">
+				<img src="../images/logo1.jpg" width="130px" alt="">
 			</div>
 		</a>
 		<ul class="side-menu top">
@@ -82,7 +82,7 @@ function getGUIDnoHash()
 					<span class="text">Admin Panel</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="manage-online-order.php">
 					<i class='bx bxs-cart'></i>
 					<span class="text">Online Orders&nbsp;</span>

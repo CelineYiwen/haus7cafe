@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2023 at 05:04 PM
+-- Generation Time: Nov 06, 2023 at 02:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,13 +42,13 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`id`, `name`, `phone`, `subject`, `message`, `message_status`, `date`) VALUES
-(18, 'Mohammad Wasikuzzaman', 1717731002, 'Hi There', 'Aasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'read', '2022-02-13 11:23:36'),
-(19, 'Maheosy Haque', 1867348264, 'Test Subject', 'Test Message', 'read', '2022-02-14 12:24:15'),
 (20, 'Jane', 2147483647, 'Test Features', 'Demo 123...', 'read', '2023-10-18 01:21:14'),
 (21, 'Alice', 123456789, 'Feedback', 'Hello World!', 'read', '2023-10-18 02:19:30'),
 (22, 'Michelle', 2147483647, 'Hello', 'Hello World', 'read', '2023-10-27 10:21:14'),
 (23, 'Cheng Zhi Xuan', 2147483647, 'Comment about restaurant', 'The foods is very delicious.', 'read', '2023-11-02 03:26:32'),
-(24, 'Zhi Xuan', 2147483647, 'Booking Reserve', 'I would like to book a table for birthday celebration.', 'unread', '2023-11-02 03:53:15');
+(24, 'Zhi Xuan', 2147483647, 'Booking Reserve', 'I would like to book a table for birthday celebration.', 'read', '2023-11-02 03:53:15'),
+(25, 'Bryan', 2147483647, 'Book Reserve', 'Table 3, 5 person, for birthday party.', 'read', '2023-11-06 04:43:43'),
+(26, 'Chen Dong', 2147483647, 'Book A Table', 'Birthday Party, 10 pax', 'read', '2023-11-06 09:27:38');
 
 -- --------------------------------------------------------
 
@@ -266,7 +266,30 @@ INSERT INTO `online_orders_new` (`order_id`, `Item_Name`, `Price`, `Quantity`) V
 (121, 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried', 20, 1),
 (121, '', 12, 1),
 (121, 'Percik Chicken', 16, 1),
-(121, 'Latte', 12, 2);
+(121, 'Latte', 12, 2),
+(122, 'A crips waffle topped with slices of form-fresh sweet banana, Premium  Vanilla ice cream, whipping c', 23, 1),
+(122, 'Cappucino', 12, 2),
+(122, 'Simply Waffle', 14, 1),
+(123, 'Pudding', 10, 1),
+(123, 'Uncle Paul Fish & Fries', 22, 1),
+(123, 'Nasi Goreng Petai', 15, 1),
+(123, 'Latte', 12, 2),
+(124, 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried', 20, 1),
+(124, 'Butter Milk Chicken', 20, 1),
+(124, 'Spicy Portugese Chicken', 22, 1),
+(124, '', 12, 1),
+(124, 'Espresso', 7, 1),
+(125, 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried', 20, 1),
+(125, 'Aglio Olio', 22, 2),
+(125, 'Cappucino', 12, 1),
+(126, 'This citrus-filled cold brew is perfect for a hot summer day.', 11, 1),
+(126, 'Yuzu Spicy Mocktail', 12, 1),
+(126, 'Espresso', 7, 1),
+(127, 'Fried Rice with Haus made Shrimp Sambal, Petai, shrimps and Fried Egg. (Spicy/non-Spicy)', 15, 1),
+(127, 'Butter Milk Chicken', 20, 1),
+(127, 'Lotus Biscoff Waffle', 30, 1),
+(127, 'Latte', 12, 1),
+(127, 'Espresso', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -300,10 +323,16 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (115, 'alice', 'Alice', 'alice@gmail.com', 'test fucntion', 'penang', 1232456789, 'successful', '2023-10-27 09:59:11', 74, 'ONL-PAY-BG831HKGG0', 'Delivered'),
 (116, 'Kelvin', 'Kelvin', 'Kelvin@gmail.com', 'No.1 Jalan Kenanga, Off, Lorong Meranti 2 ', 'Kuala Lumpur', 112872293, 'successful', '2023-10-27 09:59:59', 70, 'ONL-PAY-FQMENABNAH', 'Delivered'),
 (117, 'Michelle', 'Michelle', 'michelle@gmail.com', 'No.13, Jalan Gembira, 11300 Georgetown, Penang', 'Pulau Pinang', 60123456789, 'successful', '2023-10-27 10:16:39', 117, 'ONL-PAY-DG59TOI59A', 'Delivered'),
-(118, 'Michelle', 'Michelle', 'michelle@gmail.com', 'No.13, Jalan Gembira, 11300 Georgetown, Penang', 'Pulau Pinang', 60123456789, 'successful', '2023-10-27 10:24:56', 55, 'ONL-PAY-6ICV2HOE9B', 'Processing'),
+(118, 'Michelle', 'Michelle', 'michelle@gmail.com', 'No.13, Jalan Gembira, 11300 Georgetown, Penang', 'Pulau Pinang', 60123456789, 'successful', '2023-10-27 10:24:56', 55, 'ONL-PAY-6ICV2HOE9B', 'Delivered'),
 (119, 'Michelle', 'Michelle', 'michelle@gmail.com', 'No.13, Jalan Gembira, 11300 Georgetown, Penang', 'Pulau Pinang', 60123456789, 'successful', '2023-10-27 11:13:32', 92, 'ONL-PAY-4KYYE7W9RM', 'Delivered'),
 (120, 'jane', 'Jane', 'jane@example.com', 'Penang, Malaysia', 'Penang', 60123456789, 'successful', '2023-10-27 04:01:40', 46, 'ONL-PAY-TPSWL77HEH', 'Delivered'),
-(121, 'Zhi Xuan', 'Cheng Zhi Xuan', 'zhixuan@gmail.com', 'No.33, Jalan Bintang Tiru 1, 11300 Georgetown', 'Pulau Pinang', 60123456789, 'successful', '2023-11-02 03:27:13', 96, 'ONL-PAY-HKHJO4WUBO', 'Pending');
+(121, 'Zhi Xuan', 'Cheng Zhi Xuan', 'zhixuan@gmail.com', 'No.33, Jalan Bintang Tiru 1, 11300 Georgetown', 'Pulau Pinang', 60123456789, 'successful', '2023-11-02 03:27:13', 96, 'ONL-PAY-HKHJO4WUBO', 'Delivered'),
+(122, 'Bryan', 'Bryan', 'bryan@gmail.com', 'No.14, Lintang Bendari 13002', 'George Town', 60129876543, 'successful', '2023-11-06 04:43:04', 61, 'ONL-PAY-FYSQ885MCZ', 'Delivered'),
+(123, 'huikhim', 'Khaw Hui Khim', 'k.dex18@gmail.com', 'NO. 16, Pintasan Cecil 10300', 'Georgetown, Penang.', 60145236798, 'successful', '2023-11-06 05:39:58', 73, 'ONL-PAY-YPCK6XJ7S2', 'Delivered'),
+(124, 'slyvia', 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'successful', '2023-11-06 06:05:53', 83, 'ONL-PAY-YM6BFONADH', 'Delivered'),
+(125, 'Chen Dong', 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'successful', '2023-11-06 09:23:05', 78, 'ONL-PAY-GQG0TICMEG', 'Delivered'),
+(126, 'Chen Dong', 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'pending', '2023-11-06 09:34:47', 30, 'ONL-PAY-2JBAWDI33G', 'Pending'),
+(127, 'slyvia', 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'pending', '2023-11-06 09:45:38', 86, 'ONL-PAY-V02TREE8QO', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -323,10 +352,9 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`id`, `full_name`, `username`, `password`) VALUES
-(39, 'celine', 'celine', '81dc9bdb52d04dc20036dbd8313ed055'),
-(41, 'admin', 'admin', '81dc9bdb52d04dc20036dbd8313ed055'),
-(42, 'Dexter', 'Dexter', '81dc9bdb52d04dc20036dbd8313ed055'),
-(43, 'Luke Brandon', 'Luke', '780ea9376333dabb1959f16e1622e00c');
+(44, 'Alicia', 'Alicia', '780ea9376333dabb1959f16e1622e00c'),
+(45, 'Celine', 'Celine', '780ea9376333dabb1959f16e1622e00c'),
+(46, 'Admin', 'Admin', '780ea9376333dabb1959f16e1622e00c');
 
 -- --------------------------------------------------------
 
@@ -352,7 +380,9 @@ INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`) V
 (60, 'Coffee', 'Food_Category_56745.jpg', 'Yes', 'Yes'),
 (61, 'Spaghetti', 'Food_Category_31185.jpg', 'Yes', 'Yes'),
 (62, 'Rice', 'Food_Category_34774.jpg', 'Yes', 'Yes'),
-(64, 'Dessert', 'Food_Category_74288.jpg', 'Yes', 'Yes');
+(64, 'Dessert', 'Food_Category_74288.jpg', 'Yes', 'Yes'),
+(66, 'Non - Coffee', 'Food_Category_63356.jpg', 'Yes', 'Yes'),
+(67, 'Mocktail', 'Food_Category_89791.jpg', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -375,15 +405,14 @@ CREATE TABLE `tbl_eipay` (
 --
 
 INSERT INTO `tbl_eipay` (`id`, `table_id`, `amount`, `tran_id`, `order_date`, `payment_status`, `order_status`) VALUES
-(415, 'Table 3', 763.00, 'EI-PAY-GKKQXXZ42C', '2022-02-09 10:36:18', 'Successful', 'Delivered'),
-(416, 'Table 2', 460.00, 'EI-PAY-5SA6TNEO29', '2022-02-09 12:14:30', 'Successful', 'Delivered'),
-(418, 'Table 4', 450.00, 'EI-PAY-65IYLWUW2S', '2022-02-09 14:11:26', 'Successful', 'Delivered'),
-(420, 'Table 4', 678.00, 'EI-PAY-245XLV2144', '2022-02-09 16:41:41', 'successful', 'Processing'),
 (422, 'Table 8', 66.60, '10256525610156575451', '2023-11-01 12:32:00', 'successful', 'Delivered'),
 (423, 'Table 5', 69.60, '56545210154102525057', '2023-11-01 12:32:46', 'successful', 'Delivered'),
-(424, 'Table 4', 53.40, '54495610257531015756', '2023-11-02 00:34:53', 'Pending', 'Pending'),
-(425, 'Table 4', 17.00, '57534855485210110055', '2023-11-02 00:55:31', 'Pending', 'Pending'),
-(426, 'Table 7', 53.40, '50515099505449995753', '2023-11-02 01:28:36', 'successful', 'Delivered');
+(424, 'Table 4', 53.40, '54495610257531015756', '2023-11-02 00:34:53', 'successful', 'Delivered'),
+(425, 'Table 4', 17.00, '57534855485210110055', '2023-11-02 00:55:31', 'successful', 'Delivered'),
+(426, 'Table 7', 53.40, '50515099505449995753', '2023-11-02 01:28:36', 'successful', 'Delivered'),
+(427, 'Table 8', 63.60, '51544852102551015710', '2023-11-06 01:45:25', 'successful', 'Delivered'),
+(428, 'Table 6', 40.00, '10148554948524953984', '2023-11-06 06:24:38', 'Pending', 'Pending'),
+(429, 'Table 5', 44.00, '10248481021025010151', '2023-11-06 06:34:26', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -420,7 +449,19 @@ INSERT INTO `tbl_eipay_details` (`tran_id`, `item_name`, `price`, `quantity`, `i
 ('57534855485210110055', 'Pudding', 10.00, 1, 14),
 ('50515099505449995753', 'Nasi Goreng Petai', 15.80, 1, 15),
 ('50515099505449995753', 'Butter Milk Chicken', 20.80, 1, 16),
-('50515099505449995753', 'Percik Chicken', 16.80, 1, 17);
+('50515099505449995753', 'Percik Chicken', 16.80, 1, 17),
+('51544852102551015710', 'Percik Chicken', 16.80, 1, 18),
+('51544852102551015710', 'Spicy Portugese Chicken', 22.80, 1, 19),
+('51544852102551015710', 'Latte', 12.00, 1, 20),
+('51544852102551015710', 'Cappucino', 12.00, 1, 21),
+('10148554948524953984', 'Espresso', 7.00, 1, 22),
+('10148554948524953984', 'Pudding', 10.00, 1, 23),
+('10148554948524953984', 'Matcha Milk', 11.00, 1, 24),
+('10148554948524953984', 'Yuzu Spicy Mocktail', 12.00, 1, 25),
+('10248481021025010151', 'Pudding', 10.00, 1, 26),
+('10248481021025010151', 'Matcha Milk', 11.00, 1, 27),
+('10248481021025010151', 'Yuzu Spicy Mocktail', 12.00, 1, 28),
+('10248481021025010151', 'Orange Cold Brew Coffee', 11.00, 1, 29);
 
 -- --------------------------------------------------------
 
@@ -447,10 +488,12 @@ CREATE TABLE `tbl_feedback` (
 --
 
 INSERT INTO `tbl_feedback` (`id`, `username`, `often_visit`, `quality`, `cleanliness`, `service_satisfaction`, `appreciate`, `other_feedback`, `coupon_code`, `date`, `claim_indicator`) VALUES
-(1, 'Zhi Xuan', 'Monthly', 'Excellent', 'VeryClean', 'Satisfied', 'Price', 'The staff there are very nice and the meals is delicious.', 'Free53971015599101511015', '2023-11-01 08:31:06', 'Active'),
-(2, 'Zhi Xuan', 'Rarely', 'VeryGood', 'Clean', 'Neutral', 'Location', 'Test Function & Features', 'Free53574910010151575753', '2023-11-02 08:19:00', 'Claimed'),
-(3, 'Zhi Xuan', 'Weekly', 'Good', 'Neutral', 'Satisfied', 'FoodQuality', 'The food is yummy.', 'Free 32c4be', '2023-11-02 08:22:43', 'Cancelled'),
-(4, 'Zhi Xuan', 'Weekly', 'VeryGood', 'VeryClean', 'Satisfied', 'Ambiance', 'Thank you for the service', 'Free 618fa9', '2023-11-02 09:25:35', 'Claimed');
+(1, 'Zhi Xuan', 'Monthly', 'Excellent', 'VeryClean', 'Satisfied', 'Price', 'The staff there are very nice and the meals is delicious.', 'Free53971015599101511015', '2023-11-01 08:31:06', 'Claimed'),
+(2, 'Zhi Xuan', 'Rarely', 'VeryGood', 'Clean', 'Neutral', 'Location', 'Test Function & Features', 'Free53574910010151575753', '2023-11-02 08:19:00', 'Cancelled'),
+(3, 'Zhi Xuan', 'Weekly', 'Good', 'Neutral', 'Satisfied', 'FoodQuality', 'The food is yummy.', 'Free 32c4be', '2023-11-02 08:22:43', 'Claimed'),
+(4, 'Zhi Xuan', 'Weekly', 'VeryGood', 'VeryClean', 'Satisfied', 'Ambiance', 'Thank you for the service', 'Free 618fa9', '2023-11-02 09:25:35', 'Active'),
+(5, 'Bryan', 'Monthly', 'VeryGood', 'VeryClean', 'Satisfied', 'FoodQuality', 'The food is delicious.', 'Free ee0684b2', '2023-11-06 09:41:34', 'Claimed'),
+(6, 'Chen Dong', 'Weekly', 'VeryGood', 'VeryClean', 'Neutral', 'Service', 'Nice Service', 'Free 7bcf85cb', '2023-11-06 02:21:21', 'Claimed');
 
 -- --------------------------------------------------------
 
@@ -475,20 +518,23 @@ CREATE TABLE `tbl_food` (
 --
 
 INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `category_id`, `featured`, `active`, `stock`) VALUES
-(71, 'Nasi Goreng Petai', 'Fried Rice with Haus made Shrimp Sambal, Petai, shrimps and Fried Egg. (Spicy/non-Spicy)', 15.80, 'Food-Name-8090.jpg', 62, 'No', 'Yes', 65),
-(72, 'Butter Milk Chicken', 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried egg (Spicy)', 20.80, 'Food-Name-383.jpg', 62, 'No', 'Yes', 49),
+(71, 'Nasi Goreng Petai', 'Fried Rice with Haus made Shrimp Sambal, Petai, shrimps and Fried Egg. (Spicy/non-Spicy)', 15.80, 'Food-Name-8090.jpg', 62, 'No', 'Yes', 64),
+(72, 'Butter Milk Chicken', 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried egg (Spicy)', 20.80, 'Food-Name-383.jpg', 62, 'No', 'Yes', 47),
 (73, 'Percik Chicken', 'Percik Style Chicken serve with Jasmine White Rice and Mix Green Salad.  (Spicy)', 16.80, 'Food-Name-3545.jpg', 62, 'Yes', 'Yes', 96),
-(74, 'Spicy Portugese Chicken', 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce', 22.80, 'Food-Name-9506.jpg', 59, 'Yes', 'Yes', 96),
-(75, 'Latte', '', 12.00, 'Food-Name-2900.jpg', 60, 'Yes', 'Yes', 93),
-(76, 'Cappucino', '', 12.00, 'Food-Name-4575.jpg', 60, 'No', 'Yes', 40),
-(77, 'Aglio Olio', 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshly cooked spaghetti.\r\n(Smoked duck/Shrimps)', 22.80, 'Food-Name-3892.jpg', 61, 'Yes', 'Yes', 88),
-(78, 'Uncle Paul Fish & Fries', 'Crispy Soda Battered Fish Fillet (Perch) serve with Fries and Special Tartar Dipping Sauce.', 22.80, 'Food-Name-2611.jpg', 59, 'Yes', 'Yes', 28),
-(79, 'Simply Waffle', 'A crips waffle topped with strawberry slices, blueberries serve with Queen maple syrup (sugar free), unsalted butter and sprinkled with granola and icing sugar', 14.00, 'Food-Name-1152.jpg', 58, 'No', 'Yes', 34),
+(74, 'Spicy Portugese Chicken', 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce', 22.80, 'Food-Name-9506.jpg', 59, 'Yes', 'Yes', 95),
+(75, 'Latte', '', 12.00, 'Food-Name-2900.jpg', 60, 'Yes', 'Yes', 90),
+(76, 'Cappucino', '', 12.00, 'Food-Name-4575.jpg', 60, 'No', 'Yes', 37),
+(77, 'Aglio Olio', 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshly cooked spaghetti.\r\n(Smoked duck/Shrimps)', 22.80, 'Food-Name-3892.jpg', 61, 'Yes', 'Yes', 86),
+(78, 'Uncle Paul Fish & Fries', 'Crispy Soda Battered Fish Fillet (Perch) serve with Fries and Special Tartar Dipping Sauce.', 22.80, 'Food-Name-2611.jpg', 59, 'Yes', 'Yes', 27),
+(79, 'Simply Waffle', 'A crips waffle topped with strawberry slices, blueberries serve with Queen maple syrup (sugar free), unsalted butter and sprinkled with granola and icing sugar', 14.00, 'Food-Name-1152.jpg', 58, 'No', 'Yes', 33),
 (80, 'Banana Waffle', 'A crips waffle topped with slices of form-fresh sweet banana, Premium  Vanilla ice cream, whipping cream, drizzled with caramel sauce and sprinkled with cinnamon sugar', 23.00, 'Food-Name-8496.jpg', 58, 'No', 'Yes', 54),
-(81, 'Lotus Biscoff Waffle', 'A crips waffle topped with 5 pcs Nutella Chocolate Brownies, Premium Vanilla Ice Cream, Lotus Biscoff biscuits, Biscoff sauce and one shot of Alturra espresso (Suitable for sharing)', 30.00, 'Food-Name-1.jpg', 58, 'Yes', 'Yes', 87),
+(81, 'Lotus Biscoff Waffle', 'A crips waffle topped with 5 pcs Nutella Chocolate Brownies, Premium Vanilla Ice Cream, Lotus Biscoff biscuits, Biscoff sauce and one shot of Alturra espresso (Suitable for sharing)', 30.00, 'Food-Name-1.jpg', 58, 'Yes', 'Yes', 86),
 (82, 'Signature Overload Waffles', 'Two crips waffles topped with Premium Vanilla ice cream, Premium Mini Almond ice cream , Gery chocolate wafer roll, strawberries and blueberries, serve with chocolate sauce, drizzled with chocolate sauce and sprinkled with icing sugar and almond (Suitable for sharing)', 36.00, 'Food-Name-5029.jpg', 58, 'Yes', 'Yes', 100),
-(83, 'Espresso', '', 7.00, 'Food-Name-7507.jpg', 58, 'No', 'Yes', 100),
-(85, 'Pudding', '', 10.00, 'Food-Name-256.jpg', 64, 'Yes', 'Yes', 97);
+(83, 'Espresso', '', 7.00, 'Food-Name-7507.jpg', 58, 'No', 'Yes', 97),
+(85, 'Pudding', '', 10.00, 'Food-Name-256.jpg', 64, 'Yes', 'Yes', 96),
+(87, 'Matcha Milk', '', 11.00, 'Food-Name-2945.jpg', 66, 'Yes', 'Yes', 75),
+(88, 'Yuzu Spicy Mocktail', 'Monin Yuzu, Lemon Juice, Shichimi Togarashi Spice,  Sparkling Soda', 12.00, 'Food-Name-5121.jpg', 67, 'No', 'Yes', 42),
+(89, 'Orange Cold Brew Coffee', 'This citrus-filled cold brew is perfect for a hot summer day.', 11.00, 'Food-Name-6518.jpg', 67, 'Yes', 'Yes', 100);
 
 -- --------------------------------------------------------
 
@@ -580,7 +626,11 @@ INSERT INTO `tbl_users` (`id`, `name`, `email`, `add1`, `city`, `phone`, `userna
 (7, 'Alice', 'alice@gmail.com', 'test fucntion', 'penang', 1232456789, 'alice', '780ea9376333dabb1959f16e1622e00c'),
 (8, 'Michelle', 'michelle@gmail.com', 'No.13, Jalan Gembira, 11300 Georgetown, Penang', 'Pulau Pinang', 60143256798, 'Michelle', '81dc9bdb52d04dc20036dbd8313ed055'),
 (9, 'Jane', 'jane@example.com', 'Penang, Malaysia', 'Penang', 60123456789, 'jane', '81dc9bdb52d04dc20036dbd8313ed055'),
-(10, 'Cheng Zhi Xuan', 'zhixuan@gmail.com', 'No.33, Jalan Bintang Tiru 1, 11300 Georgetown', 'Pulau Pinang', 60123456789, 'Zhi Xuan', '81dc9bdb52d04dc20036dbd8313ed055');
+(10, 'Cheng Zhi Xuan', 'zhixuan@gmail.com', 'No.33, Jalan Bintang Tiru 1, 11300 Georgetown', 'Pulau Pinang', 60123456789, 'Zhi Xuan', '81dc9bdb52d04dc20036dbd8313ed055'),
+(11, 'Bryan', 'bryan@gmail.com', 'No.14, Lintang Bendari 13002', 'George Town', 60129876543, 'Bryan', '780ea9376333dabb1959f16e1622e00c'),
+(12, 'Khaw Hui Khim', 'k.dex18@gmail.com', 'NO. 16, Pintasan Cecil 10300', 'Georgetown, Penang.', 60145236798, 'huikhim', '780ea9376333dabb1959f16e1622e00c'),
+(13, 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'slyvia', '780ea9376333dabb1959f16e1622e00c'),
+(14, 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'Chen Dong', '780ea9376333dabb1959f16e1622e00c');
 
 --
 -- Indexes for dumped tables
@@ -654,49 +704,49 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `order_manager`
 --
 ALTER TABLE `order_manager`
-  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay`
 --
 ALTER TABLE `tbl_eipay`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=427;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=430;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay_details`
 --
 ALTER TABLE `tbl_eipay_details`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
@@ -708,7 +758,7 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
