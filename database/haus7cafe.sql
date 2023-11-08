@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2023 at 02:47 PM
+-- Generation Time: Nov 07, 2023 at 05:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,10 @@ INSERT INTO `message` (`id`, `name`, `phone`, `subject`, `message`, `message_sta
 (23, 'Cheng Zhi Xuan', 2147483647, 'Comment about restaurant', 'The foods is very delicious.', 'read', '2023-11-02 03:26:32'),
 (24, 'Zhi Xuan', 2147483647, 'Booking Reserve', 'I would like to book a table for birthday celebration.', 'read', '2023-11-02 03:53:15'),
 (25, 'Bryan', 2147483647, 'Book Reserve', 'Table 3, 5 person, for birthday party.', 'read', '2023-11-06 04:43:43'),
-(26, 'Chen Dong', 2147483647, 'Book A Table', 'Birthday Party, 10 pax', 'read', '2023-11-06 09:27:38');
+(26, 'Chen Dong', 2147483647, 'Book A Table', 'Birthday Party, 10 pax', 'read', '2023-11-06 09:27:38'),
+(27, 'Wen Chi', 2147483647, 'Demo', 'Booking', 'read', '2023-11-06 10:40:14'),
+(28, 'Alicia', 2147483647, 'Book A Table', 'Tuesday 8pm 10 person', 'read', '2023-11-07 04:14:02'),
+(29, 'Lim Mei Xuan', 2147483647, 'Hello', 'Can we have more discount on the holidays', 'read', '2023-11-07 10:07:00');
 
 -- --------------------------------------------------------
 
@@ -289,7 +292,23 @@ INSERT INTO `online_orders_new` (`order_id`, `Item_Name`, `Price`, `Quantity`) V
 (127, 'Butter Milk Chicken', 20, 1),
 (127, 'Lotus Biscoff Waffle', 30, 1),
 (127, 'Latte', 12, 1),
-(127, 'Espresso', 7, 1);
+(127, 'Espresso', 7, 1),
+(128, 'Percik Style Chicken serve with Jasmine White Rice and Mix Green Salad.  (Spicy)', 16, 2),
+(128, 'Latte', 12, 1),
+(128, 'Yuzu Spicy Mocktail', 12, 1),
+(129, 'Aglio Olio', 22, 1),
+(129, 'Spicy Portugese Chicken', 22, 1),
+(129, 'Cappucino', 12, 1),
+(129, 'Latte', 12, 1),
+(130, 'Aglio Olio', 22, 1),
+(130, 'Pudding', 10, 1),
+(130, 'Cappucino', 12, 1),
+(131, '', 12, 1),
+(132, '', 12, 1),
+(132, 'Lotus Biscoff Waffle', 30, 1),
+(133, '', 10, 1),
+(133, 'Latte', 12, 2),
+(133, 'Aglio Olio', 22, 1);
 
 -- --------------------------------------------------------
 
@@ -332,7 +351,13 @@ INSERT INTO `order_manager` (`order_id`, `username`, `cus_name`, `cus_email`, `c
 (124, 'slyvia', 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'successful', '2023-11-06 06:05:53', 83, 'ONL-PAY-YM6BFONADH', 'Delivered'),
 (125, 'Chen Dong', 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'successful', '2023-11-06 09:23:05', 78, 'ONL-PAY-GQG0TICMEG', 'Delivered'),
 (126, 'Chen Dong', 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'pending', '2023-11-06 09:34:47', 30, 'ONL-PAY-2JBAWDI33G', 'Pending'),
-(127, 'slyvia', 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'pending', '2023-11-06 09:45:38', 86, 'ONL-PAY-V02TREE8QO', 'Pending');
+(127, 'slyvia', 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'pending', '2023-11-06 09:45:38', 86, 'ONL-PAY-V02TREE8QO', 'Pending'),
+(128, 'Wen Chi', 'Oh Wen Chi', 'wenchi@gmail.com', 'Block B - 12 - 01, Centrio Greens 11300', 'Klang', 60123498765, 'successful', '2023-11-06 10:36:34', 58, 'ONL-PAY-N82KSLCEMX', 'Delivered'),
+(129, 'Chen Dong', 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'successful', '2023-11-06 11:59:25', 70, 'ONL-PAY-TM73XWRGR1', 'Delivered'),
+(130, 'Alicia', 'Alicia', 'alicia@gmail.com', 'No.12, Jalan York, 11900', 'Puchong', 60123456789, 'successful', '2023-11-07 04:11:59', 45, 'ONL-PAY-O2FXGTPNX9', 'Delivered'),
+(131, 'Alicia', 'Alicia', 'alicia@gmail.com', 'No.12, Jalan York, 11900', 'Puchong', 60123456789, 'successful', '2023-11-07 04:34:13', 12, 'ONL-PAY-4JQLE6GMXJ', 'Delivered'),
+(132, 'Alicia', 'Alicia', 'alicia@gmail.com', 'No.12, Jalan York, 11900', 'Puchong', 60123456789, 'pending', '2023-11-07 09:52:24', 42, 'ONL-PAY-RSI1Q7NC14', 'Pending'),
+(133, 'Mei Xuan', 'Lim Mei Xuan', 'meixuan@gmail.com', 'Block A - 15 - 12, Ferehen Heights, 11400', 'Bayan Lepas', 601234657869, 'successful', '2023-11-07 10:06:31', 57, 'ONL-PAY-1QTQVGQNWG', 'Delivered');
 
 -- --------------------------------------------------------
 
@@ -382,7 +407,8 @@ INSERT INTO `tbl_category` (`id`, `title`, `image_name`, `featured`, `active`) V
 (62, 'Rice', 'Food_Category_34774.jpg', 'Yes', 'Yes'),
 (64, 'Dessert', 'Food_Category_74288.jpg', 'Yes', 'Yes'),
 (66, 'Non - Coffee', 'Food_Category_63356.jpg', 'Yes', 'Yes'),
-(67, 'Mocktail', 'Food_Category_89791.jpg', 'Yes', 'Yes');
+(67, 'Mocktail', 'Food_Category_89791.jpg', 'Yes', 'Yes'),
+(71, 'Alcohol', 'Food_Category_7613.jpg', 'Yes', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -410,9 +436,12 @@ INSERT INTO `tbl_eipay` (`id`, `table_id`, `amount`, `tran_id`, `order_date`, `p
 (424, 'Table 4', 53.40, '54495610257531015756', '2023-11-02 00:34:53', 'successful', 'Delivered'),
 (425, 'Table 4', 17.00, '57534855485210110055', '2023-11-02 00:55:31', 'successful', 'Delivered'),
 (426, 'Table 7', 53.40, '50515099505449995753', '2023-11-02 01:28:36', 'successful', 'Delivered'),
-(427, 'Table 8', 63.60, '51544852102551015710', '2023-11-06 01:45:25', 'successful', 'Delivered'),
+(427, 'Table 8', 63.60, '51544852102551015710', '2023-11-06 01:45:25', 'successful', 'Processing'),
 (428, 'Table 6', 40.00, '10148554948524953984', '2023-11-06 06:24:38', 'Pending', 'Pending'),
-(429, 'Table 5', 44.00, '10248481021025010151', '2023-11-06 06:34:26', 'Pending', 'Pending');
+(429, 'Table 5', 44.00, '10248481021025010151', '2023-11-06 06:34:26', 'successful', 'Delivered'),
+(430, 'Table 7', 55.80, '10010155525149985399', '2023-11-06 07:41:32', 'successful', 'Delivered'),
+(431, 'Table 6', 110.00, '10097100535455534810', '2023-11-07 01:14:45', 'successful', 'Pending'),
+(432, 'Table 8', 63.60, '10151101575397999953', '2023-11-07 07:09:35', 'Pending', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -461,7 +490,20 @@ INSERT INTO `tbl_eipay_details` (`tran_id`, `item_name`, `price`, `quantity`, `i
 ('10248481021025010151', 'Pudding', 10.00, 1, 26),
 ('10248481021025010151', 'Matcha Milk', 11.00, 1, 27),
 ('10248481021025010151', 'Yuzu Spicy Mocktail', 12.00, 1, 28),
-('10248481021025010151', 'Orange Cold Brew Coffee', 11.00, 1, 29);
+('10248481021025010151', 'Orange Cold Brew Coffee', 11.00, 1, 29),
+('10010155525149985399', 'Aglio Olio', 22.80, 1, 30),
+('10010155525149985399', 'Pudding', 10.00, 1, 31),
+('10010155525149985399', 'Matcha Milk', 11.00, 1, 32),
+('10010155525149985399', 'Yuzu Spicy Mocktail', 12.00, 1, 33),
+('10097100535455534810', 'Banana Waffle', 23.00, 1, 34),
+('10097100535455534810', 'Lotus Biscoff Waffle', 30.00, 1, 35),
+('10097100535455534810', 'Signature Overload Waffles', 36.00, 1, 36),
+('10097100535455534810', 'Pudding', 10.00, 1, 37),
+('10097100535455534810', 'Matcha Milk', 11.00, 1, 38),
+('10151101575397999953', 'Percik Chicken', 16.80, 1, 39),
+('10151101575397999953', 'Spicy Portugese Chicken', 22.80, 1, 40),
+('10151101575397999953', 'Latte', 12.00, 1, 41),
+('10151101575397999953', 'Cappucino', 12.00, 1, 42);
 
 -- --------------------------------------------------------
 
@@ -493,7 +535,10 @@ INSERT INTO `tbl_feedback` (`id`, `username`, `often_visit`, `quality`, `cleanli
 (3, 'Zhi Xuan', 'Weekly', 'Good', 'Neutral', 'Satisfied', 'FoodQuality', 'The food is yummy.', 'Free 32c4be', '2023-11-02 08:22:43', 'Claimed'),
 (4, 'Zhi Xuan', 'Weekly', 'VeryGood', 'VeryClean', 'Satisfied', 'Ambiance', 'Thank you for the service', 'Free 618fa9', '2023-11-02 09:25:35', 'Active'),
 (5, 'Bryan', 'Monthly', 'VeryGood', 'VeryClean', 'Satisfied', 'FoodQuality', 'The food is delicious.', 'Free ee0684b2', '2023-11-06 09:41:34', 'Claimed'),
-(6, 'Chen Dong', 'Weekly', 'VeryGood', 'VeryClean', 'Neutral', 'Service', 'Nice Service', 'Free 7bcf85cb', '2023-11-06 02:21:21', 'Claimed');
+(6, 'Chen Dong', 'Weekly', 'VeryGood', 'VeryClean', 'Neutral', 'Service', 'Nice Service', 'Free 7bcf85cb', '2023-11-06 02:21:21', 'Claimed'),
+(7, 'Wen Chi', 'Monthly', 'Excellent', 'VeryClean', 'Satisfied', 'FoodQuality', 'The food is delicious, but hard to find parking slot.', 'Free 58f2d3e1', '2023-11-06 03:37:36', 'Cancelled'),
+(8, 'Alicia', 'Weekly', 'Excellent', 'Clean', 'VerySatisfied', 'Service', 'The food is delicious', 'Free 836c2662', '2023-11-07 09:10:10', 'Claimed'),
+(9, 'Mei Xuan', 'Weekly', 'Excellent', 'VeryClean', 'VerySatisfied', 'Price', 'The price here are quite reasonable', 'Free eb2aed7a', '2023-11-07 03:07:35', 'Active');
 
 -- --------------------------------------------------------
 
@@ -521,20 +566,21 @@ INSERT INTO `tbl_food` (`id`, `title`, `description`, `price`, `image_name`, `ca
 (71, 'Nasi Goreng Petai', 'Fried Rice with Haus made Shrimp Sambal, Petai, shrimps and Fried Egg. (Spicy/non-Spicy)', 15.80, 'Food-Name-8090.jpg', 62, 'No', 'Yes', 64),
 (72, 'Butter Milk Chicken', 'Jasmine white rice serve with deep fried chicken chop with spicy butter milk sauce, Mix Salad, fried egg (Spicy)', 20.80, 'Food-Name-383.jpg', 62, 'No', 'Yes', 47),
 (73, 'Percik Chicken', 'Percik Style Chicken serve with Jasmine White Rice and Mix Green Salad.  (Spicy)', 16.80, 'Food-Name-3545.jpg', 62, 'Yes', 'Yes', 96),
-(74, 'Spicy Portugese Chicken', 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce', 22.80, 'Food-Name-9506.jpg', 59, 'Yes', 'Yes', 95),
-(75, 'Latte', '', 12.00, 'Food-Name-2900.jpg', 60, 'Yes', 'Yes', 90),
-(76, 'Cappucino', '', 12.00, 'Food-Name-4575.jpg', 60, 'No', 'Yes', 37),
-(77, 'Aglio Olio', 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshly cooked spaghetti.\r\n(Smoked duck/Shrimps)', 22.80, 'Food-Name-3892.jpg', 61, 'Yes', 'Yes', 86),
+(74, 'Spicy Portugese Chicken', 'Grilled Spicy Lemon & Herbs 1/4 chicken leg serve with salad, fries and our special cooling sauce', 22.80, 'Food-Name-9506.jpg', 59, 'Yes', 'Yes', 94),
+(75, 'Latte', '', 12.00, 'Food-Name-2900.jpg', 60, 'Yes', 'Yes', 86),
+(76, 'Cappucino', '', 12.00, 'Food-Name-4575.jpg', 60, 'No', 'Yes', 100),
+(77, 'Aglio Olio', 'A deliciously simple Italian dish of fresh garlic, olive oil, and Parmesan cheese tossed with freshly cooked spaghetti.\r\n(Smoked duck/Shrimps)', 22.80, 'Food-Name-3892.jpg', 61, 'Yes', 'Yes', 83),
 (78, 'Uncle Paul Fish & Fries', 'Crispy Soda Battered Fish Fillet (Perch) serve with Fries and Special Tartar Dipping Sauce.', 22.80, 'Food-Name-2611.jpg', 59, 'Yes', 'Yes', 27),
 (79, 'Simply Waffle', 'A crips waffle topped with strawberry slices, blueberries serve with Queen maple syrup (sugar free), unsalted butter and sprinkled with granola and icing sugar', 14.00, 'Food-Name-1152.jpg', 58, 'No', 'Yes', 33),
 (80, 'Banana Waffle', 'A crips waffle topped with slices of form-fresh sweet banana, Premium  Vanilla ice cream, whipping cream, drizzled with caramel sauce and sprinkled with cinnamon sugar', 23.00, 'Food-Name-8496.jpg', 58, 'No', 'Yes', 54),
-(81, 'Lotus Biscoff Waffle', 'A crips waffle topped with 5 pcs Nutella Chocolate Brownies, Premium Vanilla Ice Cream, Lotus Biscoff biscuits, Biscoff sauce and one shot of Alturra espresso (Suitable for sharing)', 30.00, 'Food-Name-1.jpg', 58, 'Yes', 'Yes', 86),
+(81, 'Lotus Biscoff Waffle', 'A crips waffle topped with 5 pcs Nutella Chocolate Brownies, Premium Vanilla Ice Cream, Lotus Biscoff biscuits, Biscoff sauce and one shot of Alturra espresso (Suitable for sharing)', 30.00, 'Food-Name-1.jpg', 58, 'Yes', 'Yes', 85),
 (82, 'Signature Overload Waffles', 'Two crips waffles topped with Premium Vanilla ice cream, Premium Mini Almond ice cream , Gery chocolate wafer roll, strawberries and blueberries, serve with chocolate sauce, drizzled with chocolate sauce and sprinkled with icing sugar and almond (Suitable for sharing)', 36.00, 'Food-Name-5029.jpg', 58, 'Yes', 'Yes', 100),
 (83, 'Espresso', '', 7.00, 'Food-Name-7507.jpg', 58, 'No', 'Yes', 97),
-(85, 'Pudding', '', 10.00, 'Food-Name-256.jpg', 64, 'Yes', 'Yes', 96),
+(85, 'Pudding', '', 10.00, 'Food-Name-256.jpg', 64, 'Yes', 'Yes', 95),
 (87, 'Matcha Milk', '', 11.00, 'Food-Name-2945.jpg', 66, 'Yes', 'Yes', 75),
-(88, 'Yuzu Spicy Mocktail', 'Monin Yuzu, Lemon Juice, Shichimi Togarashi Spice,  Sparkling Soda', 12.00, 'Food-Name-5121.jpg', 67, 'No', 'Yes', 42),
-(89, 'Orange Cold Brew Coffee', 'This citrus-filled cold brew is perfect for a hot summer day.', 11.00, 'Food-Name-6518.jpg', 67, 'Yes', 'Yes', 100);
+(88, 'Yuzu Spicy Mocktail', 'Monin Yuzu, Lemon Juice, Shichimi Togarashi Spice,  Sparkling Soda', 12.00, 'Food-Name-5121.jpg', 67, 'No', 'Yes', 49),
+(89, 'Orange Cold Brew Coffee', 'This citrus-filled cold brew is perfect for a hot summer day.', 11.00, 'Food-Name-6518.jpg', 67, 'Yes', 'Yes', 100),
+(93, 'Cold Brew', '', 12.90, 'Food-Name-347.jpg', 71, 'No', 'Yes', 56);
 
 -- --------------------------------------------------------
 
@@ -553,50 +599,6 @@ CREATE TABLE `tbl_order` (
   `customer_email` varchar(150) NOT NULL,
   `customer_address` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `tbl_order`
---
-
-INSERT INTO `tbl_order` (`id`, `transaction_id`, `total`, `order_date`, `status`, `customer_name`, `customer_contact`, `customer_email`, `customer_address`) VALUES
-(1, 'Pepperoni Pizza', 220.00, '2022-01-16 06:47:44', 'Ordered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(2, 'Pepperoni Pizza', 220.00, '2022-01-16 06:50:46', 'Delivered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(3, 'Beef Burger', 150.00, '2022-01-16 08:09:49', 'Cancelled', 'my full name', 'country name', 'me@mydomain.com', ''),
-(4, 'Mexican Pizza', 750.00, '2022-01-16 08:10:16', 'Ordered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(5, 'Buffalo Wings', 250.00, '2022-01-16 08:35:55', 'On Delivery', 'Maheosy Haque', '01717731002', 'me@mydomain.com', ''),
-(6, 'Pepperoni Pizza', 220.00, '2022-01-17 07:10:28', 'Ordered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(7, 'Buffalo Wings', 250.00, '2022-01-17 07:11:00', 'Ordered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(8, 'Mexican Pizza', 250.00, '2022-01-17 07:11:56', 'Ordered', 'my full name', 'country name', 'me@mydomain.com', ''),
-(9, '', 200.00, '2022-01-21 21:29:42', 'Successful', 'Maheosy Haque', '01717731002', 'maheosy.sristy@gmail.com', ''),
-(10, '', 220.00, '2022-01-21 21:31:46', 'Successful', 'Maheosy Haque', '01717731002', 'me@mydomain.com', ''),
-(11, '', 250.00, '2022-01-21 21:32:43', 'Successful', 'Maheosy Haque', '01717731002', 'maheosy.sristy@gmail.com', ''),
-(12, 'HF141T', 220.00, '2022-01-21 21:38:46', 'Successful', 'Forest Gump', '01717731002', 'forest@gmail.com', ''),
-(13, 'IVVOP1', 250.00, '2022-01-21 21:40:30', 'Successful', 'Maheosy Haque', '9', 'me@mydomain.com', ''),
-(14, 'ROBO-CAFEMP5J31', 250.00, '2022-01-21 21:42:27', 'Successful', 'Maheosy Haque', '23', 'maheosy.sristy@gmail.com', ''),
-(15, 'ROBO-CAFE-K0WPJ8', 150.00, '2022-01-21 21:49:59', 'Successful', 'Maheosy Haque', '2', 'maheosy.sristy@gmail.com', ''),
-(16, 'ROBO-CAFE-7XS507', 680.00, '2022-01-21 23:18:36', 'Successful', 'Maheosy Haque', '01717732432', 'maheosy.sristy@gmail.com', ''),
-(17, 'ROBO-CAFE-0GI4JT', 180.00, '2022-01-21 23:21:39', 'Successful', 'Maheosy Haque', '45345345', 'maheosy.sristy@gmail.com', ''),
-(18, '', 0.00, '2022-01-22 02:05:57', '', '', '', '', ''),
-(19, '', 0.00, '2022-01-22 02:14:44', '', '', '', '', ''),
-(20, '', 0.00, '2022-01-22 02:15:44', '', '', '', '', ''),
-(21, '', 0.00, '2022-01-22 02:17:10', '', '', '', '', 'Array'),
-(22, 'Array', 0.00, '2022-01-22 02:18:24', '', '', '', '', 'cus_add1'),
-(23, 'Array', 0.00, '2022-01-22 02:22:21', '', '', '', '', ''),
-(24, 'Array', 0.00, '2022-01-22 02:23:30', '', '', '', '', ''),
-(25, 'ROBO-CAFE-MML336', 250.00, '2022-01-22 02:27:11', '', 'my full name', '34534', 'me@mydomain.com', '01'),
-(26, 'ROBO-CAFE-MML336', 250.00, '2022-01-22 02:28:40', '', 'my full name', '34534', 'me@mydomain.com', '01'),
-(27, 'ROBO-CAFE-A1DFRQ', 250.00, '2022-01-22 02:29:22', '', 'my full name', '45', 'me@mydomain.com', '01'),
-(28, 'ROBO-CAFE-S4B37V', 250.00, '2022-01-22 02:30:25', '', 'my full name', '45', 'me@mydomain.com', '01'),
-(29, 'ROBO-CAFE-F7Y4XU', 250.00, '2022-01-22 02:31:15', '', 'my full name', '56', 'me@mydomain.com', '01'),
-(30, 'ROBO-CAFE-F7Y4XU', 250.00, '2022-01-22 02:32:19', '', 'my full name', '56', 'me@mydomain.com', '01'),
-(31, 'ROBO-CAFE-PQZ46L', 250.00, '2022-01-22 02:32:26', '', 'my full name', '4', 'me@mydomain.com', '01'),
-(32, 'ROBO-CAFE-9F5EG7', 250.00, '2022-01-22 02:57:56', '', 'my full name', '345', 'me@mydomain.com', '01'),
-(33, 'ROBO-CAFE-9F5EG7', 250.00, '2022-01-22 02:57:59', '', 'my full name', '345', 'me@mydomain.com', '01'),
-(34, 'ROBO-CAFE-3N4U4N', 250.00, '2022-01-22 02:58:04', '', 'my full name', '234', 'me@mydomain.com', '01'),
-(35, 'ROBO-CAFE-3N4U4N', 250.00, '2022-01-22 02:58:52', '', 'my full name', '234', 'me@mydomain.com', '01'),
-(36, 'ROBO-CAFE-51G6DI', 100.00, '2022-01-22 05:52:14', '', 'Mohammad Wasikuzzaman', '01717731002', 'wasik@gmail.com', 'Banani, Dhaka'),
-(37, 'ROBO-CAFE-CJAJIH', 250.00, '2022-01-22 05:54:56', '', 'my full name', '4', 'me@mydomain.com', '01'),
-(38, 'ROBO-CAFE-MH9P87', 150.00, '2022-01-22 17:56:12', 'Successful', 'my full name', '8', 'me@mydomain.com', '');
 
 -- --------------------------------------------------------
 
@@ -630,7 +632,10 @@ INSERT INTO `tbl_users` (`id`, `name`, `email`, `add1`, `city`, `phone`, `userna
 (11, 'Bryan', 'bryan@gmail.com', 'No.14, Lintang Bendari 13002', 'George Town', 60129876543, 'Bryan', '780ea9376333dabb1959f16e1622e00c'),
 (12, 'Khaw Hui Khim', 'k.dex18@gmail.com', 'NO. 16, Pintasan Cecil 10300', 'Georgetown, Penang.', 60145236798, 'huikhim', '780ea9376333dabb1959f16e1622e00c'),
 (13, 'Slyvia', 'sylvia@gmail.com', 'Block A - 13 - 9, Centrio Avenue 10800', 'Alor Setar', 60189234567, 'slyvia', '780ea9376333dabb1959f16e1622e00c'),
-(14, 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'Chen Dong', '780ea9376333dabb1959f16e1622e00c');
+(14, 'Chen Dong', 'chendong@gmail.com', 'No.11, Jalan Gembira 11200', 'Klang', 60123456789, 'Chen Dong', '780ea9376333dabb1959f16e1622e00c'),
+(15, 'Oh Wen Chi', 'wenchi@gmail.com', 'Block B - 12 - 01, Centrio Greens 11300', 'Klang', 60123498765, 'Wen Chi', '780ea9376333dabb1959f16e1622e00c'),
+(16, 'Alicia', 'alicia@gmail.com', 'No.12, Jalan York, 11900', 'Puchong', 60123456789, 'Alicia', '780ea9376333dabb1959f16e1622e00c'),
+(17, 'Lim Mei Xuan', 'meixuan@gmail.com', 'Block A - 15 - 12, Ferehen Heights, 11400', 'Bayan Lepas', 601234657869, 'Mei Xuan', '780ea9376333dabb1959f16e1622e00c');
 
 --
 -- Indexes for dumped tables
@@ -704,13 +709,13 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `order_manager`
 --
 ALTER TABLE `order_manager`
-  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `order_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -722,31 +727,31 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay`
 --
 ALTER TABLE `tbl_eipay`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=430;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay_details`
 --
 ALTER TABLE `tbl_eipay_details`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
@@ -758,7 +763,7 @@ ALTER TABLE `tbl_order`
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
