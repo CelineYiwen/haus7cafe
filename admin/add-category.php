@@ -47,6 +47,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<title>Haus 7 Cafe Admin</title>
 </head>
 
+
 <body>
 
 
