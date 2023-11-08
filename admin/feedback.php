@@ -299,7 +299,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			<div class="head-title">
 				<div class="left">
-					<h1>Eat In Orders</h1>
+					<h1>Feedback Survey Responses</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="index.php">Dashboard</a>
