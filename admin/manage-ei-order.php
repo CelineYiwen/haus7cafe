@@ -183,6 +183,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 				}
 				?>
+
+				
 			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
