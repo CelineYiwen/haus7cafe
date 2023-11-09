@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2023 at 07:36 PM
+-- Generation Time: Nov 09, 2023 at 07:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -394,7 +394,8 @@ INSERT INTO `tbl_feedback` (`id`, `username`, `often_visit`, `quality`, `cleanli
 (6, 'Chen Dong', 'Weekly', 'VeryGood', 'VeryClean', 'Neutral', 'Service', 'Nice Service', 'Free 7bcf85cb', '2023-11-06 02:21:21', 'Claimed'),
 (7, 'Wen Chi', 'Monthly', 'Excellent', 'VeryClean', 'Satisfied', 'FoodQuality', 'The food is delicious, but hard to find parking slot.', 'Free 58f2d3e1', '2023-11-06 03:37:36', 'Cancelled'),
 (8, 'Alicia', 'Weekly', 'Excellent', 'Clean', 'VerySatisfied', 'Service', 'The food is delicious', 'Free 836c2662', '2023-11-07 09:10:10', 'Claimed'),
-(9, 'Mei Xuan', 'Weekly', 'Excellent', 'VeryClean', 'VerySatisfied', 'Price', 'The price here are quite reasonable', 'Free eb2aed7a', '2023-11-07 03:07:35', 'Claimed');
+(9, 'Mei Xuan', 'Weekly', 'Excellent', 'VeryClean', 'VerySatisfied', 'Price', 'The price here are quite reasonable', 'Free eb2aed7a', '2023-11-07 03:07:35', 'Claimed'),
+(10, 'Alicia', 'Daily', 'VeryGood', 'VeryClean', 'Satisfied', 'FoodQuality', 'Test', 'Free 7986a632', '2023-11-09 10:30:57', 'Active');
 
 -- --------------------------------------------------------
 
@@ -582,7 +583,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `tbl_eipay`
@@ -600,13 +601,13 @@ ALTER TABLE `tbl_eipay_details`
 -- AUTO_INCREMENT for table `tbl_feedback`
 --
 ALTER TABLE `tbl_feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
 --
 ALTER TABLE `tbl_food`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
