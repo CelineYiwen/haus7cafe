@@ -1,9 +1,21 @@
-<?php include('../frontend/config/constants.php');
+<?php
+
+// Include necessary files
+include('../frontend/config/constants.php');
 include('login-check.php');
+
+
+// Disable error reporting and displaying errors
+// Setting it to 0 means no errors will be reported.
 error_reporting(0);
+
+// error control operator
+// PHP will not display error messages directly on the web page.
 @ini_set('display_errors', 0);
 
 ?>
+
+
 <?php
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
@@ -168,8 +180,12 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				</div>
 			</form>
 			<div class="bx.bx-menu">
+
 				<?php
+				// Check if the user is logged in as an admin
 				if (isset($_SESSION['user-admin'])) {
+
+					// Retrieve and display the username
 					$username = $_SESSION['user-admin'];
 
 				?>
@@ -260,35 +276,50 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 		</nav>
 		<!-- NAVBAR -->
-		<?php
 
+		<?php
+		// Check and display related session messages for various scenarios
+
+		// Check if there is an 'add' session message
 		if (isset($_SESSION['add'])) {
-			echo $_SESSION['add'];
-			unset($_SESSION['add']);
+			echo $_SESSION['add'];			// Display the 'add' message
+			unset($_SESSION['add']);		// Remove the 'add' session message
 		}
+
+		// Check if there is a 'remove' session message
 		if (isset($_SESSION['remove'])) {
-			echo $_SESSION['remove'];
-			unset($_SESSION['remove']);
+			echo $_SESSION['remove'];			// Display the 'remove' message
+			unset($_SESSION['remove']);			// Remove the 'remove' session message
 		}
+
+		// Check if there is a 'delete' session message
 		if (isset($_SESSION['delete'])) {
-			echo $_SESSION['delete'];
-			unset($_SESSION['delete']);
+			echo $_SESSION['delete'];			// Display the 'delete' message
+			unset($_SESSION['delete']);			// Remove the 'delete' session message
 		}
+
+		// Check if there is a 'no-category-found' session message
 		if (isset($_SESSION['no-category-found'])) {
-			echo $_SESSION['no-category-found'];
-			unset($_SESSION['no-category-found']);
+			echo $_SESSION['no-category-found'];			// Display the 'no-category-found' message
+			unset($_SESSION['no-category-found']);			// Remove the 'no-category-found' session message
 		}
+
+		// Check if there is an 'update' session message
 		if (isset($_SESSION['update'])) {
-			echo $_SESSION['update'];
-			unset($_SESSION['update']);
+			echo $_SESSION['update'];			// Display the 'update' message
+			unset($_SESSION['update']);			// Remove the 'update' session message
 		}
+
+		// Check if there is an 'upload' session message
 		if (isset($_SESSION['upload'])) {
-			echo $_SESSION['upload'];
-			unset($_SESSION['upload']);
+			echo $_SESSION['upload'];				// Display the 'upload' message
+			unset($_SESSION['upload']);				// Remove the 'upload' session message
 		}
+
+		// Check if there is a 'failed-remove' session message
 		if (isset($_SESSION['failed-remove'])) {
-			echo $_SESSION['failed-remove'];
-			unset($_SESSION['failed-remove']);
+			echo $_SESSION['failed-remove'];			// Display the 'failed-remove' message
+			unset($_SESSION['failed-remove']);			// Remove the 'failed-remove' session message
 		}
 
 
@@ -316,16 +347,21 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			<br />
 
-			<!-- Button Add Admin-->
+			<!-- Button to add a new category -->
 			<a href="<?php echo SITEURL; ?>add-category.php" class="button-8" role="button">Add Category</a>
 
 			<br /> <br />
+
+			<!-- Container for table data -->
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
 					</div>
+
+					<!-- Table to display category data -->
 					<table class="">
 						<tr>
+							<!-- Table headers -->
 							<th>S.N.</th>
 							<th>Title</th>
 							<th>Image</th>
@@ -337,23 +373,27 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<?php
 						//Fetching and Displaying data from database
 
+						// SQL query to select all records from the 'tbl_category' table
 						$sql = "SELECT * FROM tbl_category";
 
-						//Executing the Query
+						// Executing the SQL Query using the mysqli_query function
 						$res = mysqli_query($conn, $sql);
 
-						//Counting number of rows
-
+						// Counting the number of rows retrieved from the query result
 						$count = mysqli_num_rows($res);
 
 						//Fixing Serial Number issue
-						$sn = 1; //Create variable and assign as 1
+						$sn = 1; //Create variable and assign (initialize) as 1
 
 						//Check whether there is data in database or not
 						if ($count > 0) {
-							//Data available in database
-							//Get data and display
+
+							// Data available in database
+							// Get data and display it
+							// Loop through each category data and generate a table row
 							while ($row = mysqli_fetch_assoc($res)) {
+
+								// Extracting individual data fields from the database result
 								$id = $row['id'];
 								$title = $row['title'];
 								$image_name = $row['image_name'];
@@ -363,8 +403,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						?> <!-- Breaking the PHP to write HTML -->
 
 								<tr>
+
+									<!-- Serial Number -->
 									<td><?php echo $sn++; ?></td>
+
+									<!-- Category Title -->
 									<td><?php echo $title; ?></td>
+
+									<!-- Category Image -->
 									<td>
 										<?php
 										//Check whether image name is available or not
@@ -378,13 +424,17 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										<?php
 
 										} else {
-											//Display the message
+											// Display a message if no image is available
 											echo "<div class='error'>No Image Available</div>";
 										}
 										?>
 									</td>
+
+									<!-- Featured and Active Status -->
 									<td><?php echo $featured; ?></td>
 									<td><?php echo $active; ?></td>
+
+									<!-- Actions (Update and Delete) -->
 									<td>
 										<a href="<?php echo SITEURL; ?>update-category.php?id=<?php echo $id; ?>" class="button-5" role="button">Update</a>
 										<a href="<?php echo SITEURL; ?>delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="button-7" role="button">Delete</a>
@@ -395,10 +445,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 							<?php
 							}
-						} else {
-							//No Data in database
-							//Displaying the message inside table
-
+						}
+						
+						else {
+							// If no data in the database, display a message inside the table
 							?> <!-- Breaking the PHP to write HTML-->
 
 							<tr>
@@ -408,18 +458,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 							</tr>
 
 						<?php
-
-
 						}
-
-
-
-
-
 						?>
-
-
-
 
 
 					</table>
@@ -430,13 +470,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			</div>
 
-
 			<!-- Main Content Ends -->
-
-
-
-
-
 
 
 		</main>

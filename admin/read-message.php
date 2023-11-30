@@ -1,22 +1,25 @@
 <?php
 
-//Including the constant file
-
+// Including the constant file and login-check files
 include('../frontend/config/constants.php');
 include('login-check.php');
 
+// Get the message ID from the URL parameter
 $id = $_GET['id'];
+
+// Construct the SQL query to update the message status to 'read' for the specified ID
 $sql = "UPDATE message SET
         message_status='read'
         WHERE id=$id";
 
+// Execute the SQL query using the database connection
 $res = mysqli_query($conn, $sql);
 
 ?>
 <?php
 
 //Stats
-
+// Query to retrieve total sales by hour
 $sales_by_hour =  "SELECT date(order_date) as hname,
 					sum(total_amount) as total_sales
 					FROM order_manager
@@ -25,6 +28,7 @@ $sales_by_hour =  "SELECT date(order_date) as hname,
 
 $res_sales_by_hour = mysqli_query($conn, $sales_by_hour);
 
+// Query to retrieve most sold items
 $most_sold_items = "SELECT sum(Quantity) as total_qty,
 							Item_Name as item_name
 							FROM online_orders_new
@@ -33,7 +37,7 @@ $most_sold_items = "SELECT sum(Quantity) as total_qty,
 $res_most_sold_items = mysqli_query($conn, $most_sold_items);
 
 //Orders
-
+// Query to get notifications for pending or processing orders from tbl_eipay
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
 
@@ -41,6 +45,7 @@ $res_ei_order_notif = mysqli_query($conn, $ei_order_notif);
 
 $row_ei_order_notif = mysqli_num_rows($res_ei_order_notif);
 
+// Query to get notifications for pending or processing orders from order_manager
 $online_order_notif = "SELECT order_status from order_manager
 					WHERE order_status='Pending'OR order_status='Processing' ";
 
@@ -49,6 +54,7 @@ $res_online_order_notif = mysqli_query($conn, $online_order_notif);
 $row_online_order_notif = mysqli_num_rows($res_online_order_notif);
 
 // Stock Notification
+// Query to get stock notifications for items with stock less than 50
 $stock_notif = "SELECT stock FROM tbl_food
 				WHERE stock<50";
 
@@ -56,19 +62,21 @@ $res_stock_notif = mysqli_query($conn, $stock_notif);
 $row_stock_notif = mysqli_num_rows($res_stock_notif);
 
 // Revenue Generated
+// Query to calculate total revenue from successful orders
 $revenue = "SELECT SUM(total_amount) AS total_amount FROM order_manager
 			WHERE order_status='Delivered' ";
 $res_revenue = mysqli_query($conn, $revenue);
 $total_revenue = mysqli_fetch_array($res_revenue);
 
 //Total Orders Delivered
-
+// Query to get total delivered orders
 $orders_delivered = "SELECT order_status FROM order_manager
 					 WHERE order_status='Delivered'";
 $res_orders_delivered = mysqli_query($conn, $orders_delivered);
 $total_orders_delivered = mysqli_num_rows($res_orders_delivered);
 
 //Message Notification
+// Query to get unread message notifications
 $message_notif = "SELECT message_status FROM message
 				 WHERE message_status = 'unread'";
 $res_message_notif = mysqli_query($conn, $message_notif);
@@ -91,21 +99,28 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 	<!-- Chart --->
 
-
+	<!-- Chart Library - Google Charts -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+		// Load the visualization library and set a callback function
 		google.charts.load("current", {
 			packages: ["corechart"]
 		});
+
+		// Callback function to draw the chart when the library is loaded
 		google.charts.setOnLoadCallback(drawChart);
 
+		// Function to draw the chart
 		function drawChart() {
 
+			// Define the data for the chart
 			var data = google.visualization.arrayToDataTable([
 				['Item Name', 'Sales'],
 				<?php
 				//while($row_sales=mysqli_fetch_array($res_sales_by_month))
 				while ($row_sales = mysqli_fetch_array($res_most_sold_items)) {
+
+					// Loop through the result set of most sold items and generate chart data
 					echo "['" . $row_sales["item_name"] . "', " . $row_sales["total_qty"] . "],";
 				}
 
@@ -113,7 +128,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			]);
 
-
+			// Define options for the chart
 			var options = {
 				title: 'Most Sold Items',
 				pieHole: 0.4,
@@ -131,12 +146,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			};
 
-
-
-
+			// Create a new PieChart and draw it in the specified HTML element
 			var chart = new google.visualization.PieChart(document.getElementById('donutchart_msi'));
-			chart.draw(data, options);
 
+			// draws the chart using the specified data and options.
+			chart.draw(data, options);
 
 		}
 	</script>
@@ -145,16 +159,23 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+		// Load the Google Charts library with the 'bar' package
 		google.charts.load('current', {
 			'packages': ['bar']
 		});
+
+		// Set a callback function to draw the chart when the library is loaded
 		google.charts.setOnLoadCallback(drawChart);
 
+		// Function to draw the bar chart
 		function drawChart() {
+
+			// Define the data for the chart
 			var data = google.visualization.arrayToDataTable([
 				['Time', 'Sales'],
 				<?php
-				//while($row_sales=mysqli_fetch_array($res_sales_by_month))
+
+				// Loop through the result set of sales by hour and generate chart data
 				while ($row_sales_by_hour = mysqli_fetch_array($res_sales_by_hour)) {
 					echo "['" . $row_sales_by_hour["hname"] . "', " . $row_sales_by_hour["total_sales"] . "],";
 				}
@@ -164,6 +185,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			]);
 
+			// Define options for the chart
 			var options = {
 				hAxis: {
 					title: 'Time',
@@ -183,8 +205,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			};
 
+			// Create a new Bar chart and draw it in the specified HTML element
 			var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
+			// Draw the chart using the specified data and options
 			chart.draw(data, google.charts.Bar.convertOptions(options));
 		}
 	</script>
@@ -304,44 +328,26 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<!-- Dynamic Dashborad -->
 
 	<?php
+
 	//Categories
-
 	$sql = "SELECT * FROM tbl_category";
-
 	$res = mysqli_query($conn, $sql);
-
 	$row_cat = mysqli_num_rows($res);
 
 	//Items
-
 	$sql2 = "SELECT * FROM tbl_food";
-
 	$res2 = mysqli_query($conn, $sql2);
-
 	$row_item = mysqli_num_rows($res2);
 
 	//Orders
-
 	$sql3 = "SELECT * FROM order_manager";
-
 	$res3 = mysqli_query($conn, $sql3);
-
 	$row_order = mysqli_num_rows($res3);
 
 	//Eat In Orders
-
-
 	$sql4 = "SELECT * FROM tbl_eipay";
-
 	$res4 = mysqli_query($conn, $sql4);
-
 	$row_ei_order = mysqli_num_rows($res4);
-
-
-
-
-
-
 
 	?>
 
@@ -359,17 +365,24 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				<div class="form-input">
 				</div>
 			</form>
+
+			<!-- User Information Section -->
 			<div class="bx.bx-menu">
 				<?php
+
+				// Check if the user is logged in
 				if (isset($_SESSION['user-admin'])) {
 					$username = $_SESSION['user-admin'];
 
 				?>
+					<!-- Display user information if logged in -->
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
 					</div>
 				<?php
 				} else {
+
+					// Redirect to login page if not logged in
 				?>
 					echo "<script>
 						alert('Please login');
@@ -381,9 +394,11 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				}
 				?>
 			</div>
+
 			<a href="messages.php">
 				<div class="fetch_message">
 			</a>
+
 			<a href="messages.php">
 				<div class="action_message notfi_message">
 					<i class='bx bxs-envelope'></i>
@@ -405,6 +420,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 				</div>
 
+				<!-- Notification Bell Section -->
 				<div class="notification" onclick="menuToggle();">
 					<div class="action notif" onclick="menuToggle();">
 						<i class='bx bxs-bell' onclick="menuToggle();"></i>
@@ -439,6 +455,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 		</ul>
 		</div>
 		<?php
+
+		// Display total notification count if there are any notifications
 		if ($row_stock_notif > 0 || $row_online_order_notif > 0 || $row_ei_order_notif > 0) {
 			$total_notif = $row_online_order_notif + $row_ei_order_notif + $row_stock_notif;
 		?>
@@ -463,21 +481,21 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			<div class="table-data-message">
 				<div class="order">
-					<div class="">
-
-
-					</div>
+					<div class=""></div>
 					<table>
 
-
 						<?php
-
+						// Selecting a specific message based on the provided ID
 						$read_message = "SELECT * FROM message WHERE id='$id'";
 						$res_read_message = mysqli_query($conn, $read_message);
 
+						// Checking if the query execution was successful
 						if ($res_read_message == TRUE) {
+
+							// Counting the number of rows returned
 							$count_message = mysqli_num_rows($res_read_message);
 
+							// Loop through each row in the result set
 							while ($rows = mysqli_fetch_assoc($res_read_message)) {
 								$name = $rows['name'];
 								$phone = $rows['phone'];
@@ -488,10 +506,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						?>
 								<tbody>
 
+									<!-- Displaying information for each row -->
 									<tr>
 										<td><?php echo $name;  ?>
-
-
 									<tr>
 										<td><?php echo $phone; ?></td>
 									</tr>
@@ -504,10 +521,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 									</tr>
 									<tr>
 										<td><?php echo $message; ?></td>
+
+										<!-- Link to delete the current message -->
 										<td><a href="<?php echo SITEURL; ?>delete-message.php?id=<?php echo $id; ?>" class="button-7" role="button">Delete</a></td>
 									</tr>
-
-
 
 
 
@@ -525,10 +542,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			</div>
 
 
-
 		</main>
-
-
 
 		<!-- MAIN -->
 	</section>

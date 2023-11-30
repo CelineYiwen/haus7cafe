@@ -295,6 +295,8 @@ function getGUIDnoHash()
 			<div class="table-data">
 				<div class="order">
 					<div class="head"></div>
+
+					<!-- More secure for sensitive data because the data is not exposed in the URL. -->
 					<form action="" method="POST">
 						<div class="left">
 							<label for="tablenumber">Select Table:</label>

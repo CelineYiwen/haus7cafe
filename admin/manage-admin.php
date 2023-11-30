@@ -1,7 +1,9 @@
-<?php include('../frontend/config/constants.php');
+<?php
+// Include necessary files
+include('../frontend/config/constants.php');
 include('login-check.php');
-
 ?>
+
 <?php
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
@@ -31,33 +33,48 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 
 ?>
-<?php
 
+<?php
+// Check and display session messages for various scenarios
+
+// Check if there is an 'add' session message
 if (isset($_SESSION['add'])) {
-	echo $_SESSION['add'];
-	unset($_SESSION['add']); //Removing Session message
+	echo $_SESSION['add'];			// Display the 'add' message
+	unset($_SESSION['add']);		// Remove the 'add' session message to prevent it from being displayed again
 }
+
+// Check if there is a 'delete' session message
 if (isset($_SESSION['delete'])) {
-	echo $_SESSION['delete'];
-	unset($_SESSION['delete']);
+	echo $_SESSION['delete'];		// Display the 'delete' message
+	unset($_SESSION['delete']);		// Remove the 'delete' session message
 }
+
+// Check if there is an 'update' session message
 if (isset($_SESSION['update'])) {
-	echo $_SESSION['update'];
-	unset($_SESSION['update']);
+	echo $_SESSION['update'];		// Display the 'update' message
+	unset($_SESSION['update']);		// Remove the 'update' session message
 }
+
+// Check if there is a 'user-not-found' session message
 if (isset($_SESSION['user-not-found'])) {
-	echo $_SESSION['user-not-found'];
-	unset($_SESSION['user-not-found']);
+	echo $_SESSION['user-not-found'];		// Display the 'user-not-found' message
+	unset($_SESSION['user-not-found']);		// Remove the 'user-not-found' session message
 }
+
+// Check if there is a 'pwd-not-match' session message
 if (isset($_SESSION['pwd-not-match'])) {
-	echo $_SESSION['pwd-not-match'];
-	unset($_SESSION['pwd-not-match']);
+	echo $_SESSION['pwd-not-match'];		// Display the 'pwd-not-match' message
+	unset($_SESSION['pwd-not-match']);		// Remove the 'pwd-not-match' session message
 }
+
+// Check if there is a 'change-pwd' session message
 if (isset($_SESSION['change-pwd'])) {
-	echo $_SESSION['change-pwd'];
-	unset($_SESSION['change-pwd']);
+	echo $_SESSION['change-pwd'];		// Display the 'change-pwd' message
+	unset($_SESSION['change-pwd']);		// Remove the 'change-pwd' session message
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -327,24 +344,34 @@ if (isset($_SESSION['change-pwd'])) {
 						</thead>
 
 						<?php
-
+						// Select all records from the tbl_admin table
 						$sql = "SELECT * FROM tbl_admin";
 						$res = mysqli_query($conn, $sql);
 
+						// Check if the query was executed successfully
 						if ($res == TRUE) {
+
+							// Get the number of rows returned by the query
 							$count = mysqli_num_rows($res);
 
+							// Check if there are records available
 							if ($count > 0) {
+
+								// Loop through each row in the result set
 								while ($rows = mysqli_fetch_assoc($res)) {
+
+									// Extract data from the current row
 									$id = $rows['id'];
 									$full_name = $rows['full_name'];
 									$username = $rows['username'];
 						?>
+									<!-- Displaying admin information in a table -->
 									<tbody>
 										<tr>
 											<td><?php echo $full_name; ?></td>
 											<td><?php echo $username; ?></td>
 											<td>
+												<!-- Buttons for various actions related to the admin -->
 												<a href="<?php echo SITEURL; ?>update-password.php?id=<?php echo $id; ?>" class="button-5" role="button">Change Password</a>
 												<a href="<?php echo SITEURL; ?>update-admin.php?id=<?php echo $id; ?>" class="button-6" role="button">Update</a>
 												<a href="<?php echo SITEURL; ?>delete-admin.php?id=<?php echo $id; ?>" class="button-7" role="button">Delete</a>

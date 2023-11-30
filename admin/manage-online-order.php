@@ -1,9 +1,10 @@
-<?php include('../frontend/config/constants.php');
-include('login-check.php'); ?>
 <?php
 
+include('../frontend/config/constants.php');
+include('login-check.php');
 
 ?>
+
 <?php
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
@@ -33,6 +34,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -301,15 +304,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 							<tbody>
 
 								<?php
-
-
-
-
+								// Selecting all records from the 'order_manager' table and ordering them by order_id in descending order
 								$query = "SELECT * FROM `order_manager` ORDER BY order_id DESC";
 								$user_result = mysqli_query($conn, $query);
 
-
+								// Loop through each record in the result set
 								while ($user_fetch = mysqli_fetch_assoc($user_result)) {
+
+									// Extracting data from the current record
 									$order_id = $user_fetch['order_id'];
 									$cus_name = $user_fetch['cus_name'];
 									$cus_email = $user_fetch['cus_email'];
@@ -320,6 +322,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 									$total_amount = $user_fetch['total_amount'];
 								?>
 
+									<!-- Displaying each order in a table row -->
 									<tr>
 										<td><?php echo $order_id; ?></td>
 										<td><?php echo $cus_name; ?></td>
@@ -327,7 +330,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										<td><?php echo $cus_add1; ?></td>
 										<td><?php echo $cus_phone ?></td>
 
-
+										<!-- Displaying payment status with different styles based on its value -->
 										<td>
 											<?php
 											if ($payment_status == "successful") {
@@ -338,6 +341,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 											?>
 										</td>
+
+										<!-- Displaying order status with different styles based on its value -->
 										<td>
 											<?php
 											if ($order_status == "Pending") {
@@ -353,6 +358,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 											?>
 											<br><br>
 
+											<!-- Link to update online order -->
 											<span>
 												<a href="<?php echo SITEURL; ?>update-online-order.php?id=<?php echo $order_id; ?>" class="button-8" role="button">Update</a>
 											</span>
@@ -360,6 +366,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 
 										<td><?php echo $total_amount; ?></td>
+
+										<!-- Nested table to display order details -->
 									<?php
 									echo "
                             <td>
@@ -376,10 +384,13 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
                                 <tbody>
                                 ";
 
+									// Fetching and displaying order details for the current order ID
 									$order_query = "SELECT * FROM `online_orders_new` WHERE `order_id`='$user_fetch[order_id]' ORDER BY order_id DESC ";
 									$order_result = mysqli_query($conn, $order_query);
 
+									// Loop through each record in the result set of order details
 									while ($order_fetch = mysqli_fetch_assoc($order_result)) {
+										// Display each order detail in a table row
 										echo "
                                         <tr>
                                             <td>$order_fetch[Item_Name]</td>
@@ -387,8 +398,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
                                             <td>$order_fetch[Quantity]</td>
                                          
                                         </tr>
-                                    
-                                    
                                     
                                     ";
 									}
@@ -411,14 +420,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			</div>
 
-
-
-
-
-
-
 		</main>
 		<!-- MAIN -->
+
 	</section>
 	<!-- CONTENT -->
 

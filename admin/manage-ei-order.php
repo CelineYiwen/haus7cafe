@@ -184,7 +184,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 				}
 				?>
 
-				
+
 			</div>
 			<div class="fetch_message">
 				<div class="action_message notfi_message">
@@ -298,13 +298,19 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						</thead>
 						<tbody>
 
+							<!-- Loop through each record in the 'tbl_eipay' table -->
 							<?php
 
+							// Selecting all records from the 'tbl_eipay' table and ordering them by ID in descending order
 							$query = "SELECT * FROM `tbl_eipay` ORDER BY id DESC";
+
+							// Executing the query and fetching the result
 							$user_result = mysqli_query($conn, $query);
 
-
+							// Loop through each record in the result set
 							while ($user_fetch = mysqli_fetch_assoc($user_result)) {
+
+								// Extracting data from the current record
 								$tran_id = $user_fetch['tran_id'];
 								$id = $user_fetch['id'];
 								$table_id = $user_fetch['table_id'];
@@ -314,13 +320,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 								$total_amount = $user_fetch['amount'];
 							?>
 
+								<!-- Displaying data in a table row -->
 								<tr>
 									<td><?php echo $tran_id++; ?> </td>
 									<td><?php echo $table_id; ?></td>
 									<td><?php echo $order_date; ?></td>
 									<td><span class="status process"><?php echo $payment_status; ?></span></td>
 
-
+									<!-- Displaying order status with different styles based on its value -->
 									<td>
 										<?php
 										if ($order_status == "Pending") {
@@ -335,6 +342,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 										?>
 									</td>
+
+									<!-- Link to update order -->
 									<td>
 										<br><br>
 
@@ -343,24 +352,25 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										</span>
 									</td>
 
-
+									<!-- Displaying total amount -->
 									<td><?php echo $total_amount; ?></td>
+
+									<!-- Nested table to display order details -->
 								<?php
 								echo "
-                            <td>
-                                <table class='tbl-full'>
-                                <thead>
-                                    <tr>
-                                        <th>Item Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                      
+									<td>
+										<table class='tbl-full'>
+											<thead>
+												<tr>
+													<th>Item Name</th>
+													<th>Price</th>
+													<th>Quantity</th>
+												</tr>
+											</thead>
+										<tbody>
+								";
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                ";
-
+								// Fetching and displaying order details for the current transaction ID
 								$order_query = "SELECT * FROM `tbl_eipay_details` WHERE `tran_id`='$user_fetch[tran_id]' ORDER BY tran_id DESC ";
 								$order_result = mysqli_query($conn, $order_query);
 

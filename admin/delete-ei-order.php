@@ -14,12 +14,12 @@ $sql = "DELETE FROM tbl_eipay WHERE id=$id";
 
 $res = mysqli_query($conn, $sql);
 
-//Check whether the query executed succesfully or not
+//Check whether the query executed successfully or not
 
 if($res == true){
     //Query executed successfully and admin deleted
     //echo "Order Deleted";
-    //Create Session varibale to display message 
+    //Create Session variable to display message 
 
     $_SESSION['delete'] = "<div class='success'>Order Deleted Successfully</div>";
 
@@ -27,16 +27,14 @@ if($res == true){
 
     header('location:'.SITEURL.'manage-ei-order.php');
 }
+
 else{
     //Failed to delete admin
     //echo "Failed to Delete Admin";
-
     $_SESSION['delete'] = "<div class='error'>Failed to Delete Order</div>";
     header('location:'.SITEURL.'manage-ei-order.php');
 }
 
-//3. Redirect to manage admin page with message(Succuess/error)
-
-
+//3. Redirect to manage admin page with message (Success / Error)
 
 ?>

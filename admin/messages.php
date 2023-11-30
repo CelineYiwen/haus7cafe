@@ -308,14 +308,22 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 						<?php
 
+						// Selecting all messages from the database and ordering them by date in descending order
 						$sql = "SELECT * FROM message ORDER BY date DESC";
 						$res = mysqli_query($conn, $sql);
 
+						// Checking if the query execution was successful
 						if ($res == TRUE) {
+							// Counting the number of rows returned
 							$count = mysqli_num_rows($res);
 
+							// Checking if there are messages available
 							if ($count > 0) {
+
+								// Loop through each row in the result set
 								while ($rows = mysqli_fetch_assoc($res)) {
+
+									// Extracting data from the current row
 									$id = $rows['id'];
 									$name = $rows['name'];
 									$phone = $rows['phone'];
@@ -326,9 +334,10 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						?>
 									<tbody>
 										<?php
-
+										// Checking the status of the message (read or unread)
 										if ($message_status == 'read') { ?>
 											<tr>
+												<!-- Displaying read messages with links to read and delete -->
 												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$name"; ?></a></td>
 												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$subject"; ?></a></td>
 												<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "$date"; ?></a></td>
@@ -341,6 +350,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										} else {
 										?>
 											<tr>
+												<!-- Displaying unread messages with links to read and delete -->
 												<div class="unread_message">
 													<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "<span class='unread'>$name</span>"; ?></a></td>
 													<td><a href="<?php echo SITEURL; ?>read-message.php?id=<?php echo $id; ?>"> <?php echo "<span class='unread'>$subject</span>"; ?></a></td>

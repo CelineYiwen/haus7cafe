@@ -1,4 +1,5 @@
-<?php include('../frontend/config/constants.php');
+<?php
+include('../frontend/config/constants.php');
 include('login-check.php'); ?>
 <?php
 
@@ -294,14 +295,16 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 							<tbody>
 
 								<?php
-
+								// Selecting all records from the 'tbl_eipay' table and ordering them by ID in descending order
 								$query = "SELECT * FROM `tbl_eipay` ORDER BY id DESC";
 
-
+								// Executing the query and fetching the result
 								$user_result = mysqli_query($conn, $query);
 
-
+								// Loop through each record in the result set
 								while ($user_fetch = mysqli_fetch_assoc($user_result)) {
+
+									// Extracting data from the current record
 									$tran_id = $user_fetch['tran_id'];
 									$table_id = $user_fetch['table_id'];
 									$ItemName = $user_fetch['ItemName'];
@@ -310,7 +313,9 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 									$payment_status = $user_fetch['payment_status'];
 									$order_status = $user_fetch['order_status'];
 								?>
-
+								
+								
+									<!-- Displaying data in table rows -->
 									<tr>
 										<td><?php echo $tran_id; ?></td>
 										<td><?php echo $table_id; ?></td>
@@ -318,6 +323,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 										<td><?php echo $order_date; ?></td>
 										<td><?php echo $amount; ?></td>
 
+										<!-- Displaying payment status with different styles based on its value -->
 										<td>
 											<?php
 											if ($payment_status == "successful") {
@@ -328,6 +334,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 											?>
 										</td>
+
+										<!-- Displaying order status with different styles based on its value -->
 										<td>
 											<?php
 											if ($order_status == "Pending") {
@@ -343,6 +351,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 											?>
 											<br><br>
 
+											<!-- Link to update order -->
 											<span>
 												<a href="<?php echo SITEURL; ?>update-ei-order.php?tran_id=<?php echo $tran_id; ?>" class="button-5" role="button">Update</a>
 

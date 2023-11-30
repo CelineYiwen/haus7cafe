@@ -1,7 +1,11 @@
-<?php include('../frontend/config/constants.php');
+<?php
+
+// Include necessary files and configurations
+include('../frontend/config/constants.php');
 include('login-check.php');
 
 ?>
+
 <?php
 
 //Stats
