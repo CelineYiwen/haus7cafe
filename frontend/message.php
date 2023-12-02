@@ -1,7 +1,6 @@
 <?php
 // Include the constants.php file
 include('config/constants.php');
-
 ?>
 
 <?php
@@ -35,7 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 alert('Message Sent!'); 
                 window.location.href='contact.php';
                 </script>";
-        } else {
+        }
+        
+        else {
             echo "<script>
                 alert('Failed to send message'); 
                 window.location.href='contact.php';
