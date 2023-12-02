@@ -1,20 +1,31 @@
 <?php include('config/constants.php');?>
 <?php
 
-
+// Suppress error reporting
 error_reporting(0);
+
+// Set the default timezone to Asia/Kuala_Lumpur
 date_default_timezone_set('Asia/Kuala_Lumpur');
+
 //Generate Unique Transaction ID
 function rand_string( $length ) {
+
+  // Define characters for generating the random string
 	$chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";	
 
+  // Get the size of the character set
 	$size = strlen( $chars );
+
+  // Generate a random string of the specified length
 	for( $i = 0; $i < $length; $i++ ) {
 		$str .= $chars[ rand( 0, $size - 1 ) ];
 	}
 
+  // Return the generated random string
 	return $str;
 }
+
+// Generate a random string with a length of 10 characters
 $cur_random_value=rand_string(10);
 
 ?>  

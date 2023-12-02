@@ -26,8 +26,6 @@
     <button>Try Again</button>
  
 
-   
-    
     
   </form>
   

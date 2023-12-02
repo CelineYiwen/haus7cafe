@@ -2,22 +2,26 @@
 
 <?php
 date_default_timezone_set('Asia/Kuala_Lumpur');
-if (!isset($_SESSION['user'])) //If user session is not set
-{
-    //User is not logged in
-    //Redirect to login page with message
 
+// Check if the user is not logged in
+if (!isset($_SESSION['user'])) {
+    // Set a message for users who are not logged in
     $_SESSION['no-login-message'] = "<div class='error'>Please login to access Admin Panel</div>";
+
+    // Redirect to the login page
     header('location:' . SITEURL . 'login.php');
 }
 
+
+// Check if the user is logged in
 if (isset($_SESSION['user'])) {
+
+    // Retrieve user information from the database based on the logged-in username
     $username = $_SESSION['user'];
-
     $fetch_user = "SELECT * FROM tbl_users WHERE username = '$username'";
-
     $res_fetch_user = mysqli_query($conn, $fetch_user);
 
+    // Loop through the result set to fetch user details
     while ($rows = mysqli_fetch_assoc($res_fetch_user)) {
         $id = $rows['id'];
         $name = $rows['name'];
@@ -184,12 +188,16 @@ if (isset($_SESSION['user'])) {
                                     <tbody>
 
                                         <?php
-
+                                        // Query to select orders from the order_manager table for a specific username, ordered by order_id in descending order
                                         $query = "SELECT * FROM `order_manager` WHERE username='$username' ORDER BY order_id DESC";
+
+                                        // Execute the query and store the result in $user_result
                                         $user_result = mysqli_query($conn, $query);
 
-
+                                        // Loop through each row in the result set
                                         while ($user_fetch = mysqli_fetch_assoc($user_result)) {
+
+                                            // Extract information for each order
                                             $order_id = $user_fetch['order_id'];
                                             $cus_name = $user_fetch['cus_name'];
                                             $cus_email = $user_fetch['cus_email'];
@@ -200,11 +208,11 @@ if (isset($_SESSION['user'])) {
                                             $total_amount = $user_fetch['total_amount'];
                                         ?>
 
+                                            <!-- Display each order in a table row -->
                                             <tr>
                                                 <td><?php echo $order_id; ?></td>
 
-
-
+                                                <!-- Display payment status with appropriate styling -->
                                                 <td>
                                                     <?php
                                                     if ($payment_status == "successful") {
@@ -215,6 +223,8 @@ if (isset($_SESSION['user'])) {
 
                                                     ?>
                                                 </td>
+
+                                                <!-- Display order status with appropriate styling -->
                                                 <td>
                                                     <?php
                                                     if ($order_status == "Pending") {
@@ -229,11 +239,12 @@ if (isset($_SESSION['user'])) {
 
                                                     ?>
 
-
                                                 </td>
 
-
+                                                <!-- Display total amount for the order -->
                                                 <td><?php echo $total_amount; ?></td>
+
+                                                <!-- Display a nested table for order details -->
                                             <?php
                                             echo "
                             <td>
@@ -243,16 +254,15 @@ if (isset($_SESSION['user'])) {
                                         <th>Item Name</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
-                                      
-
                                     </tr>
                                 </thead>
                                 <tbody>
                                 ";
-
+                                            // Query to select items for the current order from the online_orders_new table
                                             $order_query = "SELECT * FROM `online_orders_new` WHERE `order_id`='$user_fetch[order_id]' ORDER BY order_id DESC ";
                                             $order_result = mysqli_query($conn, $order_query);
 
+                                            // Loop through each row in the result set and display item details
                                             while ($order_fetch = mysqli_fetch_assoc($order_result)) {
                                                 echo "
                                         <tr>
@@ -261,9 +271,6 @@ if (isset($_SESSION['user'])) {
                                             <td>$order_fetch[Quantity]</td>
                                          
                                         </tr>
-                                    
-                                    
-                                    
                                     ";
                                             }
 
@@ -295,15 +302,8 @@ if (isset($_SESSION['user'])) {
 
     <!-- Categories Start -->
     <div class="container">
-        <div class="row">
-
-
-
-
-        </div>
+        <div class="row"></div>
     </div>
-
-
     <!-- Categories End  -->
 
 
@@ -342,7 +342,7 @@ if (isset($_SESSION['user'])) {
                         &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        
+
                     </div>
                 </div>
             </div>

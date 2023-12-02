@@ -55,6 +55,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navbar Items -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link">Home</a>
@@ -65,10 +67,12 @@
                     </div>
 
                     <?php
+                    // Check if a user is logged in
                     if (isset($_SESSION['user'])) {
                         $username = $_SESSION['user'];
-
                     ?>
+
+                        <!-- Dropdown menu for logged-in user -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                             <div class="dropdown-menu m-0">
@@ -80,6 +84,8 @@
                     <?php
                     } else {
                     ?>
+
+                        <!-- Login link for non-logged-in users -->
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
 
@@ -88,13 +94,17 @@
 
 
                     <?php
+                    // Count items in the cart
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
                         $count = count($_SESSION['cart']);
                     }
 
                     ?>
+
+                    <!-- Cart button -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
+
                 </div>
             </nav>
 
@@ -115,13 +125,14 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12"></div>
 
-                </div>
-
+                <!-- Cart Table -->
                 <div class="col-lg-9 table-responsive">
                     <table class="table" id="cart_table">
                         <thead class="text-center">
+
+                            <!-- Table Header -->
                             <tr>
                                 <th scope="col">S.N.</th>
                                 <th scope="col">Item Name</th>
@@ -132,44 +143,45 @@
                             </tr>
                         </thead>
                         <tbody class="text-center">
+
                             <?php
 
                             $item_price = 0;
                             $total_amount = 0;
 
+                            // Check if the cart session is set
                             if (isset($_SESSION['cart'])) {
 
                                 foreach ($_SESSION['cart'] as $key => $value) {
                                     $item_price = $value['Price'] * $value['Quantity'];
                                     $total_amount = $total_amount + $item_price;
 
-
-
                                     $sn = $key + 1;
 
-
+                                    // Display each item in the cart as a table row
                                     echo "
+                                    
+                                        <tr>
+                                            <td>$sn</td>
+                                            <td>$value[Item_Name]</td>
+                                            <td>$value[Price]<input type='hidden' class='iprice' value='$value[Price]'></td>
+                                            <td>
+                                                <form action='manage-cart.php' method='POST'>
+                                                    <input class='text-center iquantity' name='Mod_Quantity' onchange='this.form.submit();' type='number' value='$value[Quantity]' min = '1' max = '20'>
+                                                    <input type='hidden' name='Item_Name' value='$value[Item_Name]'>
+                                                </form>
+                                            </td>
 
-            <tr>
-                <td>$sn</td>
-                <td>$value[Item_Name]</td>
-                <td>$value[Price]<input type='hidden' class='iprice' value='$value[Price]'></td>
-                <td>
-                    <form action='manage-cart.php' method='POST'>
-                    <input class='text-center iquantity' name='Mod_Quantity' onchange='this.form.submit();' type='number' value='$value[Quantity]' min = '1' max = '20'>
-                    <input type='hidden' name='Item_Name' value='$value[Item_Name]'>
-                    </form>
-                </td>
-                <td class='itotal'></td>
-                <td>
-                    <form action='manage-cart.php' method='POST'>
-                <button name='Remove_Item' class='btn btn-danger btn-sm'>REMOVE</button>
-                    <input type='hidden' name='Item_Name' value='$value[Item_Name]'>
-                    </form>
-                </td>
-        </tr>
-
-                ";
+                                            <td class='itotal'></td>
+                                            
+                                            <td>
+                                                <form action='manage-cart.php' method='POST'>
+                                                    <button name='Remove_Item' class='btn btn-danger btn-sm'>REMOVE</button>
+                                                    <input type='hidden' name='Item_Name' value='$value[Item_Name]'>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    ";
                                 }
                             }
 
@@ -178,8 +190,7 @@
                         </tbody>
                     </table>
                 </div>
-
-
+                <!-- End of Cart Table -->
 
 
                 <div class="col-lg-3">
@@ -191,11 +202,15 @@
                         <br>
 
                         <?php
+                        // Check if a user is logged in
                         if (isset($_SESSION['user'])) {
                             $username = $_SESSION['user'];
 
+                            // Fetch user details from the database
                             $fetch_user = "SELECT * FROM tbl_users WHERE username = '$username'";
                             $res_fetch_user = mysqli_query($conn, $fetch_user);
+
+                            // Loop through the user data
                             while ($rows = mysqli_fetch_assoc($res_fetch_user)) {
                                 $username = $rows['username'];
                                 $cus_name = $rows['name'];
@@ -205,15 +220,17 @@
                                 $cus_phone = $rows['phone'];
                             }
 
+                            // Check if the cart session is set and has items
                             if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
-
-
                         ?>
 
                                 <?php
+                                // Generate a unique transaction ID
+
                                 error_reporting(0);
                                 date_default_timezone_set('Asia/Kuala_Lumpur');
-                                //Generate Unique Transaction ID
+
+                                // Function to generate a random string
                                 function rand_string($length)
                                 {
                                     $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -225,18 +242,23 @@
 
                                     return $str;
                                 }
+
+                                // Generate a random string of length 10 for the transaction ID
                                 $cur_random_value = rand_string(10);
 
                                 ?>
 
 
                                 <form action="purchase.php" method="POST">
+                                    <!-- Hidden fields for transaction details -->
                                     <div class="form-group">
                                         <input type="hidden" name="amount" value="<?php echo $total_amount; ?>" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <input type="hidden" name="tran_id" value="ONL-PAY-<?php echo "$cur_random_value"; ?>" class="form-control">
                                     </div>
+
+                                    <!-- Delivery Address Form -->
                                     <div class="form-group">
                                         <h4 class="text-center">Delivery Address</h4>
                                     </div>
@@ -271,9 +293,10 @@
 
                                     <br>
                                     <a href="update-account.php">Change Shipping Address</a>
-                                    <br>
-                                    <br>
+                                    
+                                    <br><br>
 
+                                    <!-- Payment Mode Selection -->
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="pay_mode" value="amrpay" id="flexRadioDefault1" required>
                                         <label class="form-check-label" for="flexRadioDefault1">
@@ -290,8 +313,7 @@
 
                                     <!-- Creating Session Variables --->
 
-
-
+                                    <!-- Checkout Button -->
                                     <div class="d-grid gap-2 col-12 mx-auto">
                                         <button class="btn btn-primary btn-lg" name="purchase">Checkout</button>
                                 </form>
@@ -300,24 +322,22 @@
 
 
                             }
-                        } else {
+                        }
+                        
+                        else {
+                            // User not logged in
                             echo "Please login to place order";
                             ?>
                             <a href="login.php">Login</a>
                         <?php
-
-
                         }
                         ?>
-
-
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -354,7 +374,7 @@
                         &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                     </div>
                     <div class="col-md-6 text-center text-md-end">
-                        
+
                     </div>
                 </div>
             </div>
@@ -383,24 +403,35 @@
     <script src="js/main.js"></script>
 
     <script>
+        
+        // Initialize variables
         var gt = 0;
         var iprice = document.getElementsByClassName('iprice');
         var iquantity = document.getElementsByClassName('iquantity');
         var itotal = document.getElementsByClassName('itotal');
         var igtotal = document.getElementById('gtotal');
 
+        // Function to calculate and update subtotal
         function subTotal() {
             gt = 0;
+
+            // Loop through each item
             for (i = 0; i < iprice.length; i++) {
                 itotal[i].innerText = (iprice[i].value) * (iquantity[i].value);
 
+                // Update the grand total
                 gt = gt + (iprice[i].value) * (iquantity[i].value);
             }
+
+            // Update the grand total display
             gtotal.innerText = gt;
         }
 
+        // Call the subTotal function on page load
         subTotal();
+
     </script>
+
 </body>
 
 </html>

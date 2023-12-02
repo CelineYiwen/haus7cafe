@@ -1,53 +1,50 @@
 <?php include('config/constants.php'); ?>
 
 <?php
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-if($_SERVER['REQUEST_METHOD']=="POST"){
+  // $paystatus=$_POST['pay_status'];
+  // $amount=$_POST['amount'];
 
-    // $paystatus=$_POST['pay_status'];
-    // $amount=$_POST['amount'];
-    
-    //you can get all parameter from post request
-    //print_r($_POST);
+  //you can get all parameter from post request
+  //print_r($_POST);
 
-    //mer_txnid , amount_original, pay_status, pay_time
-    
-    $tran_id = $_POST['mer_txnid'];
-    $amount = $_POST['amount_original'];
-    $status = $_POST['pay_status'];
-    $pay_time = $_POST['pay_time'];
-    $customer_name = $_POST['cus_name'];
-    $card_type = $_POST['card_type'];
+  //mer_txnid , amount_original, pay_status, pay_time
 
-    
+  // Extract relevant data from the POST request
+  $tran_id = $_POST['mer_txnid'];
+  $amount = $_POST['amount_original'];
+  $status = $_POST['pay_status'];
+  $pay_time = $_POST['pay_time'];
+  $customer_name = $_POST['cus_name'];
+  $card_type = $_POST['card_type'];
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
-    <link rel="stylesheet" href="css/eipay.css">
-    <link rel="icon" 
-      type="image/png" 
-      href="../images/logo.png">
-    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment</title>
+  <link rel="stylesheet" href="css/eipay.css">
+  <link rel="icon" type="image/png" href="../images/logo.png">
+
 </head>
+
 <body>
 
-<div class="container">
-  <div class="brand-logo"></div>
-  <div class="brand-title">Haus 7 Cafe</div>
+  <div class="container">
+    <div class="brand-logo"></div>
+    <div class="brand-title">Haus 7 Cafe</div>
 
 
-  
-  <?php 
-
-
-        $sql = "INSERT INTO aamarpay SET
+    <?php
+    // Insert payment details into the database (assuming 'aamarpay' is the correct table name)
+    $sql = "INSERT INTO aamarpay SET
         cus_name='$customer_name',
         amount='$amount',
         status = '$status',
@@ -57,24 +54,22 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
     ";
     $res = mysqli_query($conn, $sql) or die(mysqli_error());
-    
-    if($res == true)
-    { 
-      $_SESSION['success'] =  "Dear ".$customer_name. ", Your Payment of BDT " .$amount. " is Successful."."<br/> Transaction ID: ".$tran_id;
-      header('location:'.SITEURL.'payment-redir.php');
+
+    // Redirect based on payment success or failure
+
+    if ($res == true) {
+      $_SESSION['success'] =  "Dear " . $customer_name . ", Your Payment of BDT " . $amount . " is Successful." . "<br/> Transaction ID: " . $tran_id;
+      header('location:' . SITEURL . 'payment-redir.php');
+    } else {
+      $_SESSION['fail'] = "Your Payment of BDT " . $amount . " is Not Successful." . "<br/> Transaction ID: " . $tran_id . "Please Try Again";
+      header('location:' . SITEURL . 'index.php');
     }
-    else
-    {
-      $_SESSION['fail'] = "Your Payment of BDT " .$amount. " is Not Successful."."<br/> Transaction ID: ".$tran_id ."Please Try Again";
-      header('location:'.SITEURL.'index.php'); 
-    }
-    
-  
-  ?>
-  
-  
-  
-</div>
+
+    ?>
+
+
+  </div>
 
 </body>
+
 </html>

@@ -1,12 +1,16 @@
-<?php include('config/constants.php'); ?>
+<?php
+// Include configuration constants
+include('config/constants.php');
+?>
 
 <?php
 
-
+// Check if the 'cart' key exists in the session, if not, initialize it as an empty array
 if (empty($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
+// Add the 'food_id' from the GET parameters to the 'cart' session array
 array_push($_SESSION['cart'], $_GET['food_id']);
 
 ?>
@@ -101,18 +105,22 @@ array_push($_SESSION['cart'], $_GET['food_id']);
                 </div>
                 <div class="col-md-12">
                     <div class="card-body">
+
+                        <!-- Title indicating that the item has been added to the cart -->
                         <h5 class="card-title text-center">Item Added to Cart!</h5>
+
+                        <!-- Button to continue shopping, linking to the menu page -->
                         <a href="<?php echo SITEURL; ?>menu.php" class="btn btn-primary btn-lg btn-block">Continue</a>
+
+                        <!-- Button to view the shopping cart, linking to the cart page -->
                         <a href="<?php echo SITEURL; ?>cart.php" class="btn btn-primary btn-lg btn-block"><i class="fas fa-shopping-cart"></i><span> View Cart</span></a>
+
+                        <!-- Button to proceed to checkout, linking to the cart page -->
                         <a href="<?php echo SITEURL; ?>cart.php" class="btn btn-primary btn-lg btn-block">Checkout</a>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -146,6 +154,7 @@ array_push($_SESSION['cart'], $_GET['food_id']);
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            <!-- Copyright notice with dynamic year using PHP -->
                             &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                         </div>
                         <div class="col-md-6 text-center text-md-end">

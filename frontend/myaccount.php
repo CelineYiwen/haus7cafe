@@ -1,23 +1,32 @@
-<?php include('config/constants.php'); ?>
+<?php
+// Include the constants.php file
+include('config/constants.php');
+?>
 
 <?php
+// Set the default timezone to Asia/Kuala_Lumpur
 date_default_timezone_set('Asia/Kuala_Lumpur');
-if (!isset($_SESSION['user'])) //If user session is not set
-{
-    //User is not logged in
-    //Redirect to login page with message
 
+// Check if the user is not logged in
+if (!isset($_SESSION['user']))
+{
+    // User is not logged in
+    // Redirect to the login page with a message
     $_SESSION['no-login-message'] = "<div class='error'>Please login to access Admin Panel</div>";
     header('location:' . SITEURL . 'login.php');
 }
 
+// Check if the user is logged in
 if (isset($_SESSION['user'])) {
+
+    // Retrieve user information from the database based on the session username
     $username = $_SESSION['user'];
 
     $fetch_user = "SELECT * FROM tbl_users WHERE username = '$username'";
 
     $res_fetch_user = mysqli_query($conn, $fetch_user);
 
+    // Loop through the user data
     while ($rows = mysqli_fetch_assoc($res_fetch_user)) {
         $id = $rows['id'];
         $name = $rows['name'];
@@ -80,13 +89,16 @@ if (isset($_SESSION['user'])) {
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
-                <a href="<?php echo SITEURL; ?>" class="navbar-brand p-0">
 
+                <!-- Logo -->
+                <a href="<?php echo SITEURL; ?>" class="navbar-brand p-0">
                     <img src="../images/logo.png" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navbar Items -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link">Home</a>
@@ -97,10 +109,13 @@ if (isset($_SESSION['user'])) {
                     </div>
 
                     <?php
+                    // Check if a user is logged in
                     if (isset($_SESSION['user'])) {
                         $username = $_SESSION['user'];
 
                     ?>
+
+                        <!-- Dropdown menu for logged-in user -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                             <div class="dropdown-menu m-0">
@@ -112,18 +127,23 @@ if (isset($_SESSION['user'])) {
                     <?php
                     } else {
                     ?>
+                        <!-- Login link for non-logged-in users -->
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
 
                     }
                     ?>
+
                     <?php
+                    // Count items in the cart
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
                         $count = count($_SESSION['cart']);
                     }
 
                     ?>
+                    
+                    <!-- Cart button -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
                 </div>
             </nav>
@@ -199,15 +219,8 @@ if (isset($_SESSION['user'])) {
 
         <!-- Categories Start -->
         <div class="container">
-            <div class="row">
-
-
-
-
-            </div>
+            <div class="row"></div>
         </div>
-
-
         <!-- Categories End  -->
 
 

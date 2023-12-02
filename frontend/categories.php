@@ -48,14 +48,23 @@
         <!-- Navbar & Hero Start -->
         <div class="container-xxl position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+
+                <!-- Brand/logo on the left side -->
                 <a href="<?php echo SITEURL; ?>" class="navbar-brand p-0">
 
+                    <!-- Logo image -->
                     <img src="../images/logo.png" alt="Logo">
                 </a>
+
+                <!-- Toggler button for small screens -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navbar items -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                    <!-- Navigation links -->
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link">Home</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
@@ -65,10 +74,13 @@
                     </div>
 
                     <?php
+
+                    // Check if the user is logged in
                     if (isset($_SESSION['user'])) {
                         $username = $_SESSION['user'];
 
                     ?>
+                        <!-- Dropdown menu for logged-in user -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                             <div class="dropdown-menu m-0">
@@ -80,6 +92,8 @@
                     <?php
                     } else {
                     ?>
+
+                        <!-- Login link for non-logged-in user -->
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
 
@@ -87,12 +101,16 @@
                     ?>
 
                     <?php
+
+                    // Count the number of items in the cart
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
                         $count = count($_SESSION['cart']);
                     }
 
                     ?>
+
+                    <!-- Cart link with item count -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
                 </div>
             </nav>
@@ -117,20 +135,24 @@
         <div class="container">
             <div class="row">
 
-
                 <?php
+
+                // Selecting active categories from the database
                 $sql = "SELECT * FROM tbl_category WHERE active='Yes'";
                 $res = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($res);
 
+                // Check if there are any active categories
                 if ($count > 0) {
+                    // Loop through each category
                     while ($row = mysqli_fetch_assoc($res)) {
-                        //Get the Values
+                        // Get category details
                         $id = $row['id'];
                         $title = $row['title'];
                         $image_name = $row['image_name'];
 
                 ?>
+                    <!-- Display each category in a Bootstrap card -->
                         <div class="col-lg-3">
                             <div class="card">
                                 <img src="<?php echo SITEURL; ?>../images/category/<?php echo $image_name; ?>" class="card-img-top" alt="...">
@@ -147,7 +169,7 @@
 
                     }
                 } else {
-                    //Categories are not available
+                    // Display a message if no categories are found
                     echo "Categories not found";
                 }
 
@@ -159,10 +181,6 @@
 
             </div>
         </div>
-
-
-
-
 
 
 

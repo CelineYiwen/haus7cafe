@@ -120,30 +120,43 @@
 
 
                 <?php
+
+                // SQL query to retrieve active food items
                 $sql = "SELECT * FROM tbl_food WHERE active='Yes'";
                 $res = mysqli_query($conn, $sql);
                 $count = mysqli_num_rows($res);
 
+                // Check if there are active food items
                 if ($count > 0) {
+
+                    // Loop through the results and display each food item
                     while ($row = mysqli_fetch_assoc($res)) {
-                        //Get the Values
+
+                        // Get the values from the database
                         $id = $row['id'];
                         $title = $row['title'];
                         $description = $row['description'];
                         $price = $row['price'];
                         $image_name = $row['image_name'];
 
-
                 ?>
                         <div class="col-lg-3">
                             <div class="card">
+
+                                <!-- Display the food item image -->
                                 <img src="<?php echo SITEURL; ?>../images/food/<?php echo $image_name; ?>" class="card-img-top" alt="...">
                                 <div class="card-body text-center">
                                     <form action="manage-cart.php" method="POST">
+
+                                        <!-- Display the food item details -->
                                         <h5 class="card-title"><?php echo $title; ?></h5>
                                         <h8 class="card-title"><?php echo $description; ?></h8>
                                         <p class="card-text" style="color: blue; font-weight: bold;">RM<?php echo $price; ?></p>
+
+                                        <!-- Button to add the item to the cart -->
                                         <button type="submit" name="Add_To_Cart" class="btn btn-primary btn-sm">Add To Cart</button>
+
+                                        <!-- Hidden input fields to store item details for the cart -->
                                         <input type="hidden" name="Item_Name" value="<?php echo $title; ?>">
                                         <input type="hidden" name="Item_Description" value="<?php echo $description; ?>">
                                         <input type="hidden" name="Price" value="<?php echo $price; ?>">
@@ -157,15 +170,11 @@
 
                     }
                 } else {
-                    //Categories are not available
+                    // No active food items available
                     echo "Categories not found";
                 }
 
-
-
                 ?>
-
-
 
             </div>
         </div>
@@ -209,7 +218,7 @@
                             &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                         </div>
                         <div class="col-md-6 text-center text-md-end">
-                            
+
                         </div>
                     </div>
                 </div>

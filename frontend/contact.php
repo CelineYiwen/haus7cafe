@@ -1,4 +1,7 @@
-<?php include('config/constants.php'); ?>
+<?php
+// Include the constants file
+include('config/constants.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +55,13 @@
 
                     <img src="../images/logo.png" alt="Logo">
                 </a>
+
+                <!-- Navbar Toggler Button for Small Screens -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link">Home</a>
@@ -64,11 +71,14 @@
                         <a href="contact.php" class="nav-item nav-link active">Contact</a>
                     </div>
 
+                    <!-- User Authentication Section -->
                     <?php
                     if (isset($_SESSION['user'])) {
                         $username = $_SESSION['user'];
 
                     ?>
+
+                        <!-- Dropdown Menu for Authenticated Users -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                             <div class="dropdown-menu m-0">
@@ -80,13 +90,14 @@
                     <?php
                     } else {
                     ?>
+                        <!-- Login Link for Guests -->
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
 
                     }
                     ?>
 
-
+                    <!-- Shopping Cart Section -->
                     <?php
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
@@ -94,6 +105,8 @@
                     }
 
                     ?>
+
+                    <!-- Cart Link with Item Count -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
                 </div>
             </nav>
@@ -139,10 +152,13 @@
                         </div>
                     </div>
 
+                    <!-- Display Google Maps iframe for location -->
                     <div class="col-md-6 wow fadeIn" data-wow-delay="0.1s">
+
+                        <!-- Google Maps iframe with location coordinates -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.374701119934!2d101.62397907461441!3d2.993328154091497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cdb53d2cbe1e1b%3A0xa4b0c784a57bfb22!2sHaus%207%20Coffee!5e0!3m2!1sen!2smy!4v1698373347621!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form action="message.php" method="POST">

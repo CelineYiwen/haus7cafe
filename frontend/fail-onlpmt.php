@@ -44,14 +44,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 
   
-  <?php 
-
-
- 
+  <?php
     
       $_SESSION['fail'] = "Your Payment of BDT " .$amount. " failed"."<br>Please Try Again";
       header('location:'.SITEURL.'payment-fail-redir.php'); 
-
   
   ?>
   

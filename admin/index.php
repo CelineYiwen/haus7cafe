@@ -12,14 +12,14 @@ include('login-check.php');
 
 // Stats
 
-// Query to retrieve total sales by hour
-$sales_by_hour =  "SELECT date(order_date) as hname,
+// Query to retrieve total sales by date
+$sales_by_date =  "SELECT date(order_date) as date_name,
 					sum(total_amount) as total_sales
 					FROM order_manager
 					WHERE payment_status = 'successful'
 					GROUP BY date(order_date)";
 
-$res_sales_by_hour = mysqli_query($conn, $sales_by_hour);
+$res_sales_by_date = mysqli_query($conn, $sales_by_date);
 
 // Query to retrieve most sold items
 $most_sold_items = "SELECT sum(OON.Quantity) as total_qty,
@@ -171,6 +171,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 	<!-- Chart Section Start -->
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+
 		// Load the Google Charts library with the 'bar' package
 		google.charts.load('current', {
 			'packages': ['bar']
@@ -184,12 +185,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			// Define the data for the chart
 			var data = google.visualization.arrayToDataTable([
-				['Time', 'Sales'],
+
+				['Date', 'Sales'],
+
 				<?php
 
 				// Loop through the result set of sales by hour and generate chart data
-				while ($row_sales_by_hour = mysqli_fetch_array($res_sales_by_hour)) {
-					echo "['" . $row_sales_by_hour["hname"] . "', " . $row_sales_by_hour["total_sales"] . "],";
+				while ($row_sales_by_date = mysqli_fetch_array($res_sales_by_date)) {
+					echo "['" . $row_sales_by_date["date_name"] . "', " . $row_sales_by_date["total_sales"] . "],";
 				}
 
 				?>
@@ -199,12 +202,13 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 			// Define options for the chart
 			var options = {
 				hAxis: {
-					title: 'Time',
+					title: 'Date',
 					titleTextStyle: {
 						color: 'Black'
 					}
 				},
-				colors: ['#eb2f06', 'green'],
+				
+				colors: ['#3498db', 'green'],
 
 				chart: {
 					title: 'Sales By Date',

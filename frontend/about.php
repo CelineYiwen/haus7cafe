@@ -1,4 +1,7 @@
-<?php include('config/constants.php'); ?>
+<?php
+// Include the constants file
+include('config/constants.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -184,15 +187,30 @@
                         <a class="btn btn-link" href="contact.php">Contact Us</a>
                         </div>
                         <div class="col-lg-3 col-md-6">
+
+                            <!-- Section title for Contact Details -->
                             <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact Details</h4>
+
+                            <!-- Address information with an icon -->
                             <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>No 7446-H Jalan Kampung, Jalan Puchong Batu 14, 47100 Puchong, Selangor.</p>
+                            
+                            <!-- Phone number with an icon -->
                             <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>017 - 428 8332</p>
+
+                            <!-- Email address with an icon, linked for mailto -->
                             <p class="mb-2"><i class="fa fa-envelope me-3"></i><a href="mailto: haus7.cafe@gmail.com">haus7.cafe@gmail.com</a></p>
+
+                            <!-- Social media links with icons -->
                             <div class="d-flex pt-2">
+
+                                <!-- Facebook link with Facebook icon -->
                                 <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/Haus7cafe"><i class="fab fa-facebook-f"></i></a>
+
+                                <!-- Instagram link with Instagram icon -->
                                 <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/haus7cafe/"><i class="fab fa-instagram"></i></a>
                             </div>
                         </div>
+
                         <div class="col-lg-3 col-md-6">
                             <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Business Hours</h4>
                             <p>Monday : Closed</p>
@@ -206,6 +224,7 @@
                     <div class="copyright">
                         <div class="row">
                             <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                <!-- Copyright notice with dynamic year using PHP -->
                                 &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Rights Reserved.
 
 

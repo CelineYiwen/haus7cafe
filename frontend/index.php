@@ -1,4 +1,8 @@
-<?php include('config/constants.php'); ?>
+<?php
+// Include the constants.php file
+include('config/constants.php');
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +56,13 @@
 
                     <img src="../images/logo.png" alt="Logo">
                 </a>
+
+                <!-- Toggler button for responsive design -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navigation links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link active">Home</a>
@@ -62,11 +70,14 @@
                         <a href="categories.php" class="nav-item nav-link">Categories</a>
                         <a href="menu.php" class="nav-item nav-link">Menu</a>
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
+
+                        <!-- User Authentication Section -->
                         <?php
                         if (isset($_SESSION['user'])) {
                             $username = $_SESSION['user'];
 
                         ?>
+                            <!-- Dropdown menu for logged-in user -->
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                                 <div class="dropdown-menu m-0">
@@ -78,6 +89,7 @@
                         <?php
                         } else {
                         ?>
+                            <!-- Link for non-logged-in users to login -->
                             <a href="login.php" class="nav-item nav-link">Login</a>
                         <?php
 
@@ -85,6 +97,8 @@
                         ?>
 
                     </div>
+
+                    <!-- Cart button with item count -->
                     <?php
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
@@ -161,28 +175,38 @@
                 <div class="text-center">
                     <h5 class="section-title ff-secondary text-center text-primary fw-normal">Featured Items</h5>
                     <div class="row">
+
+                        <!-- Fetch and display featured food items -->
                         <?php
+                        // SQL query to select featured and active food items
                         $sql = "SELECT * FROM tbl_food WHERE featured='Yes' AND active='Yes'";
                         $res = mysqli_query($conn, $sql);
                         $count = mysqli_num_rows($res);
 
+                        // Check if there are featured items
                         if ($count > 0) {
                             while ($row = mysqli_fetch_assoc($res)) {
-                                //Get the Values
+                                // Get the values for each featured item
                                 $id = $row['id'];
                                 $title = $row['title'];
                                 $image_name = $row['image_name'];
                                 $price = $row['price'];
 
                         ?>
+
+                                <!-- Display each featured item in a card -->
                                 <div class="col-lg-3">
                                     <div class="card">
                                         <img src="<?php echo SITEURL; ?>../images/food/<?php echo $image_name; ?>" class="card-img-top" alt="...">
                                         <div class="card-body text-center">
+
+                                            <!-- Form for adding items to the cart -->
                                             <form action="manage-cart.php" method="POST">
                                                 <h5 class="card-title"><?php echo $title; ?></h5>
                                                 <p class="card-text" style="color: blue; font-weight: bold;"><?php echo $price; ?></p>
                                                 <button type="submit" name="Add_To_Cart" class="btn btn-primary btn-sm">Add To Cart</button>
+
+                                                <!-- Hidden input fields to pass item details to the server -->
                                                 <input type="hidden" name="Item_Name" value="<?php echo $title; ?>">
                                                 <input type="hidden" name="Price" value="<?php echo $price; ?>">
                                             </form>
@@ -193,8 +217,10 @@
                         <?php
 
                             }
-                        } else {
-                            //Categories are not available
+                        }
+                        
+                        else {
+                            // No featured items available
                             echo "Categories not found";
                         }
 
@@ -215,8 +241,8 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Pages</h4>
-                            <a class="btn btn-link" href="about.php">About Us</a>
-                            <a class="btn btn-link" href="contact.php">Contact Us</a>
+                        <a class="btn btn-link" href="about.php">About Us</a>
+                        <a class="btn btn-link" href="contact.php">Contact Us</a>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact Details</h4>
@@ -244,7 +270,7 @@
                             &copy; <?php echo date('F Y'); ?> <a class="border-bottom" href="#">Haus 7 Cafe</a>, All Right Reserved.
                         </div>
                         <div class="col-md-6 text-center text-md-end">
-                           
+
                         </div>
                     </div>
                 </div>

@@ -1,16 +1,27 @@
 <?php
 
+// Include the constants file
 include('config/constants.php');
 
+// Function to generate a GUID with a prefix
 function getGUIDWithPrefix()
 {
+    // Seed the random number generator
     mt_srand((float)microtime() * 10000);
+
+    // Generate a unique identifier
     $charid = md5(uniqid(rand(), true));
+
+    // Unpack the characters into an array
     $c = unpack("C*", $charid);
+
+    // Convert the array to a string
     $c = implode("", $c);
 
-    $guid = substr($charid, 0, 8);      // Adjust the length here (8 characters)
+    // Extract a portion of the identifier as the GUID (adjust the length as needed)
+    $guid = substr($charid, 0, 8);
 
+    // Return the GUID with a prefix
     return "Free " . $guid;
 }
 
@@ -239,7 +250,10 @@ function getGUIDWithPrefix()
 
         <?php
 
+        // Check if the form is submitted
         if (isset($_POST['submit'])) {
+
+            // Retrieve user input from the form
             $username = $_SESSION['user'];
             $often_visit = $_POST['often_visit'];
             $quality = $_POST['quality'];
@@ -247,21 +261,32 @@ function getGUIDWithPrefix()
             $service_satisfaction = $_POST['service_satisfaction'];
             $appreciate = $_POST['appreciate'];
             $other_feedback = $_POST['other_feedback'];
+
+            // Generate a unique coupon code using the getGUIDWithPrefix function
             $coupon_code = getGUIDWithPrefix();
+
+            // Get the current date and time
             $date = date("Y-m-d h:i:sa");
+
+            // Set the claim indicator to 'Active'
             $claim_indicator = 'Active';
 
-
+            // SQL query to insert feedback into the database
             $send_feedback = "INSERT INTO `tbl_feedback`(`username`, `often_visit`, `quality`, `cleanliness`, `service_satisfaction`, `appreciate`, `other_feedback`, `coupon_code`, `date`, `claim_indicator`) VALUES ('$username','$often_visit','$quality','$cleanliness','$service_satisfaction','$appreciate','$other_feedback','$coupon_code','$date','$claim_indicator')";
+
+            // Execute the query
             $res_send_feedback = mysqli_query($conn, $send_feedback);
 
+            // Check if the feedback submission was successful
             if ($res_send_feedback == true) {
-                // Output the generated GUID
+
+                // Output a success message with the generated GUID
                 echo "<script>
                             alert('Thank you for your valuable feedback. We appreciate your input, and we are happy to offer you a small free gift as a token of our gratitude. Please claim your free gift at our counter with this code: " . getGUIDWithPrefix() . ". Thanks again for choosing us.'); 
                             window.location.href='feedback.php';
                             </script>";
             } else {
+                // Output an error message if feedback submission fails
                 echo "<script>
                             alert('Failed to send feedback'); 
                             window.location.href='feedback.php';

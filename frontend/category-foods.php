@@ -52,9 +52,13 @@
 
                     <img src="../images/logo.png" alt="Logo">
                 </a>
+
+                <!-- Navbar Toggler Button for Small Screens -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
+
+                <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0 pe-4">
                         <a href="index.php" class="nav-item nav-link">Home</a>
@@ -64,11 +68,14 @@
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
                     </div>
 
+                    <!-- User Authentication Section -->
                     <?php
                     if (isset($_SESSION['user'])) {
                         $username = $_SESSION['user'];
 
                     ?>
+
+                        <!-- Dropdown Menu for Authenticated Users -->
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><?php echo $username; ?></a>
                             <div class="dropdown-menu m-0">
@@ -80,13 +87,14 @@
                     <?php
                     } else {
                     ?>
+                        <!-- Login Link for Guests -->
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
 
                     }
                     ?>
 
-
+                    <!-- Shopping Cart Section -->
                     <?php
                     $count = 0;
                     if (isset($_SESSION['cart'])) {
@@ -94,6 +102,8 @@
                     }
 
                     ?>
+
+                    <!-- Cart Link with Item Count -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
                 </div>
             </nav>
@@ -118,31 +128,41 @@
         <!-- Menu Start -->
 
         <?php
-        //Check whether category id is passed or not
+
+        // Check whether category id is passed or not
         if (isset($_GET['category_id'])) {
-            //Category id is set and get the id
+
+            // Category id is set, so get the id
             $category_id = $_GET['category_id'];
-            //Get the category title based on category ID
+
+            // Get the category title based on category ID
             $sql = "SELECT title FROM tbl_category WHERE id=$category_id";
             $res = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($res);
             $category_title = $row['title'];
-        } else {
-            //Category id not passed
-            //Redirect to homepage
+        }
+        
+        else {
+            // Category id not passed
+            // Redirect to the homepage
             header('location:' . SITEURL);
         }
         ?>
+
+        <!-- Display food items from the selected category -->
         <div class="container">
             <div class="row">
 
                 <?php
+
+                // Retrieve food items based on the category ID
                 $sql2 = "SELECT * FROM tbl_food WHERE category_id=$category_id";
                 $res2 = mysqli_query($conn, $sql2);
                 $count2 = mysqli_num_rows($res2);
 
                 if ($count2 > 0) {
-                    //Item Available
+
+                    // Food items are available
                     while ($row2 = mysqli_fetch_assoc($res2)) {
                         $id = $row2['id'];
                         $title = $row2['title'];
@@ -152,15 +172,21 @@
 
                 ?>
 
+                        <!-- Display each food item in a Bootstrap card -->
                         <div class="col-lg-3">
                             <div class="card">
+                                <!-- Display food item image -->
                                 <img src="<?php echo SITEURL; ?>../images/food/<?php echo $image_name; ?>" class="card-img-top" alt="...">
                                 <div class="card-body text-center">
+                                    
+                                    <!-- Display food item details and add to cart form -->
                                     <form action="manage-cart.php" method="POST">
                                         <h5 class="card-title"><?php echo $title; ?></h5>
                                         <h8 class="card-title"><?php echo $description; ?></h8>
                                         <p class="card-text" style="color: blue; font-weight: bold;">RM<?php echo $price; ?></p>
                                         <button type="submit" name="Add_To_Cart" class="btn btn-primary btn-sm">Add To Cart</button>
+
+                                        <!-- Hidden input fields for item details -->
                                         <input type="hidden" name="Item_Name" value="<?php echo $title; ?>">
                                         <input type="hidden" name="Item_Name" value="<?php echo $description; ?>">
                                         <input type="hidden" name="Price" value="<?php echo $price; ?>">
@@ -172,17 +198,13 @@
                 <?php
                     }
                 } else {
-                    //Item Not Available
+                    // No food items available for the selected category
+                    echo "No items available in this category.";
                 }
-
-
                 ?>
 
             </div>
         </div>
-
-
-
 
         <!-- Menu End   -->
 

@@ -1,23 +1,30 @@
-<?php include('config/constants.php'); ?>
-
 <?php
-date_default_timezone_set('Asia/Kuala_Lumpur');
-if (!isset($_SESSION['user'])) //If user session is not set
-{
-    //User is not logged in
-    //Redirect to login page with message
 
+// Include the constants.php file
+include('config/constants.php');
+
+// Set the default time zone to Asia/Kuala_Lumpur
+date_default_timezone_set('Asia/Kuala_Lumpur');
+
+// Check if the user is not logged in
+if (!isset($_SESSION['user'])) {
+    // User is not logged in
+    // Redirect to the login page with a message
     $_SESSION['no-login-message'] = "<div class='error'>Please login to access Admin Panel</div>";
     header('location:' . SITEURL . 'login.php');
 }
 
+// Check if the user is logged in
 if (isset($_SESSION['user'])) {
+
+    // Get the username from the session
     $username = $_SESSION['user'];
 
+    // Fetch user details from the database based on the username
     $fetch_user = "SELECT * FROM tbl_users WHERE username = '$username'";
-
     $res_fetch_user = mysqli_query($conn, $fetch_user);
 
+    // Loop through the result set to retrieve user details
     while ($rows = mysqli_fetch_assoc($res_fetch_user)) {
         $id = $rows['id'];
         $name = $rows['name'];
@@ -98,6 +105,7 @@ if (isset($_SESSION['user'])) {
 
                     <?php
                     if (isset($_SESSION['user'])) {
+                        // If the user is logged in, display a dropdown with account options
                         $username = $_SESSION['user'];
 
                     ?>
@@ -111,6 +119,7 @@ if (isset($_SESSION['user'])) {
                         </div>
                     <?php
                     } else {
+                        // If the user is not logged in, display a "Login" link
                     ?>
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     <?php
@@ -119,12 +128,16 @@ if (isset($_SESSION['user'])) {
                     ?>
 
                     <?php
+                    // Count the items in the cart
                     $count = 0;
+
                     if (isset($_SESSION['cart'])) {
                         $count = count($_SESSION['cart']);
                     }
 
                     ?>
+
+                    <!-- Display a link to the shopping cart with the cart count -->
                     <a href="mycart.php" class="btn btn-primary py-2 px-4"><i class="fas fa-shopping-cart"></i><span> Cart <?php echo $count; ?></span></a>
                 </div>
             </nav>
@@ -192,8 +205,6 @@ if (isset($_SESSION['user'])) {
                                         </td>
                                     </tr>
 
-
-
                                 </table>
 
                             </form>
@@ -205,6 +216,7 @@ if (isset($_SESSION['user'])) {
                 <?php
                 // Check whether the submit button is clicked or not
                 if (isset($_POST['submit'])) {
+
                     // Get the data from the form
                     $username = $_POST['username'];
                     $current_password = md5($_POST['current_password']);
@@ -213,6 +225,8 @@ if (isset($_SESSION['user'])) {
 
                     // Check if the new password meets security requirements
                     if (preg_match("/^(?=.*\d)(?=.*[A-Za-z])(?=.*[^A-Za-z0-9]).{8,}$/", $new_password)) {
+
+                        // Check if the current password matches the one in the database
                         $update_password = "SELECT * FROM tbl_users WHERE username='$username' AND password='$current_password'";
                         $res_update_password = mysqli_query($conn, $update_password);
 
@@ -220,7 +234,10 @@ if (isset($_SESSION['user'])) {
                             $count = mysqli_num_rows($res_update_password);
 
                             if ($count == 1) {
+                                // Check if the new password and confirm password match
                                 if ($new_password == $confirm_password) {
+
+                                    // Update the password in the database
                                     $sql2_update_password = "UPDATE tbl_users SET password = '$new_password' WHERE username='$username'";
                                     $res2_update_password = mysqli_query($conn, $sql2_update_password);
 
@@ -241,26 +258,17 @@ if (isset($_SESSION['user'])) {
                             }
                         }
                     } else {
+                        // Display an error if the new password does not meet the security requirements
                         $_SESSION['pwd-not-match'] = "<div class='error'>Your password does not meet the security requirements. Please revise it to meet the password criteria.</div>";
                         header('location:' . SITEURL . 'myaccount.php');
                     }
                 }
                 ?>
 
-
-
-
                 <!-- Categories Start -->
                 <div class="container">
-                    <div class="row">
-
-
-
-
-                    </div>
+                    <div class="row"></div>
                 </div>
-
-
                 <!-- Categories End  -->
 
 

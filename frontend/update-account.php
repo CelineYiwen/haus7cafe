@@ -1,23 +1,32 @@
-<?php include('config/constants.php'); ?>
-
 <?php
+
+// Include configuration constants
+include('config/constants.php');
+
+// Set the default time zone to Asia/Kuala_Lumpur
 date_default_timezone_set('Asia/Kuala_Lumpur');
-if (!isset($_SESSION['user'])) //If user session is not set
-{
-    //User is not logged in
-    //Redirect to login page with message
+
+// Check if the user is not logged in
+if (!isset($_SESSION['user'])) {
+
+    // User is not logged in
+    // Redirect to the login page with a message
 
     $_SESSION['no-login-message'] = "<div class='error'>Please login to access Admin Panel</div>";
     header('location:' . SITEURL . 'login.php');
 }
 
+// Check if the user is logged in
 if (isset($_SESSION['user'])) {
+
+    // Get the username from the session
     $username = $_SESSION['user'];
 
+    // Fetch user details from the database based on the username
     $fetch_user = "SELECT * FROM tbl_users WHERE username = '$username'";
-
     $res_fetch_user = mysqli_query($conn, $fetch_user);
 
+    // Loop through the result set to retrieve user details
     while ($rows = mysqli_fetch_assoc($res_fetch_user)) {
         $id = $rows['id'];
         $name = $rows['name'];
@@ -156,7 +165,6 @@ if (isset($_SESSION['user'])) {
 
                                     <form action="" method="POST">
 
-
                                         <table class="rtable">
                                             <tr>
                                                 <td>Name</td>
@@ -174,36 +182,34 @@ if (isset($_SESSION['user'])) {
                                                 <td>Address</td>
                                                 <td>
                                                     <textarea name="cus_add1" cols="30" rows="5"><?php echo $add1; ?></textarea id="ip2">
-                </td>
-            </tr>
-              <tr>
-                <td>City</td>
-                <td>
-                    <input type="text" name="cus_city" value="<?php echo $city; ?>" id="ip2">
-                </td>
-            </tr>
-              <tr>
-                <td>Phone</td>
-                <td>
-                    <input type="text" name="cus_phone" value="<?php echo $phone; ?>" id="ip2">
-                </td>
-            </tr>
-
-            <tr>
-                <td >
-                    <input type="hidden" name="username" value="<?php echo $username; ?>">
-                    <input type="submit" name="submit" value="Update" class="btn btn-primary btn-lg">
-                </td>
-            </tr>
-
-        </table>
-
-        </form>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>City</td>
+                                                <td>
+                                                    <input type="text" name="cus_city" value="<?php echo $city; ?>" id="ip2">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone</td>
+                                                <td>
+                                                    <input type="text" name="cus_phone" value="<?php echo $phone; ?>" id="ip2">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="username" value="<?php echo $username; ?>">
+                                                    <input type="submit" name="submit" value="Update" class="btn btn-primary btn-lg">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
 
         <?php
-
+        // Check if the form is submitted
         if (isset($_POST['submit'])) {
 
+            // Get data from the form
             $username = $_POST['username'];
             $cus_name = $_POST['cus_name'];
             $cus_email = $_POST['cus_email'];
@@ -211,21 +217,24 @@ if (isset($_SESSION['user'])) {
             $cus_city = $_POST['cus_city'];
             $cus_phone = $_POST['cus_phone'];
 
+            // Update the user account information in the database
             $update_account = "UPDATE tbl_users SET
-     name = '$cus_name',
-     email = '$cus_email',
-     add1 = '$cus_add1',
-     city = '$cus_city',
-     phone = '$cus_phone'
-     WHERE username='$username'
-     ";
-
-
+                name = '$cus_name',
+                email = '$cus_email',
+                add1 = '$cus_add1',
+                city = '$cus_city',
+                phone = '$cus_phone'
+                WHERE username='$username'
+            ";
+            
             $res_update_account = mysqli_query($conn, $update_account);
-            if ($res_update_account == true) {
-                $_SESSION['update'] = "<div class='success'>Account Updated Successfully</div>";
 
+            // Check if the update was successful
+            if ($res_update_account == true) {
+
+                $_SESSION['update'] = "<div class='success'>Account Updated Successfully</div>";
                 header('location:' . SITEURL . 'myaccount.php');
+
             } else {
                 $_SESSION['update'] = "<div class='error'>Failed to Update Account</div>";
 
@@ -241,9 +250,6 @@ if (isset($_SESSION['user'])) {
   </div>
 </div>
 </div>
-
-
-
  
         <!-- Categories End  -->
         
