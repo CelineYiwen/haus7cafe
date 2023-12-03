@@ -6,7 +6,6 @@ include('login-check.php');
 error_reporting(0);
 @ini_set('display_errors', 0);
 
-
 $ei_order_notif = "SELECT order_status from tbl_eipay
 					WHERE order_status='Pending' OR order_status='Processing'";
 
@@ -280,6 +279,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			// Check if 'delete' session variable is set
 			if (isset($_SESSION['delete'])) {
+
 				// Display and then unset 'delete' session variable
 				echo $_SESSION['delete'];
 				unset($_SESSION['delete']);
@@ -287,6 +287,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			// Check if 'upload' session variable is set
 			if (isset($_SESSION['upload'])) {
+
 				// Display and then unset 'upload' session variable
 				echo $_SESSION['upload'];
 				unset($_SESSION['upload']);
@@ -294,13 +295,14 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 			// Check if 'unauthorized' session variable is set
 			if (isset($_SESSION['unauthorized'])) {
+
 				// Display and then unset 'unauthorized' session variable
 				echo $_SESSION['unauthorized'];
 				unset($_SESSION['unauthorized']);
 			}
 
-			?>
 
+			?>
 			<br />
 
 			<!-- Display a link/button to add food -->
@@ -315,6 +317,7 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 					<!-- Table to display food details -->
 					<table class="">
+
 						<tr>
 							<!-- Table headers -->
 							<th>S.N.</th>
@@ -330,10 +333,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 						<?php
 						// SQL query to select all records from the 'tbl_food' table
 						$sql = "SELECT * FROM tbl_food";
-
 						// Execute the query
 						$res = mysqli_query($conn, $sql);
-
 						// Count the number of rows
 						$count = mysqli_num_rows($res);
 
@@ -342,8 +343,8 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 
 						// Check if there is data in the table
 						if ($count > 0) {
-							while ($row = mysqli_fetch_assoc($res)) {
 
+							while ($row = mysqli_fetch_assoc($res)) {
 								// Extracting data from each row
 								$id = $row['id'];
 								$title = $row['title'];
@@ -354,7 +355,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 								$active = $row['active'];
 
 						?>
-
 								<!-- Displaying each food item in a table row -->
 								<tr>
 									<td><?php echo $sn++; ?></td>
@@ -362,7 +362,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 									<td><?php echo $description; ?></td>
 									<td><?php echo $price; ?></td>
 									<td>
-
 										<?php
 										// Check if image is available
 										if ($image_name == "") {
@@ -379,7 +378,6 @@ $row_message_notif = mysqli_num_rows($res_message_notif);
 									</td>
 									<td><?php echo $featured; ?></td>
 									<td><?php echo $active; ?></td>
-
 									<td>
 										<!-- Buttons for updating and deleting a food item -->
 										<a href="<?php echo SITEURL; ?>update-food.php?id=<?php echo $id; ?>" class="button-5" role="button">Update</a>
